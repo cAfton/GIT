@@ -111,6 +111,40 @@ public:
     }
 };
 
+//Знаходимо наймений елемент масиву і закидаємо його на початок
+//Тоді шукаємо наступний найменший елемент і ставимо його на друге місце
+//Повторюємо до останього елементу
+
+
+void selectionSort(Array& array) {
+    for (int smalestIndex = 0; smalestIndex < array.getSize() - 1; smalestIndex++)
+    {
+        int smalestElem = smalestIndex;
+
+        for (size_t currentIndex = smalestElem+1; currentIndex < array.getSize(); currentIndex++)
+        {
+            if (array[smalestElem] < array[currentIndex]) {
+                smalestElem = currentIndex;
+            }
+        }
+        array.Swap(smalestIndex, smalestElem);
+    }
+
+}
+
+void selectionSortByNazarchik(Array& array) {
+    int mainIndex = 0;
+    while (mainIndex != array.getSize() - 1) {
+        int indexOfSmalestElem = mainIndex;
+        for (size_t currentIndex = mainIndex;  currentIndex  < array.getSize();  currentIndex ++)
+        {
+            if (array[currentIndex] < array[indexOfSmalestElem])
+                indexOfSmalestElem = currentIndex;
+        }
+        array.Swap(mainIndex, indexOfSmalestElem);
+        mainIndex++;
+    }
+}
 
 int main()
 {
@@ -123,6 +157,24 @@ int main()
     arra.Add(7, 2);
 
     arra.Swap(0, 3);
+
+    for (int i = 0; i < arra.getSize(); i++)
+    {
+        cout << arra[i] << endl;
+    }
+
+    cout << endl;
+
+    selectionSort(arra);
+
+    for (int i = 0; i < arra.getSize(); i++)
+    {
+        cout << arra[i] << endl;
+    }
+
+    cout << endl;
+
+    selectionSortByNazarchik(arra);
 
     for (int i = 0; i < arra.getSize(); i++)
     {
