@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+
 using namespace std;
 
 class Array{
@@ -115,14 +116,15 @@ public:
 int main()
 {
     Array arra;
-    arra.Add(1, 0);
-    arra.Add(2, 1);
-    arra.Add(3, 2);
+    arra.Add(2, 0);
+    arra.Add(1, 1);
+    arra.Add(10, 2);
     arra.Add(4, 3);
-    arra.Add(5, 4);
+    arra.Add(8, 4);
     arra.Add(7, 2);
 
     arra.Swap(0, 3);
+
 
     for (int i = 0; i < arra.getSize(); i++)
     {
