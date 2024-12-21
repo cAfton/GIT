@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <thread>
+#include <vector>
 
 using namespace std;
 
@@ -14,6 +16,11 @@ public:
         this->size = 0;
         this->memory = 5;
     }
+    Array(int M) {
+        this->memory = M;
+        this->arr = new int[this->memory];
+        this->size = 0;
+    }
     Array(int* Array, int M, int S) {
         this->memory = M;
         this->size = S;
@@ -26,6 +33,29 @@ public:
     ~Array() {
         cout << "end" << endl;
         delete[] arr;
+    }
+
+    Array(Array&& copy) : arr(copy.arr), size(copy.size), memory(copy.memory) {
+        copy.arr = nullptr;
+        copy.size = 0;
+        copy.memory = 0;
+    }
+
+    Array& operator=(Array& arr) {
+        this->arr = arr.arr;
+        this->size = arr.size;
+        this->memory = arr.memory;
+
+        return *this;
+    }
+    Array& operator=(Array&& arr) {
+        this->arr = arr.arr;
+        this->size = arr.size;
+        this->memory = arr.memory;
+        arr.arr = nullptr;
+        arr.size = 0;
+        arr.memory = 0;
+        return *this;
     }
 
     int operator[] (int index) {
@@ -112,10 +142,6 @@ public:
     }
 };
 
-//Знаходимо наймений елемент масиву і закидаємо його на початок
-//Тоді шукаємо наступний найменший елемент і ставимо його на друге місце
-//Повторюємо до останього елементу
-
 
 void selectionSort(Array& array) {
     for (int smalestIndex = 0; smalestIndex < array.getSize() - 1; smalestIndex++)
@@ -124,7 +150,7 @@ void selectionSort(Array& array) {
 
         for (size_t currentIndex = smalestElem+1; currentIndex < array.getSize(); currentIndex++)
         {
-            if (array[smalestElem] < array[currentIndex]) {
+            if (array[smalestElem] > array[currentIndex]) {
                 smalestElem = currentIndex;
             }
         }
@@ -147,6 +173,67 @@ void selectionSortByNazarchik(Array& array) {
     }
 }
 
+Array BusketSort(Array& arr) {
+    int max = arr[0], min = arr[0];
+    for (size_t i = 0; i < arr.getSize(); i++)
+    {
+        if (arr[i] > max)
+        {
+            max = arr[i];
+        }
+        else if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+
+    Array arr1;//min -> min + (max - min)/3
+    Array arr2;//min + (max - min)/3 -> min + (2(max - min)) / 3
+    Array arr3;//min + (2(max - min)) / 3 -> max
+
+    for (size_t i = 0; i < arr.getSize(); i++)
+    {
+        if (arr[i] >= min && arr[i] < min + ((max - min) / 3))
+        {
+            arr1.Add(arr[i], arr1.getSize());
+        }
+        else if (arr[i] >= min + ((max - min) / 3) && arr[i] < min + ((2 * (max - min)) / 3)) {
+            arr2.Add(arr[i], arr2.getSize());
+        }
+        else {
+            arr3.Add(arr[i], arr3.getSize());
+        }
+    }
+
+    Array* arras = new Array[3];
+    arras[0] = arr1;
+    arras[1] = arr2;
+    arras[2] = arr3;
+
+    vector<thread> threads;
+
+    for (size_t i = 0; i < 3; i++)
+    {
+        threads.emplace_back([&arras, i]() {selectionSort(arras[i]); });
+    }
+    for (auto& thread : threads) { thread.join(); }
+
+    Array sorted(arr.getSize());
+    for (size_t i = 0; i < arr1.getSize(); i++)
+    {
+        sorted.Add(arr1[i], sorted.getSize());
+    }
+    for (size_t i = 0; i < arr2.getSize(); i++)
+    {
+        sorted.Add(arr2[i], sorted.getSize());
+    }
+    for (size_t i = 0; i < arr3.getSize(); i++)
+    {
+        sorted.Add(arr3[i], sorted.getSize());
+    }
+   return sorted;
+    
+}
+
 int main()
 {
     Array arra;
@@ -158,28 +245,15 @@ int main()
     arra.Add(7, 2);
 
     arra.Swap(0, 3);
-
-
-    for (int i = 0; i < arra.getSize(); i++)
+    for (size_t i = 0; i < arra.getSize(); i++)
     {
-        cout << arra[i] << endl;
+        cout << arra[i] << ", ";
     }
 
-    cout << endl;
+    Array newArr = BusketSort(arra);
 
-    selectionSort(arra);
-
-    for (int i = 0; i < arra.getSize(); i++)
+    for (size_t i = 0; i < arra.getSize(); i++)
     {
-        cout << arra[i] << endl;
-    }
-
-    cout << endl;
-
-    selectionSortByNazarchik(arra);
-
-    for (int i = 0; i < arra.getSize(); i++)
-    {
-        cout << arra[i] << endl;
+        cout << newArr[i] << ", ";
     }
 }
