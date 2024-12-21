@@ -96,6 +96,12 @@ public:
         }
     }
 
+    void Swap(int a, int b) {
+        int temp = this->arr[a];
+        this->arr[a] = this->arr[b];
+        this->arr[b] = temp;
+    }
+
     int getSize() {
         return this->size;
     }
@@ -116,7 +122,9 @@ int main()
     arra.Add(5, 4);
     arra.Add(7, 2);
 
-    for (int i = 0; i < 6; i++)
+    arra.Swap(0, 3);
+
+    for (int i = 0; i < arra.getSize(); i++)
     {
         cout << arra[i] << endl;
     }
