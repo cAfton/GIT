@@ -45,3 +45,17 @@ void FileASCII::Display(string path)
 
     closeFile(file);
 }
+
+void FileBit::Display(string path)
+{
+    ifstream file(path, ios::binary);
+    if (!file) {
+        cout << "Не вдалося відкрити файл: " << path << endl;
+    }
+    char ch;
+    while (file.get(ch)) {
+        cout << bitset<8>(static_cast<unsigned char>(ch)) << " " << endl;
+    }
+
+    file.close();
+}

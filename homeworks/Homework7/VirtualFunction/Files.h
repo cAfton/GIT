@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <bitset>
 #include <string>
 
 using namespace std;
@@ -19,6 +20,13 @@ public:
 };
 
 class FileASCII : public File {
+public:
+
+    void Display(string path) override;
+};
+
+
+class FileBit : public File {
 public:
 
     void Display(string path) override;
