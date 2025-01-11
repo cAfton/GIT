@@ -167,7 +167,26 @@ int main()
     cin >> name;
     cout << "please enter password: ";
     cin >> password;
-    bool entered = any_of(users.begin(), users.end(), [name, password, &entered](auto user) { return user->LogIn(name, password);});
+
+    auto it = find_if(users.begin(), users.end(), [name, password](auto user) { return user->LogIn(name, password); });
+    bool entered = false;
+
+    if (it != users.end())
+    {
+        BlockedUser* Bloc = static_cast<BlockedUser*> (*it);
+        if (Bloc == nullptr)
+        {
+            entered = true;
+        }
+        else {
+            cout << "you are blocked" << endl;
+        }
+
+    }
+
+
     
     cout << entered << endl;
+
+    
 }
