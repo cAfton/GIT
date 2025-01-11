@@ -28,6 +28,7 @@ public:
         b = find(a + 1, fromFile.end(), ';');
         string count(a + 1, b);
         this->count = stoi(count);
+
     }
     void printBook() {
         cout << this->name << endl;
@@ -49,6 +50,9 @@ public:
         return file;
     }
 
+    int getCount() { return this->count; }
+    void setCount(int Count) { count = Count; }
+    int getPrice() { return this->prise; }
 };
 //Name1;100;15.0;50;
 //Name2; 150; 25.0; 100;
@@ -60,9 +64,9 @@ class User {
     string password;
 public:
 
-    User(string name, string pass): login(name), password(pass){}
+    User(string name, string pass) : login(name), password(pass) {}
 
-    bool LogIn(string log, string pass){
+    bool LogIn(string log, string pass) {
         if (this->login == log && this->password == pass)
         {
             return true;
@@ -90,7 +94,7 @@ public:
     ~Admin() {
         cout << "Admin dest" << endl;
     }
-    void Virtual() { cout << "Olec loh";}
+    void Virtual() { cout << "Olec loh"; }
 };
 
 class CommonUser : public User {
@@ -156,7 +160,7 @@ int main()
                     break;
                 }
 
-                
+
 
                 users.push_back(new Admin(login, pass));
             }
@@ -184,11 +188,10 @@ int main()
                     break;
                 }
 
-
                 users.push_back(new CommonUser(login, pass));
             }
         }
-        else if(line == "blocked") {
+        else if (line == "blocked") {
             string login, pass;
 
             while (true)
@@ -229,14 +232,14 @@ int main()
 
     auto it = find_if(users.begin(), users.end(), [name, password](auto user) { return user->LogIn(name, password); });
     bool entered = false;
-    
+
     if (it != users.end())
     {
 
         //BlockedUser* Bloc = static_cast<BlockedUser*> (*it);
         if (getUserType(*it) != "class BlockedUser")
         {
-            
+
             entered = true;
         }
         else {
@@ -249,7 +252,7 @@ int main()
     if (!entered) {
         return 0;
     }
-   
+
     ifstream fileBooks;
     string filepath = "Books.txt";
     fileBooks.open(filepath);
@@ -263,7 +266,7 @@ int main()
     }
     fileBooks.close();
     vector<Book>::iterator QQ;
-    if (getUserType(*it) == "class Admin"){
+    if (getUserType(*it) == "class Admin") {
         bool toExit = false;
         while (!toExit)
         {
@@ -319,9 +322,52 @@ int main()
             system("pause");
             system("cls");
         }
-        
+
     }
-    
+
+    else if (getUserType(*it) == "class CommonUser") {
+        bool toExit = false;
+        while (!toExit)
+        {
+            cout << "//////////\n/ MENU /\n//////////";
+            int choice;
+            cout << "\n1) Print list of books\n2) buy book\n Enter your choice:";
+            cin >> choice;
+            switch (choice) {
+            case 0:
+                toExit = true;
+                break;
+            case 1:
+                for_each(Books.begin(), Books.end(), [](auto Book) {Book.printBook(); });
+                break;
+            case 2:
+                cout << "Enter name of book to buy:";
+                cin >> name;
+                QQ = find_if(Books.begin(), Books.end(), [name](Book book) {return book.ifOKtoDel(name); });
+                if (QQ != Books.end()) {
+                    cout << QQ->getCount();
+                    int CC;//count choise 
+                    cout << "Enter count of book`s you want";
+                    cin >> CC;
+                    if (CC > QQ->getCount()) {
+                        cout << "Nazar WTF are you doing?!";
+                    }
+                    else {
+                        cout << "it`s cost: " << CC * QQ->getPrice();
+                        QQ->setCount(QQ->getCount() - CC);
+                        if (QQ->getCount() == 0)
+                        {
+                            Books.erase(QQ);
+                        }
+                    }
+                }
+                else {
+                    cout << "Bra, no";
+                }
+                break;
+            }
+        }
+    }
     ofstream fileB;
     fileB.open(filepath);
     int N = 0;
