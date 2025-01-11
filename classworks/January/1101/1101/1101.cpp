@@ -6,6 +6,55 @@
 
 using namespace std;
 
+class Book {
+    int pages;
+    string name;
+    double prise;
+    int count;
+public:
+    Book(string fromFile) {
+        auto a = find(fromFile.begin(), fromFile.end(), ';');
+        string name(fromFile.begin(), a);
+        this->name = name;
+
+        auto b = find(a + 1, fromFile.end(), ';');
+        string pages(a + 1, b);
+        this->pages = stoi(pages);
+
+        a = find(b + 1, fromFile.end(), ';');
+        string prise(b + 1, a);
+        this->prise = stod(prise);
+
+        b = find(a + 1, fromFile.end(), ';');
+        string count(a + 1, b);
+        this->count = stoi(count);
+    }
+    void printBook() {
+        cout << this->name << endl;
+        cout << this->pages << endl;
+        cout << this->prise << endl;
+        cout << this->count << endl;
+    }
+    bool ifOKtoDel(string name) {
+        if (this->name == name)
+            return true;
+        return false;
+    }
+
+    friend ofstream& operator<<(ofstream& file, Book& book) {
+        file << book.name << ';';
+        file << book.pages << ';';
+        file << book.prise << ';';
+        file << book.count << ';';
+        return file;
+    }
+
+};
+//Name1;100;15.0;50;
+//Name2; 150; 25.0; 100;
+//Name3; 200; 20.0; 20;
+
+
 class User {
     string login;
     string password;
@@ -26,6 +75,7 @@ public:
         cout << this->login << endl;
         cout << this->password << endl;
     }
+    virtual void Virtual() = 0;
 
     ~User() {
         cout << "User dest" << endl;
@@ -40,6 +90,7 @@ public:
     ~Admin() {
         cout << "Admin dest" << endl;
     }
+    void Virtual() { cout << "Olec loh";}
 };
 
 class CommonUser : public User {
@@ -49,6 +100,7 @@ public:
     ~CommonUser() {
         cout << "CommonUser dest" << endl;
     }
+    void Virtual() { cout << "Olec loh"; }
 };
 
 class BlockedUser : public User {
@@ -58,7 +110,12 @@ public:
     ~BlockedUser() {
         cout << "BlockedUser dest" << endl;
     }
+    void Virtual() { cout << "Olec loh"; }
 };
+
+string getUserType(const User* user) {
+    return typeid(*user).name();
+}
 
 int main()
 {
@@ -159,6 +216,8 @@ int main()
         }
     }
 
+    file.close();
+
     for_each(users.begin(), users.end(), [](auto user) {user->printUser(); });
 
     string name, password;
@@ -170,23 +229,102 @@ int main()
 
     auto it = find_if(users.begin(), users.end(), [name, password](auto user) { return user->LogIn(name, password); });
     bool entered = false;
-
+    
     if (it != users.end())
     {
-        BlockedUser* Bloc = static_cast<BlockedUser*> (*it);
-        if (Bloc == nullptr)
+
+        //BlockedUser* Bloc = static_cast<BlockedUser*> (*it);
+        if (getUserType(*it) != "class BlockedUser")
         {
+            
             entered = true;
         }
         else {
             cout << "you are blocked" << endl;
+            return 0;
         }
 
     }
 
+    if (!entered) {
+        return 0;
+    }
+   
+    ifstream fileBooks;
+    string filepath = "Books.txt";
+    fileBooks.open(filepath);
 
-    
-    cout << entered << endl;
+    vector<Book> Books;
+    string list;
+    while (!fileBooks.eof())
+    {
+        getline(fileBooks, list);
+        Books.push_back(Book(list));
+    }
+    fileBooks.close();
+    vector<Book>::iterator QQ;
+    if (getUserType(*it) == "class Admin"){
+        bool toExit = false;
+        while (!toExit)
+        {
+            cout << "//////////\n/ MENU /\n//////////";
+            cout << "\n1) Print list of books\n2) Add new book\n3) Delate book\nEnter your choice:";
+            int choice;
+            cin >> choice;
+            string finalList;
+            string tmpList;
+            string name;
+            switch (choice)
+            {
+            case 1:
+                for_each(Books.begin(), Books.end(), [](auto Book) {Book.printBook(); });
+                break;
+            case 2:
+                cout << "Enter book`s name:";
+                cin >> tmpList;
+                finalList = tmpList + ';';
 
+                cout << "\nEnter book`s pages:";
+                cin >> tmpList;
+                finalList += tmpList + ';';
+
+                cout << "\nEnter book`s prise:";
+                cin >> tmpList;
+                finalList += tmpList + ';';
+
+                cout << "\nEnter book`s count:";
+                cin >> tmpList;
+                finalList += tmpList + ';';
+
+                Books.push_back(Book(finalList));
+                break;
+            case 3:
+                cout << "Enter name of book to delate:";
+                cin >> name;
+                QQ = find_if(Books.begin(), Books.end(), [name](Book book) {return book.ifOKtoDel(name); });
+                if (QQ != Books.end()) {
+                    Books.erase(QQ);
+                }
+                else {
+                    cout << "Bra, no";
+                }
+                break;
+            case 0:
+                toExit = true;
+                break;
+            default:
+                toExit = true;
+                break;
+            }
+            system("pause");
+            system("cls");
+        }
+        
+    }
     
+    ofstream fileB;
+    fileB.open(filepath);
+    int N = 0;
+    for_each(Books.begin(), Books.end(), [&fileB, Books, &N](Book Book) {fileB << Book; N++; if (N < Books.size()) fileB << '\n'; });
+
 }
