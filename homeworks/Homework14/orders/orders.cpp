@@ -1,20 +1,85 @@
-// orders.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-#include <iostream>
+#include "Order.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	vector<Order> orders;
+	int userChoice;
+	while (true)
+	{
+		cout << "1. Add a new order \n2. Find an order by ID \n3. Delete order by ID \n4. Display all orders \n5. Filter orders by customer \n6. Sort orders by amount \n7. End the program\n\nYour choice: ";
+		cin >> userChoice;
+
+		if (userChoice == 1)
+		{
+			cout << endl;
+			cout << endl;
+			Order newOrder;
+			cin >> newOrder;
+			orders.push_back(newOrder);
+			cout << endl;
+			cout << endl;
+		}
+		else if(userChoice == 2)
+		{
+			cout << "\n\nEnter ID: ";
+			string id;
+			cin >> id;
+			auto findOrder = find_if(orders.begin(), orders.end(), [id](Order order) {return order.getOrderId() == id; });
+			if (findOrder != orders.end()) {
+				cout << "found:   " << *findOrder << endl;
+			}
+			else {
+				cout << "Didnt find" << std::endl;
+			}
+		}
+		else if(userChoice == 3)
+		{
+			cout << "\n\nEnter ID: ";
+			string id;
+			cin >> id;
+			auto findId = find_if(orders.begin(), orders.end(), [id](Order order) {return order.getOrderId() == id; });
+			if (findId != orders.end()) {
+				orders.erase(findId);
+				cout << "deleted successfully" << endl;
+			}
+			else {
+				cout << "Didnt find";
+			}
+		}
+		else if(userChoice == 4)
+		{
+			cout << endl;
+			cout << endl;
+			for_each(orders.begin(), orders.end(), [](Order order) {cout << order; });
+			cout << endl;
+			cout << endl;
+		}
+		else if(userChoice == 5)
+		{
+			cout << "\n\nEnter name: ";
+			string name;
+			cin >> name;
+			for_each(orders.begin(), orders.end(), [name](Order order) {
+				if (order.getName() == name) {
+					cout << "order from " << order.getName() << ": " << order.getOrderId() << endl;
+				}
+				});
+		}
+		else if(userChoice == 6)
+		{
+			sort(orders.begin(), orders.end(), [](Order a, Order b) {
+				return a.getAmount() < b.getAmount();
+			});
+		}
+		else if(userChoice == 7)
+		{
+			cout << "\n\n\nthank you for shoping!" << endl;
+			return 0;
+		}
+		else
+		{
+			cout << "\n\nerror\n\n" << endl;
+		}
+	}
+
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
