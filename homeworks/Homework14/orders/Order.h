@@ -22,6 +22,8 @@ public:
     
     friend istream& operator>>(istream& in, Order& order);
 
+    void setId(string orderId);
+
     string getOrderId();
 
     string getName();

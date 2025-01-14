@@ -6,7 +6,7 @@ int main()
 	int userChoice;
 	while (true)
 	{
-		cout << "1. Add a new order \n2. Find an order by ID \n3. Delete order by ID \n4. Display all orders \n5. Filter orders by customer \n6. Sort orders by amount \n7. End the program\n\nYour choice: ";
+		cout << "1. Add a new order \n2. Find an order by ID \n3. Delete order by ID \n4. Display all orders \n5. Filter orders by customer \n6. Edit order \n7. Sort orders by amount \n8. End the program\n\nYour choice: ";
 		cin >> userChoice;
 
 		if (userChoice == 1)
@@ -14,10 +14,22 @@ int main()
 			cout << endl;
 			cout << endl;
 			Order newOrder;
-			cin >> newOrder;
-			orders.push_back(newOrder);
-			cout << endl;
-			cout << endl;
+			cout << "ID: ";
+			string ID;
+			cin >> ID;
+			newOrder.setId(ID);
+			auto it = find_if(orders.begin(), orders.end(), [&newOrder](Order& order) {
+				return order.getOrderId() == newOrder.getOrderId();
+				});
+			if (it == orders.end()) {
+				cin >> newOrder;
+				orders.push_back(newOrder);
+				cout << endl;
+				cout << endl;
+			}
+			else
+				cout << "Sorry, but an order with this ID already exists.\n" << endl;
+			
 		}
 		else if(userChoice == 2)
 		{
@@ -65,13 +77,34 @@ int main()
 				}
 				});
 		}
-		else if(userChoice == 6)
+		else if(userChoice == 6) {
+			cout << endl;
+			for_each(orders.begin(), orders.end(), [](Order order) {cout << order; });
+			cout << endl;
+
+			cout << "\n\nEnter ID: ";
+			string id;
+			cin >> id;
+			auto findOrder = find_if(orders.begin(), orders.end(), [id](Order order) {return order.getOrderId() == id; });
+			if (findOrder != orders.end()) {
+				cout << "found:   " << *findOrder << endl;
+			}
+			else {
+				cout << "Didnt find" << std::endl;
+				continue;
+			}
+			
+			cout << endl;
+			cin >> *findOrder;
+			cout << endl;
+		}
+		else if(userChoice == 7)
 		{
 			sort(orders.begin(), orders.end(), [](Order a, Order b) {
 				return a.getAmount() < b.getAmount();
 			});
 		}
-		else if(userChoice == 7)
+		else if(userChoice == 8)
 		{
 			cout << "\n\n\nthank you for shoping!" << endl;
 			return 0;

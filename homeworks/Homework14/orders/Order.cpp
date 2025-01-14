@@ -9,6 +9,11 @@ Order::Order(string orderId, string customerName, double totalAmount)
 
 Order::Order(){}
 
+void Order::setId(string orderId)
+{
+	this->orderId = orderId;
+}
+
 string Order::getOrderId()
 {
 	return this->orderId;
@@ -43,22 +48,21 @@ ostream& operator<<(ostream& out, const Order& order)
 
 istream& operator>>(istream& in, Order& order)
 {
+	order.items.clear();
 	
-	cout << "ID: ";
-	in >> order.orderId;
 	cout << "\nCustomer name: ";
 	in >> order.customerName;
 	cout << "\nEnter the number of items: ";
 	int num; string item;
 	cin >> num;
 	for (size_t i = 0; i < num; i++)
-	{
+	{ 
 		cout << "item " << i + 1 << ": ";
 		in >> item;
 		cout << endl;
 
 		order.items.push_back(item);
-	}
+	 }
 	cout << "\nTotal amount: ";
 	in >> order.totalAmount;
 
