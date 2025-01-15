@@ -30,5 +30,8 @@ public:
 
     double getAmount();
 
+    void readFromFile(string line);
+
+    string writeToFile();
 
 };

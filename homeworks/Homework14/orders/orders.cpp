@@ -1,9 +1,25 @@
 #include "Order.h"
+#include "fstream"
 
 int main()
 {
 	vector<Order> orders;
 	int userChoice;
+	
+	ifstream fileOfOrdersToRead;
+	string filepath = "orders.txt";
+	fileOfOrdersToRead.open(filepath);
+
+	string line;
+	Order order;
+
+	while (getline(fileOfOrdersToRead, line)) {
+		order.readFromFile(line);
+		orders.push_back(order);
+	}
+
+	fileOfOrdersToRead.close();
+
 	while (true)
 	{
 		cout << "1. Add a new order \n2. Find an order by ID \n3. Delete order by ID \n4. Display all orders \n5. Filter orders by customer \n6. Edit order \n7. Sort orders by amount \n8. End the program\n\nYour choice: ";
@@ -106,8 +122,8 @@ int main()
 		}
 		else if(userChoice == 8)
 		{
-			cout << "\n\n\nthank you for shoping!" << endl;
-			return 0;
+			cout << "\n\n\nthank you for shoping!\n" << endl;
+			break;
 		}
 		else
 		{
@@ -115,4 +131,15 @@ int main()
 		}
 	}
 
+	ofstream fileOfOrders;
+	fileOfOrders.open(filepath);
+	string fileLine = "";
+
+	for_each(orders.begin(), orders.end(), [&fileLine](Order order) {fileLine += order.writeToFile(); });
+
+	fileOfOrders << fileLine;
+
+	fileOfOrders.close();
+
+	return 0;
 }

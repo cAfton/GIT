@@ -1,0 +1,8 @@
+12345,John Doe,apple;banana;orange,50.750001,
+31321,Jane Smith,grapes;watermelon,30.500000,
+6532,Tom Brown,chocolate;chips,20.000000,
+Crow,Uzi,1;4,2.000000,
+Dog,N,1;2;3,7.000000,
+Cat,V,2;22,9.000000,
+house,Cyn,N;V;J,100.000000,
+SpaceJ,J,N;V,99.000000,
