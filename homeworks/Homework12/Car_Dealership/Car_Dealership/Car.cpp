@@ -10,22 +10,22 @@ Car::Car()
 
 Car::Car(string name, int year, int volume, int price) : name(name), year(year), volume(volume), price(price){}
 
-string Car::getName()
+string Car::getName() const
 {
     return this->name;
 }
 
-int Car::getYear()
+int Car::getYear() const
 {
     return this->year;
 }
 
-int Car::getVolume()
+int Car::getVolume() const
 {
     return this->volume;
 }
 
-int Car::getPrice()
+int Car::getPrice() const
 {
     return this->price;
 }

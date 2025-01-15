@@ -16,13 +16,13 @@ public:
 
     Car(string name, int year, int volume, int price);
 
-    string getName();
+    string getName() const;
 
-    int getYear();
+    int getYear() const;
 
-    int getVolume();
+    int getVolume() const;
 
-    int getPrice();
+    int getPrice() const;
 
     friend ostream& operator<<(ostream& out, const Car& car);
 

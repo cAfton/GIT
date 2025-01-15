@@ -3,17 +3,18 @@
 int main()
 {
     vector<Car> cars;
-    //readFromFile();
+    string filename = "cars.txt";
+    readFromFile(cars, filename);
+
+    string query;
     int userChoice = -1;
-    do
-    {
+    do {
         system("cls");
-        cout << "1 - add new car\n2 - delete car\n3 - view cars\n4 - sort by...\n5 - find by...\n0 - exit\n" << endl;
+        cout << "1 - add new car\n2 - delete car\n3 - view cars\n4 - sort by...\n5 - find by...\n6 - save to file\n7 - load from file\n0 - exit\n" << endl;
         cin >> userChoice;
         system("cls");
 
-        switch (userChoice)
-        {
+        switch (userChoice) {
         case 1:
             addNewCar(cars);
             break;
@@ -21,7 +22,7 @@ int main()
             deleteCar(cars);
             break;
         case 3:
-            viewCars(cars);
+            viewCar s(cars);
             system("pause");
             break;
         case 4:
@@ -31,16 +32,29 @@ int main()
             system("pause");
             break;
         case 5:
-            system("cls");
             cout << "Find by\n\n1 - name\n2 - year\n3 - volume\n4 - price\n" << endl;
             cin >> userChoice;
-            //findBy();
+            cin.ignore();
+            cout << "Enter value to search for: ";
+            
+            getline(cin, query);
+            findBy(cars, userChoice, query);
+            system("pause");
+            break;
+        case 6:
+            writeToFile(cars, filename);
+            system("pause");
+            break;
+        case 7:
+            readFromFile(cars, filename);
             system("pause");
             break;
         case 0:
-            //writeToFile();
+            writeToFile(cars, filename);
             break;
         default:
+            cout << "Invalid choice, try again.\n";
+            system("pause");
             break;
         }
     } while (userChoice != 0);
