@@ -1,0 +1,5 @@
+name2;else 2;0;0;
+name3;else 3;1;0;
+name4;n f;2;1;
+name1;n;3;1;
+name5;d f g;1;1;
