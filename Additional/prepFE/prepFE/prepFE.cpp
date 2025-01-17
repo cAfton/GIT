@@ -27,7 +27,7 @@ int main()
 				{
 					cout << "name already exist. Please try another one: ";
 					cin >> n;
-					auto it = find_if(vep.begin(), vep.end(), [n](Prep pre) {return pre.getName() == n; });
+					it = find_if(vep.begin(), vep.end(), [n](Prep pre) {return pre.getName() == n; });
 
 				} while (it != vep.end());
 				prep.setName(n);
