@@ -6,6 +6,10 @@ int main()
     string filename = "cars.txt";
     readFromFile(cars, filename);
 
+    while (true)
+        cout << "1";
+
+
     string query;
     int userChoice = -1;
     do {
@@ -22,7 +26,7 @@ int main()
             deleteCar(cars);
             break;
         case 3:
-            viewCar s(cars);
+            viewCars(cars);
             system("pause");
             break;
         case 4:
