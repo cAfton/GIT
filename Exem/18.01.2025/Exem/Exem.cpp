@@ -1,9 +1,17 @@
 #include "Event.h"
 
+bool SortChronological(Event& event1, Event& event2) {
+	return event2 > event1;
+}
+
+bool SortAntichronological(Event& event1, Event& event2) {
+	return event1 > event2;
+}
 
 int main()
 {
 	vector<Event> calendar;
+
 
 
 	int userChoice;
@@ -179,7 +187,17 @@ int main()
 			}
 		}
 		else if (userChoice == 6) {
+			int choice;
+			cout << "How to sort?(1-Chronological||2-Antichronological):";
+			cin >> choice;
+			if (choice == 1)
+				sort(calendar.begin(), calendar.end(), SortChronological);
 
+			else if (choice == 2)
+				sort(calendar.begin(), calendar.end(), SortAntichronological);
+			else
+				continue;
+			for_each(calendar.begin(), calendar.end(), [](Event tmpEvent) {cout << tmpEvent.Date() << endl; });
 		}
 
 		/*else if (userChoice == 2) {
@@ -315,6 +333,8 @@ int main()
 			cout << endl;
 			cout << endl;
 		}
+		system("pause");
+		system("cls");
 	}
 
 }

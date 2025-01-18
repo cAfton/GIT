@@ -15,6 +15,8 @@ class Event
 	string location;//Додатково
 	string description;//Додатково
 
+	bool isFirstDateGreater(string& date1, string& date2);
+
 public:
 	Event();
 	Event(string title, string date, string time, string location, string description);
@@ -39,9 +41,9 @@ public:
 
 	void Description(string description);
 
-	bool isFirstDateGreater(string& date1, string& date2);
+	
 
-
+	
 
 
 	bool operator>(Event& other);

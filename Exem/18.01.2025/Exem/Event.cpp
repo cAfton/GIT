@@ -1,5 +1,24 @@
 #include "Event.h"
 
+bool Event::isFirstDateGreater(string& date1, string& date2)
+{
+	if (date1.substr(0, 4) > date2.substr(0, 4)) {
+		return true;
+	}
+	else if (date1.substr(0, 4) < date2.substr(0, 4)) {
+		return false;
+	}
+
+	if (date1.substr(5, 2) > date2.substr(5, 2)) {
+		return true;
+	}
+	else if (date1.substr(5, 2) < date2.substr(5, 2)) {
+		return false;
+	}
+
+	return date1.substr(8, 2) > date2.substr(8, 2);
+}
+
 Event::Event()
 {
 	/*this->title = "Null";
@@ -66,9 +85,11 @@ void Event::Description(string description)
 	this->description = description;
 }
 
+
+
 bool Event::operator>(Event& other)
 {
-	int 
+	return isFirstDateGreater(this->date, other.date);
 }
 
 istream& operator>>(istream& in, Event& event)
