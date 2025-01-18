@@ -33,13 +33,13 @@ int main()
 	int userChoice;
 	while (true)
 	{
-		cout << "1 - add\n2 - find\n3 - show all\n4 - change\n5 - delate\n6 - Show all events in chronological order\n0 - exit" << endl;
+		cout << "1 - Add a new event\n2 - Find an event\n3 - Show all\n4 - Edit event\n5 - Delete event\n6 - Show all events in chronological order\n0 - exit" << endl;
 		cin >> userChoice;
 		if (userChoice == 1)
 		{
 			Event newEvent;
 			string newName;
-			cout << "Name: ";
+			cout << "Enter a name for the new event: ";
 			cin >> newName;
 			auto it = find_if(calendar.begin(), calendar.end(), [newName](Event tmpEvent) {return tmpEvent.Title() == newName; });
 			if (it == calendar.end())
@@ -149,34 +149,34 @@ int main()
 					if (userChoice == 1)
 					{
 						string Title;
-						cout << "new name: ";
+						cout << "\nNew name: ";
 						cin >> Title;
 						(*findIt).Title(Title);
 					}
 					else if (userChoice == 2)
 					{
 						string Date;
-						cout << "new else: ";
+						cout << "\nNew else: ";
 						getline(cin, Date);
 						(*findIt).Date(Date);
 					}
 					else if (userChoice == 3)
 					{
 						string Time;
-						cout << "new Time: ";
+						cout << "\nNew Time: ";
 						cin >> Time;
 						(*findIt).Time(Time);
 					}
 					else if (userChoice == 4)
 					{
 						string Location;
-						cout << "new Location: ";
+						cout << "\nNew Location: ";
 						cin >> Location;
 						(*findIt).Location(Location);
 					}
 					else if (userChoice == 5) {
 						string Description;
-						cout << "new Description: ";
+						cout << "\nNew Description: ";
 						cin >> Description;
 						(*findIt).Description(Description);
 					}
@@ -184,7 +184,7 @@ int main()
 						break;
 				}
 				else {
-					cout << "didnt find" << endl;
+					cout << "Didnt find" << endl;
 				}
 			}
 			
@@ -196,7 +196,7 @@ int main()
 			auto findIt = find_if(calendar.begin(), calendar.end(), [Title](Event tmpEvent) {return tmpEvent.Title() == Title; });
 			if (findIt != calendar.end()) {
 				calendar.erase(findIt);
-				cout << "deleted successfully" << endl;
+				cout << "Deleted successfully" << endl;
 			}
 			else {
 				cout << "Didnt find";

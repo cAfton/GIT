@@ -21,9 +21,11 @@ bool Event::isFirstDateGreater(string& date1, string& date2)
 
 Event::Event()
 {
-	/*this->title = "Null";
+	this->title = "Null";
 	this->date = "Null";
-	this->time = "Null";*/
+	this->time = "Null";
+	this->location = "Null";
+	this->description = "Null";
 }
 
 Event::Event(string title, string date, string time, string location, string description)
@@ -101,10 +103,10 @@ istream& operator>>(istream& in, Event& event)
 	cout << "\nTime(HH:MM): ";
 	in >> event.time;
 
-	cout << "\nlocation: ";
+	cout << "\nLocation: ";
 	in >> event.location;
 
-	cout << "\ndescription: ";
+	cout << "\nDescription: ";
 	in >> event.description;
 
 	cout << endl;
@@ -117,8 +119,8 @@ ostream& operator<<(ostream& out, const Event& event)
 	out << "Name: " << event.title << endl;
 	out << "Date: " << event.date << endl;
 	out << "Time: " << event.time << endl;
-	out << "location: " << event.location << endl;
-	out << "description: " << event.description << endl;
+	out << "Location: " << event.location << endl;
+	out << "Description: " << event.description << endl;
 
 	return out;
 }

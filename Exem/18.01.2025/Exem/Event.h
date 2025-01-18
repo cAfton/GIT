@@ -9,11 +9,11 @@ using namespace std;
 
 class Event
 {
-	string title; //Назва
-	string date; //дата(формат YYYY-MM-DD)
-	string time; //час(HH:MM)
-	string location;//Додатково
-	string description;//Додатково
+	string title; 
+	string date; 
+	string time; 
+	string location;
+	string description;
 
 	bool isFirstDateGreater(string& date1, string& date2);
 
@@ -55,7 +55,7 @@ public:
 	friend ofstream& operator<<(ofstream& file, const Event& event);
 
 	friend ifstream& operator>>(ifstream& file, Event& event);
-	//~Event();
+
 
 
 };
