@@ -52,6 +52,9 @@ public:
 
 	friend ostream& operator<<(ostream& out, const Event& event);
 
+	friend ofstream& operator<<(ofstream& file, const Event& event);
+
+	friend ifstream& operator>>(ifstream& file, Event& event);
 	//~Event();
 
 

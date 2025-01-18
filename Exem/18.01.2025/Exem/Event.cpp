@@ -122,3 +122,37 @@ ostream& operator<<(ostream& out, const Event& event)
 
 	return out;
 }
+
+ofstream& operator<<(ofstream& file, const Event& event)
+{
+	file << event.title << ";" << event.date << ";" << event.time << ";" << event.location << ";" << event.description << ";";
+
+	return file;
+}
+
+ifstream& operator>>(ifstream& file, Event& event)
+{
+	string line;
+	getline(file, line);
+
+	auto it1 = find(line.begin(), line.end(), ';');
+	event.title = string(line.begin(), it1);
+	it1++;
+
+	auto it2 = find(it1, line.end(), ';');
+	event.date = string(it1, it2);
+	it1 = it2 + 1;
+
+	it2 = find(it1, line.end(), ';');
+	event.time = string(it1, it2);
+	it1 = it2 + 1;
+
+	it2 = find(it1, line.end(), ';');
+	event.location = string(it1, it2);
+	it1 = it2 + 1;
+
+	it1 = find(it2, line.end(), ';');
+	event.description = string(it2, it1);
+
+	return file;
+}
