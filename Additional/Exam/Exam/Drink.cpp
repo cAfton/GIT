@@ -13,14 +13,16 @@ void Drink::virt()
 
 ostream& operator<<(ostream& out, const Drink& drink)
 {
-    out << static_cast<const Dish&>(drink) << (drink.isAlcoholic ? "true" : "false") << endl;
+    drink.PrintCout(out, drink);
+    out << (drink.isAlcoholic ? "true" : "false") << endl;
 
     return out;
 }
 
 ofstream& operator<<(ofstream& file, const Drink& drink)
 {
-    file << static_cast<const Dish&>(drink) << drink.isAlcoholic << ";" << endl;
+    drink.PrintFile(file, drink);
+    file << "-" << drink.isAlcoholic << "-" << endl;
     return file;
 }
 

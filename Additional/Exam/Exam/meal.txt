@@ -1,3 +1,6 @@
-name2;dish main;450;100
-name3;dish not main;500;30.1
-name4;dish des;100;11
+name1;drink;100;10.5
+name2;drink;600;60.5
+name3;drink;300;40.5
+name4;dish;100;10.5
+name5;dish;600;60.5
+name6;dish dish;300;40.5

@@ -6,7 +6,7 @@ Dish::Dish(string Name, string Category, int Weight, double Price): name(Name), 
 
 void Dish::PrintFile(ofstream& file, const Dish& dish) const
 {
-	file << dish.name << ";" << dish.category << ";" << dish.weight << ";" << dish.price << ";";
+	file << dish.name << ";" << dish.category << ";" << dish.weight << ";" << dish.price;
 }
 
 void Dish::PrintCout(ostream& out, const Dish& dish) const

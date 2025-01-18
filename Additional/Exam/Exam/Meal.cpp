@@ -14,7 +14,7 @@ ostream& operator<<(ostream& out, const Meal& meal)
 
 ofstream& operator<<(ofstream& file, const Meal& meal)
 {
-    file << static_cast<const Dish&>(meal) << endl;
+    file << static_cast<const Dish&>(meal) << ";" << endl;
     return file;
 }
 

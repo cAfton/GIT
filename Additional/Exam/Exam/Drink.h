@@ -18,4 +18,8 @@ public:
 	friend istream& operator>>(istream& file, Drink& drink);
 
 	friend ifstream& operator>>(ifstream& file, Drink& drink);
+
+	bool getAlc() {
+		return this->isAlcoholic;
+	}
 };

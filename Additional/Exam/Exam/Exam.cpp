@@ -74,7 +74,7 @@ int main()
 
 					cin >> drink;
 				}
-				menu.push_back(&drink);
+				menu.push_back(new Drink(drink));
 
 			}
 			else if (userChoice == 2)
@@ -103,7 +103,7 @@ int main()
 
 					cin >> meal;
 				}
-				menu.push_back(&meal);
+				menu.push_back(new Meal(meal));
 
 			}
 			
@@ -178,13 +178,15 @@ int main()
 				for_each(menu.begin(), menu.end(), [category](Dish* dish) {
 					if ((dish)->getCategory() == category)
 					{
-						cout << dish << endl;
+						cout << (*dish) << endl;
 					} 
 				});
 			}
 			else if (userChoice == 2)
 			{
-				for_each(menu.begin(), menu.end(), [](Dish* dish) {cout << (*dish) << endl; });
+				for_each(menu.begin(), menu.end(), [](Dish* dish) {
+					cout << (*dish) << endl;
+					});
 			}
 			else {
 				cout << "wrong option" << endl;
@@ -203,10 +205,14 @@ int main()
 
 			int c = 0;
 			for_each(menu.begin(), menu.end(), [&file, menu, &c](Dish* dish) {
-				file << (&dish);
-				if (c < menu.size() - 1)
+				
+				if ((dish)->getCategory() != "drink")
 				{
-					file << endl;
+					file << (*dish) << ";";
+					if (c < menu.size() - 1)
+					{
+						file << endl;
+					}
 				}
 				c++;
 			});
@@ -221,9 +227,12 @@ int main()
 
 			c = 0;
 			for_each(menu.begin(), menu.end(), [&file, menu, &c](Dish* dish) {
+				Drink* drink = dynamic_cast<Drink*>(dish);
+
 				if ((dish)->getCategory() == "drink")
 				{
-					file << dish;
+					file << *dish << "-" << (drink->getAlc() ? "1" : "0") << "-";
+
 					if (c < menu.size() - 1)
 					{
 						file << endl;
@@ -245,7 +254,7 @@ int main()
 
 			int c = 0;
 			for_each(menu.begin(), menu.end(), [&file, menu, &c](Dish* dish) {
-				file << (&dish);
+				file << (*dish);
 				if (c < menu.size() - 1)
 				{
 					file << endl;
@@ -263,9 +272,12 @@ int main()
 
 			c = 0;
 			for_each(menu.begin(), menu.end(), [&file, menu, &c](Dish* dish) {
+				Drink* drink = dynamic_cast<Drink*>(dish);
+
 				if ((dish)->getCategory() == "drink")
 				{
-					file << (&dish);
+					file << *dish << "-" << (drink->getAlc() ? "1" : "0") << "-";
+
 					if (c < menu.size() - 1)
 					{
 						file << endl;
