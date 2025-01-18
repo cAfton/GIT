@@ -1,4 +1,4 @@
-#include "Dish.h"
+﻿#include "Dish.h"
 #include "Meal.h"
 #include "Drink.h"
 
@@ -17,8 +17,8 @@ int main()
 	while (!file.eof())
 	{
 		Drink drink;
-		file >> drink;
-		menu.push_back(&drink);
+		file >> (drink);
+		menu.push_back(new Drink(drink));
 	}
 
 	file.close();
@@ -33,7 +33,7 @@ int main()
 	{
 		Meal meal;
 		file >> meal;
-		menu.push_back(&meal);
+		menu.push_back(new Meal(meal));
 	}
 
 	file.close();
@@ -55,7 +55,7 @@ int main()
 				string name;
 				cout << "Name: ";
 				cin >> name;
-				auto it = find_if(menu.begin(), menu.end(), [name](Drink dish) {return dish.getName() == name; });
+				auto it = find_if(menu.begin(), menu.end(), [name](Dish* dish) {return dish->getName() == name; });
 				if (it == menu.end())
 				{
 					drink.setName(name);
@@ -67,7 +67,7 @@ int main()
 					{
 						cout << "name already exist. Please try another one: ";
 						cin >> name;
-						it = find_if(menu.begin(), menu.end(), [name](Drink dish) {return dish.getName() == name; });
+						it = find_if(menu.begin(), menu.end(), [name](Dish* dish) {return dish->getName() == name; });
 
 					} while (it != menu.end());
 					drink.setName(name);
@@ -84,7 +84,7 @@ int main()
 				string name;
 				cout << "Name: ";
 				cin >> name;
-				auto it = find_if(menu.begin(), menu.end(), [name](Meal dish) {return dish.getName() == name; });
+				auto it = find_if(menu.begin(), menu.end(), [name](Dish* dish) {return dish->getName() == name; });
 				if (it == menu.end())
 				{
 					meal.setName(name);
@@ -96,7 +96,7 @@ int main()
 					{
 						cout << "name already exist. Please try another one: ";
 						cin >> name;
-						it = find_if(menu.begin(), menu.end(), [name](Meal dish) {return dish.getName() == name; });
+						it = find_if(menu.begin(), menu.end(), [name](Dish* dish) {return dish->getName() == name; });
 
 					} while (it != menu.end());
 					meal.setName(name);
@@ -115,7 +115,9 @@ int main()
 			cout << "Name: ";
 			cin >> name;
 			cout << endl;
-			auto findDish = find_if(menu.begin(), menu.end(), [name](Dish* dish) {return (*dish).getName() == name; });
+			auto findDish = find_if(menu.begin(), menu.end(), [name](Dish* dish) {
+				return dish->getName() == name;
+				});
 
 			cout << *(findDish) << endl;
 		}
@@ -125,7 +127,7 @@ int main()
 
 			cout << "Name to change: ";
 			cin >> findDish;
-			auto findIt = find_if(menu.begin(), menu.end(), [findDish](Dish* dish) {return (*dish).getName() == findDish; });
+			auto findIt = find_if(menu.begin(), menu.end(), [findDish](Dish* dish) {return (dish)->getName() == findDish; });
 			if (findIt != menu.end())
 			{
 				cout << "\n1 - change price\n2 - change weight" << endl;
@@ -154,7 +156,7 @@ int main()
 			cout << "\n\nEnter name to delete: ";
 			string name;
 			cin >> name;
-			auto findIt = find_if(menu.begin(), menu.end(), [name](Dish* dish) {return (*dish).getName() == name; });
+			auto findIt = find_if(menu.begin(), menu.end(), [name](Dish* dish) {return (dish)->getName() == name; });
 			if (findIt != menu.end()) {
 				menu.erase(findIt);
 				cout << "deleted successfully" << endl;
@@ -174,7 +176,7 @@ int main()
 				cin.ignore();
 				getline(cin, category);
 				for_each(menu.begin(), menu.end(), [category](Dish* dish) {
-					if ((*dish).getCategory() == category)
+					if ((dish)->getCategory() == category)
 					{
 						cout << dish << endl;
 					} 
@@ -182,7 +184,7 @@ int main()
 			}
 			else if (userChoice == 2)
 			{
-				for_each(menu.begin(), menu.end(), [](Dish* dish) {cout << dish << endl; });
+				for_each(menu.begin(), menu.end(), [](Dish* dish) {cout << (*dish) << endl; });
 			}
 			else {
 				cout << "wrong option" << endl;
@@ -201,7 +203,7 @@ int main()
 
 			int c = 0;
 			for_each(menu.begin(), menu.end(), [&file, menu, &c](Dish* dish) {
-				file << (*dish);
+				file << (&dish);
 				if (c < menu.size() - 1)
 				{
 					file << endl;
@@ -219,7 +221,7 @@ int main()
 
 			c = 0;
 			for_each(menu.begin(), menu.end(), [&file, menu, &c](Dish* dish) {
-				if ((*dish).getCategory() == "drink")
+				if ((dish)->getCategory() == "drink")
 				{
 					file << dish;
 					if (c < menu.size() - 1)
@@ -243,7 +245,7 @@ int main()
 
 			int c = 0;
 			for_each(menu.begin(), menu.end(), [&file, menu, &c](Dish* dish) {
-				file << (*dish);
+				file << (&dish);
 				if (c < menu.size() - 1)
 				{
 					file << endl;
@@ -261,9 +263,9 @@ int main()
 
 			c = 0;
 			for_each(menu.begin(), menu.end(), [&file, menu, &c](Dish* dish) {
-				if ((*dish).getCategory() == "drink")
+				if ((dish)->getCategory() == "drink")
 				{
-					file << (*dish);
+					file << (&dish);
 					if (c < menu.size() - 1)
 					{
 						file << endl;

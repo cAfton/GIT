@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -31,9 +31,9 @@ public:
 
 	void PrintCout(ostream& out, const Dish& dish) const;
 
-	string LoadFile(ifstream& file, Dish& dish);
+	bool LoadFile(ifstream& file, Dish& dish, bool toDo);
 
-	void LoadCout(istream& in, Dish& dish);
+	void LoadCout(istream& in, Dish& dish, bool is);
 
 	string getName();
 	string getCategory();

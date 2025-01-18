@@ -20,14 +20,14 @@ ofstream& operator<<(ofstream& file, const Meal& meal)
 
 istream& operator>>(istream& in, Meal& meal)
 {
-    meal.LoadCout(in, meal);
+    meal.LoadCout(in, meal, true);
 
     return in;
 }
 
 ifstream& operator>>(ifstream& file, Meal& meal)
 {
-    meal.LoadFile(file, meal);
+    meal.LoadFile(file, meal, false);
 
     return file;
 }

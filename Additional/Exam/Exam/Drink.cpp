@@ -1,7 +1,14 @@
 #include "Drink.h"
-#include "Meal.h"
+
+Drink::Drink()
+{
+}
 
 Drink::Drink(string Name, int Weight, double Price, bool IsAlcoholic) : Dish(Name, "Drink", Weight, Price), isAlcoholic(IsAlcoholic) {}
+
+void Drink::virt()
+{
+}
 
 
 ostream& operator<<(ostream& out, const Drink& drink)
@@ -19,9 +26,9 @@ ofstream& operator<<(ofstream& file, const Drink& drink)
 
 istream& operator>>(istream& in, Drink& drink)
 {
-    drink.LoadCout(in, drink);
+    drink.LoadCout(in, drink, false);
 
-    cout << "\nBool \n0 - false\n1 - true\n\n>> ";
+    cout << "\nIs alcoholic \n0 - no\n1 - yes\n\n>> ";
     in >> drink.isAlcoholic;
     cout << endl;
     return in;
@@ -29,12 +36,8 @@ istream& operator>>(istream& in, Drink& drink)
 
 ifstream& operator>>(ifstream& file, Drink& drink)
 {
-    string last = drink.LoadFile(file, drink);
-    auto it3 = find(last.begin(), last.end(), '-');
-    auto it4 = find(last.begin(), last.end(), '-');
-
-    string is = string(it3, it4);
-    drink.isAlcoholic = stoi(is);
+    bool last = drink.LoadFile(file, drink, true);
+    drink.isAlcoholic = last;
 
     return file;
 }

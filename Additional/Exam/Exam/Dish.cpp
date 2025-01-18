@@ -17,7 +17,7 @@ void Dish::PrintCout(ostream& out, const Dish& dish) const
 	out << "Price: " << dish.price << endl;
 }
 
-string Dish::LoadFile(ifstream& file, Dish& dish)
+bool Dish::LoadFile(ifstream& file, Dish& dish, bool toDo)
 {
 	string line, temp;
 	getline(file, line);
@@ -37,15 +37,31 @@ string Dish::LoadFile(ifstream& file, Dish& dish)
 	it2 = find(it1, line.end(), '-');
 	temp = string(it1, it2);
 	dish.price = stod(temp);
+	
+	if (toDo)
+	{
+		it1 = it2 + 1;
 
-	return line;
+		it2 = find(it1, line.end(), '-');
+		temp = string(it1, it2);
+		toDo = stoi(temp);
+	}
+
+	return toDo;
 }
 
-void Dish::LoadCout(istream& in, Dish& dish)
+void Dish::LoadCout(istream& in, Dish& dish, bool is)
 {
-	cout << "\nCategory: ";
-	cin.ignore();
-	getline(in, dish.category);
+	if (is)
+	{
+		cout << "\nCategory: ";
+		cin.ignore();
+		getline(in, dish.category);
+	}
+	else {
+		dish.category = "drink";
+	}
+	
 	cout << "\nWeight: ";
 	in >> dish.weight;
 	cout << "\nPrice: ";
@@ -82,7 +98,7 @@ void Dish::setPrice(double newPrice)
 
 istream& operator>>(istream& in, Dish& dish)
 {
-	dish.LoadCout(in, dish);
+	dish.LoadCout(in, dish, true);
 	return in;
 }
 
