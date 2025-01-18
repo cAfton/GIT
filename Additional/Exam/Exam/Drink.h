@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Dish.h"
 
 class Drink: public Dish
@@ -7,7 +7,15 @@ class Drink: public Dish
 public:
 	Drink();
 
-	Drink(string Name, string Category, int Weight, double Price, bool IsAlcoholic) : Dish(Name, Category, Weight, Price), isAlcoholic(IsAlcoholic){}
+	Drink(string Name, int Weight, double Price, bool IsAlcoholic);
 
-	void setCategory(string newCategory);
+	void virt() override;
+
+	friend ostream& operator<<(ostream& out, const Drink& drink);
+
+	friend ofstream& operator<<(ofstream& file, const Drink& drink); //запис в файл
+
+	friend istream& operator>>(istream& file, Drink& drink);
+
+	friend ifstream& operator>>(ifstream& file, Drink& drink);
 };

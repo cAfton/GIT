@@ -2,7 +2,58 @@
 
 Dish::Dish(){}
 
-Dish::Dish(string Name, string Category, int Weight, double Price): name(Name), category(Category), weight(Weight), price(Price){}
+Dish::Dish(string Name, string Category, int Weight, double Price): name(Name), category(Category), weight(Weight), price(Price) {}
+
+void Dish::PrintFile(ofstream& file, const Dish& dish) const
+{
+	file << dish.name << ";" << dish.category << ";" << dish.weight << ";" << dish.price << ";";
+}
+
+void Dish::PrintCout(ostream& out, const Dish& dish) const
+{
+	out << "Name: " << dish.name << endl;
+	out << "Category: " << dish.category << endl;
+	out << "Weight: " << dish.weight << endl;
+	out << "Price: " << dish.price << endl;
+}
+
+string Dish::LoadFile(ifstream& file, Dish& dish)
+{
+	string line, temp;
+	getline(file, line);
+
+	auto it1 = find(line.begin(), line.end(), ';');
+	dish.name = string(line.begin(), it1);
+	it1++;
+
+	auto it2 = find(it1, line.end(), ';');
+	dish.category = string(it1, it2);
+	it1 = it2 + 1;
+
+	it2 = find(it1, line.end(), ';');
+	dish.weight = stoi(string(it1, it2));
+	it1 = it2 + 1;
+
+	it2 = find(it1, line.end(), '-');
+	temp = string(it1, it2);
+	dish.price = stod(temp);
+
+	return line;
+}
+
+void Dish::LoadCout(istream& in, Dish& dish)
+{
+	cout << "\nCategory: ";
+	cin.ignore();
+	getline(in, dish.category);
+	cout << "\nWeight: ";
+	in >> dish.weight;
+	cout << "\nPrice: ";
+	in >> dish.price;
+	cout << endl;
+
+}
+
 
 string Dish::getName()
 {
@@ -31,56 +82,27 @@ void Dish::setPrice(double newPrice)
 
 istream& operator>>(istream& in, Dish& dish)
 {
-	cout << "\nCategory: ";
-	cin.ignore();
-	getline(in, dish.category);
-	cout << "\nWeight: ";
-	in >> dish.weight;
-	cout << "\nPrice: ";
-	in >> dish.price;
-	cout << endl;
-
+	dish.LoadCout(in, dish);
 	return in;
 }
 
 ostream& operator<<(ostream& out, const Dish& dish)
 {
-	out << "Name: " << dish.name << endl;
-	out << "Category: " << dish.category << endl;
-	out << "Weight: " << dish.weight << endl;
-	out << "Price: " << dish.price << endl;
+	dish.PrintCout(out, dish);
 
 	return out;
 }
 
 ofstream& operator<<(ofstream& file, const Dish& dish)
 {
-	file << dish.name << ";" << dish.category << ";" << dish.weight << ";" << dish.price << ";";
+	dish.PrintFile(file, dish);
 
 	return file;
 }
 
 ifstream& operator>>(ifstream& file, Dish& dish)
 {
-	string line, temp;
-	getline(file, line);
-
-	auto it1 = find(line.begin(), line.end(), ';');
-	dish.name = string(line.begin(), it1);
-	it1++;
-
-	auto it2 = find(it1, line.end(), ';');
-	dish.category = string(it1, it2);
-	it1 = it2 + 1;
-
-	it2 = find(it1, line.end(), ';');
-	dish.weight = stoi(string(it1, it2));
-	it1 = it2 + 1;
-
-	it2 = find(it1, line.end(), ';');
-	temp = string(it1, it2);
-	dish.price = stod(temp);
-
+	
 
 	return file;
 }

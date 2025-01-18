@@ -128,7 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Dish.cpp" />
+    <ClCompile Include="Drink.cpp" />
     <ClCompile Include="Exam.cpp" />
+    <ClCompile Include="Meal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dish.h" />

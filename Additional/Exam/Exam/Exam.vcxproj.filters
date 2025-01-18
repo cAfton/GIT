@@ -21,6 +21,12 @@
     <ClCompile Include="Dish.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Drink.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Meal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dish.h">
