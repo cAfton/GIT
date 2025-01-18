@@ -19,6 +19,10 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
+            double[] name = new double[5];
+
+        
+
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.WriteLine("Enter X1, X2, DX");
             double X1, X2, DX;
