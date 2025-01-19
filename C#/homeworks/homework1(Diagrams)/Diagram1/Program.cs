@@ -14,29 +14,35 @@ namespace Diagram1
             Console.Write("Enter size of array: ");
 
             sizeOfArr = int.Parse(Console.ReadLine());
-            sizeOfArr = Math.Abs(sizeOfArr);
 
-            if (sizeOfArr == 0) { return; }
+            if (sizeOfArr != 0) {
+                sizeOfArr = Math.Abs(sizeOfArr);
+                int[] array = new int[sizeOfArr];
 
-            int[] array = new int[sizeOfArr];
+                array[0] = int.Parse(Console.ReadLine());
 
-            array[0] = int.Parse(Console.ReadLine());
+                int min = array[0];
 
-            int min = array[0];
-
-            for (int i = 1; i < sizeOfArr; i++)
-            {
-                array[i] = int.Parse(Console.ReadLine());
-
-                if (array[i] < min)
+                for (int i = 1; i < sizeOfArr; i++)
                 {
-                    min = array[i];
-                }
-            }
+                    array[i] = int.Parse(Console.ReadLine());
 
-            Console.Write("min number of this array is ");
-            Console.WriteLine(min);
-            Console.ReadLine();
+                    if (array[i] < min)
+                    {
+                        min = array[i];
+                    }
+                }
+
+                Console.Write("min number of this array is ");
+                Console.WriteLine(min);
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.Write("size cant be 0");
+                Console.ReadLine();
+
+            }
         }
     }
 }
