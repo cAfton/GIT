@@ -8,41 +8,29 @@ namespace Diagram1
 {
     internal class Program
     {
+
+        static int findMin(int[] array)
+        {
+            int minRet = array[0];
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] < minRet)
+                {
+                    minRet = array[i];
+                }
+            }
+            return minRet;
+        }
         static void Main(string[] args)
         {
-            int sizeOfArr;
-            Console.Write("Enter size of array: ");
+            int[] array = new int[5] {10, 3, 2, 7, 9 };
 
-            sizeOfArr = int.Parse(Console.ReadLine());
+            int min = findMin(array);
 
-            if (sizeOfArr != 0) {
-                sizeOfArr = Math.Abs(sizeOfArr);
-                int[] array = new int[sizeOfArr];
-
-                array[0] = int.Parse(Console.ReadLine());
-
-                int min = array[0];
-
-                for (int i = 1; i < sizeOfArr; i++)
-                {
-                    array[i] = int.Parse(Console.ReadLine());
-
-                    if (array[i] < min)
-                    {
-                        min = array[i];
-                    }
-                }
-
-                Console.Write("min number of this array is ");
-                Console.WriteLine(min);
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.Write("size cant be 0");
-                Console.ReadLine();
-
-            }
+            Console.Write("min number of this array is ");
+            Console.WriteLine(min);
+            Console.ReadLine();
+            
         }
     }
 }
