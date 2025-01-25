@@ -64,14 +64,7 @@ namespace additional_Nazarchik
             Console.WriteLine(Mul(arr));
             Console.ReadLine();
         }
-        ////////
-        /*Користувач вводить із клавіатури межі числового діапазону.Потрібно показати всі числа Фібоначчі з цього діапазону.
-            Числа Фібоначчі — елементи числової послідовності, в якій перші два числа дорівнюють 0 і 1, а кожне наступне число
-            дорівнює сумі двох попередніх чисел.Наприклад, якщо вказано діапазон 0-20, результат буде:
 
-        0, 1, 1, 2, 3, 5, 8, 13*/
-
-        // 0, 1, n1, n2
         static List<int> Fib(int n1, int n2, int last, List<int> arr)
         {
             if (n1 + n2 > last)
@@ -110,7 +103,6 @@ namespace additional_Nazarchik
             Console.ReadLine();
         }
 
-        ///////////\n3)diagonally up\n4)diagonally down
 
         static void Task6()
         {

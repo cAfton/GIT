@@ -120,18 +120,249 @@ namespace additional
                 }
             }
         }
-        static void Main(string[] args)
+
+        static void taskSix()
         {
+            Console.WriteLine("1 - vertical\n2 - horizont");
+            int a = int.Parse(Console.ReadLine());
+            int b = int.Parse(Console.ReadLine());
+            char c = char.Parse(Console.ReadLine());
 
-            printBjarneStroustrup();
+            if (a == 1)
+            {
+                for (int i = 0; i < b; i++)
+                {
+                    Console.WriteLine(c);
+                }
+            }
+            else if (a == 2)
+            {
+                for (int i = 0; i < b; i++)
+                {
+                    Console.Write(c);
+                }
+            }
+        }
 
-            flip();
+        static double Sum(double[] arr)
+        {
+            double S = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                S += arr[i];
+            }
+            return S;
+        }
+        static double Max(double[] arr)
+        {
+            double M = arr[0];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] > M)
+                    M = arr[i];
+            }
+            return M;
+        }
 
-            printNumbers();
+        static double Min(double[] arr)
+        {
+            double M = arr[0];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] < M)
+                    M = arr[i];
+            }
+            return M;
+        }
 
-            printPalidroms();
+        static double Mul(double[] arr)
+        {
+            double M = 1;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                M *= arr[i];
+            }
+            return M;
+        }
 
+        static void Task2()
+        {
+            double[] arr = new double[5];
+            Console.Write("Enter your 5 numbers:");
+            for (int i = 0; i < 5; i++)
+            {
+                arr[i] = int.Parse(Console.ReadLine());
+            }
+            Console.WriteLine(Sum(arr));
+            Console.WriteLine(Max(arr));
+            Console.WriteLine(Min(arr));
+            Console.WriteLine(Mul(arr));
             Console.ReadLine();
         }
+
+        static List<int> Fib(int n1, int n2, int last, List<int> arr)
+        {
+            if (n1 + n2 > last)
+            {
+                arr.Add(n2);
+                return arr;
+            }
+            if (n1 == 0)
+            {
+                arr.Add(n1);
+            }
+
+            arr.Add(n2);
+
+            return Fib(n2, n2 + n1, last, arr);
+
+        }
+
+        static void Task4()
+        {
+            Console.WriteLine("Enter first and last numbers:");
+            int first = int.Parse(Console.ReadLine());
+            int last = int.Parse(Console.ReadLine());
+
+
+            List<int> list = new List<int>();
+
+            list = Fib(0, 1, last, list);
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (!(list[i] < first))
+                {
+                    Console.WriteLine($"{list[i]} ");
+                }
+            }
+            Console.ReadLine();
+        }
+
+
+        static void Task6()
+        {
+            Console.WriteLine("1)Horizontally\n2)vertically:");
+            int choice1 = int.Parse(Console.ReadLine());
+            Console.WriteLine("Number:");
+            int choice2 = int.Parse(Console.ReadLine());
+            Console.WriteLine("Char:");
+            char choice3 = char.Parse(Console.ReadLine());
+
+            if (choice1 == 1)
+            {
+                for (int i = 0; i < choice2; i++)
+                {
+                    Console.Write(choice3);
+                }
+
+            }
+            else
+            {
+                for (int i = 0; i < choice2; i++)
+                {
+                    Console.WriteLine(choice3);
+                }
+            }
+            Console.ReadLine();
+        }
+
+        static void Parce()
+        {
+            string line = Console.ReadLine();
+
+            int num = 0;
+            for (int i = 0; i < line.Length; i++)
+            {
+                switch (line[i])
+                {
+                    case '0':
+                        num += 0;
+                        break;
+                    case '1':
+                        num += 1;
+                        break;
+                    case '2':
+                        num += 2;
+                        break;
+                    case '3':
+                        num += 3;
+                        break;
+                    case '4':
+                        num += 4;
+                        break;
+                    case '5':
+                        num += 5;
+                        break;
+                    case '6':
+                        num += 6;
+                        break;
+                    case '7':
+                        num += 7;
+                        break;
+                    case '8':
+                        num += 8;
+                        break;
+                    case '9':
+                        num += 9;
+                        break;
+                    case ' ':
+                        continue;
+                    default:
+                        break;
+                }
+                num *= 10;
+            }
+            num /= 10;
+
+            Console.WriteLine(num);
+
+            for (int i = 1; i <= num; i++)
+            {
+                for (int j = 1; j <= i; j++)
+                {
+                    Console.Write($"{j} ");
+
+                }
+                Console.WriteLine();
+            }
+        }
+        static void Main(string[] args)
+        {
+            //Parce();
+
+            //Console.WriteLine();
+
+            //printBjarneStroustrup();
+
+            //Console.WriteLine();
+
+            //flip();
+
+            //Console.WriteLine();
+
+            //printNumbers();
+
+            //Console.WriteLine();
+
+            //printPalidroms();
+
+            //Console.WriteLine();
+
+            //Task2();
+
+            //Console.WriteLine();
+
+            //Task4();
+
+            //Console.WriteLine();
+
+            //Task6();
+
+            //Console.ReadLine();
+
+            taskSix();
+
+            Console.ReadLine();
+;        }
     }
 }
