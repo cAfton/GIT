@@ -110,7 +110,7 @@ namespace additional_Nazarchik
             Console.ReadLine();
         }
 
-        ///////////\n3)diagonally up\n4)diagonally down
+        ///////////
 
         static void Task6()
         {
