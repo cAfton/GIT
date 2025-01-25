@@ -141,9 +141,9 @@ namespace additional_Nazarchik
 
         static void Main(string[] args)
         {
-            //Task2();
+            Task2();
 
-            //Task4();
+            Task4();
 
             Task6();
         }
