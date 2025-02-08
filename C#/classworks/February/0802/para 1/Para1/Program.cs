@@ -13,9 +13,26 @@ namespace Para1
     {
         public class Number
         {
-            private static List<int?> Value { get; set; } = new List<int?>();
+            private static List<int> Value { get; set; } = new List<int>();
 
-            
+            private static void regen(int start, int end)
+            {
+                int s = Value.FindIndex(elem => elem == start);
+                if(s == -1)
+                {
+                    s = 0;
+                }
+                for (int i = start; i <= end; i += 2)
+                {
+                    if (Value.Contains(i))
+                    {
+                        s++;
+                        continue;
+                    }
+                    Value.Insert(s,i);
+                    s++;
+                }
+            }
 
             private static void create(int start, int end)
             {
@@ -34,95 +51,34 @@ namespace Para1
 
                 if (Value.Count != 0)
                 {
-                    #region if_start_and_end_in_array
-                    if ((end > Value[0] && end < Value.Last<int?>()) && (start > Value[0] && start < Value.Last<int?>()))
+                    if(start > Value[0] && start < Value.Last<int>())
                     {
-                        if(Value.FindIndex(elem => elem == null) != Value.Count)
+                        if(end > Value[0] && end < Value.Last<int>())
                         {
-                            int s = Value.FindIndex(elem => elem == null);
+                            int c = end - start;
+                            int one = Value.FindIndex(elem => elem == start);
+                            int two = Value.FindIndex(elem => elem == end);
 
-                            for (int i = s; i < end; i += 2)
+                            if(c != two - one)
                             {
-                                Value.Insert(s, Value[i]);
-                                s++;
-                            }
-                        }
-                        Value.Add(null);
-                        return;
-                    }
-                    #endregion
-
-                    #region if_end_in_array_or_start_in_array
-                    if (end > Value[0] && end < Value.Last<int?>())
-                    {
-                        if (Value.FindIndex(elem => elem == null) != Value.Count)
-                        {
-                            int s = Value.FindIndex(elem => elem == null);
-                            if (end >= s)
-                            {
-                                for (int i = s; i < end; i += 2)
-                                {
-                                    Value.Insert(s, Value[i]);
-                                    s++;
-                                }
-                            }
-                            
-                        }
-                        end = (int)Value[0] - 1;
-
-                        for (int i = start; i <= end; i += 2)
-                        {
-                            Value.Add(i);
-                        }
-                        Value.Add(null);
-                    }
-
-                    if (start > Value[0] && start < Value.Last<int?>())
-                    {
-
-                        if (Value.FindIndex(elem => elem == null) != Value.Count)
-                        {
-                            int s = Value.FindIndex(elem => elem == null);
-                            if (start <= s)
-                            {
-                                for (int i = s; i < Value[s+1]; i += 2)
-                                {
-                                    Value.Insert(s, Value[i]);
-                                    s++;
-                                }
+                                regen(start, end);
                             }
 
+                            return;
+
                         }
-
-
-                        start = (int)Value.Last<int?>() + 1;
-
-                        for (int i = start; i <= end; i += 2)
+                        else
                         {
-                            Value.Add(i);
+                            regen(start, end);
+                            return;
                         }
-                        Value.Add(null);
+
+
                     }
-                    #endregion
-
-                    #region if_start_and_end_out_of_array
-                    int psI = 0;
-
-                    if (!(end > Value[0] && end < Value.Last<int?>()) && !(start > Value[0] && start < Value.Last<int?>()))
+                    else
                     {
-                        for (int i = start; i < Value[0]; i += 2)
-                        {
-                            Value.Insert(psI, Value[i]);
-                            psI++;
-                        }
-                        for (int i = (int)Value.Last<int?>(); i < end; i += 2)
-                        {
-                            Value.Add(i);
-                        }
-                        Value.Add(null);
+                        regen(start, end);
                     }
-                    #endregion
-
                 }
                 else
                 {
@@ -132,8 +88,8 @@ namespace Para1
                         Value.Add(i);
 
                     }
-                    Value.Add(null);
                     #endregion
+                    return;
                 }
 
             }
@@ -149,15 +105,15 @@ namespace Para1
 
 
                 #region create_array
-                if (Value.Count == 0)
-                {
-                    create(start, end);
-                }
+                //if (Value.Count == 0)
+                //{
+                //    create(start, end);
+                //}
+                //else if (start < Value[0] || end > (int)Value.Last<int?>())
+                //{
 
-                else if (start < Value[0] || end > (int)Value.Last<int?>())
-                {
-                    create(start, end);
-                }
+                //}
+                create(start, end);
                 #endregion
 
                 #region para
@@ -167,23 +123,133 @@ namespace Para1
                     end--;
                 #endregion
                 //Get the value of the desired range 
-                int?[] N = new int?[(end - start) / 2 + 1];
+                int[] N = new int[(end - start) / 2 + 1];
                 Value.CopyTo(Value.FindIndex(elem => start == elem),N,0,(end - start)/2 + 1);
 
-                #region to_normal_int
-                int[] rezalt = new int[(end - start) / 2 + 1];
 
-                for (int i = (int)N[0]; i <= N.Length; i++)
-                {
-                    rezalt[i] = (int)N[i];
-                }
-                #endregion
-
-                return rezalt;
+                return N;
             }
 
         }
     }
+
+    namespace evenNumbers
+    {
+        public class Number
+        {
+            private static List<int> Value { get; set; } = new List<int>();
+
+            private static void regen(int start, int end)
+            {
+                int s = Value.FindIndex(elem => elem == start);
+                if (s == -1)
+                {
+                    s = 0;
+                }
+                for (int i = start; i <= end; i += 2)
+                {
+                    if (Value.Contains(i))
+                    {
+                        s++;
+                        continue;
+                    }
+                    Value.Insert(s, i);
+                    s++;
+                }
+            }
+
+            private static void create(int start, int end)
+            {
+                #region swap_and_para
+                if (start > end)
+                {
+                    (start, end) = (end, start);
+                }
+
+                if (start % 2 == 0)
+                    start++;
+                if (end % 2 == 0)
+                    end--;
+                #endregion
+
+
+                if (Value.Count != 0)
+                {
+                    if (start > Value[0] && start < Value.Last<int>())
+                    {
+                        if (end > Value[0] && end < Value.Last<int>())
+                        {
+                            int c = end - start;
+                            int one = Value.FindIndex(elem => elem == start);
+                            int two = Value.FindIndex(elem => elem == end);
+
+                            if (c != two - one)
+                            {
+                                regen(start, end);
+                            }
+
+                            return;
+
+                        }
+                        else
+                        {
+                            regen(start, end);
+                            return;
+                        }
+
+
+                    }
+                    else
+                    {
+                        regen(start, end);
+                    }
+                }
+                else
+                {
+                    #region if_array_is_empty
+                    for (int i = start; i <= end; i += 2)
+                    {
+                        Value.Add(i);
+
+                    }
+                    #endregion
+                    return;
+                }
+
+            }
+
+            public static int[] GetNumbers(int start, int end)
+            {
+                #region swap
+                if (start > end)
+                {
+                    (start, end) = (end, start);
+                }
+                #endregion
+
+
+                #region create_array
+                
+                create(start, end);
+                #endregion
+
+                #region para
+                if (Math.Abs(start) % 2 == 0)
+                    start++;
+                if (Math.Abs(end) % 2 == 0)
+                    end--;
+                #endregion
+                //Get the value of the desired range 
+                int[] N = new int[(end - start) / 2 + 1];
+                Value.CopyTo(Value.FindIndex(elem => start == elem), N, 0, (end - start) / 2 + 1);
+
+
+                return N;
+            }
+
+        }
+    }
+
 
     internal class Program
     {
@@ -191,12 +257,13 @@ namespace Para1
 
         static void Main(string[] args)
         {
+            
+            #region even
+            int[] arr1 = notevenNumbers.Number.GetNumbers(25, 40);
 
-            int[] arr = notevenNumbers.Number.GetNumbers(5,100);
-
-            for (int i = 0; i < arr.Length; i++)
+            for (int i1 = 0; i1 < arr1.Length; i1++)
             {
-                Console.Write($"{arr[i]}, ");
+                Console.Write($"{arr1[i1]}, ");
 
             }
             Console.WriteLine("\n");
@@ -205,16 +272,78 @@ namespace Para1
             int end = int.Parse(Console.ReadLine());
 
 
-            arr = notevenNumbers.Number.GetNumbers(start, end);
+            arr1 = notevenNumbers.Number.GetNumbers(start, end);
 
-            for (int i = 0; i < arr.Length; i++)
+            for (int i1 = 0; i1 < arr1.Length; i1++)
             {
-                Console.Write($"{arr[i]}, ");
+                Console.Write($"{arr1[i1]}, ");
 
             }
             Console.WriteLine("\n");
 
-            Console.ReadLine();
+
+            int i = 6;
+            while (i <= 5)
+            {
+                start = int.Parse(Console.ReadLine());
+                end = int.Parse(Console.ReadLine());
+
+
+                arr1 = notevenNumbers.Number.GetNumbers(start, end);
+
+                for (int i1 = 0; i1 < arr1.Length; i1++)
+                {
+                    Console.Write($"{arr1[i1]}, ");
+
+                }
+                Console.WriteLine("\n");
+                i++;
+            }
+            #endregion
+            ///////////////////////////////////////////////
+            #region notEven
+            int[] arr2 = evenNumbers.Number.GetNumbers(25, 40);
+
+            for (int i2 = 0; i2 < arr2.Length; i2++)
+            {
+                Console.Write($"{arr2[i2]}, ");
+
+            }
+            Console.WriteLine("\n");
+
+            int start2 = int.Parse(Console.ReadLine());
+            int end2 = int.Parse(Console.ReadLine());
+
+
+            arr2 = evenNumbers.Number.GetNumbers(start2, end2);
+
+            for (int i2 = 0; i2 < arr2.Length; i2++)
+            {
+                Console.Write($"{arr2[i2]}, ");
+
+            }
+            Console.WriteLine("\n");
+
+
+
+            while (true)
+            {
+                start2 = int.Parse(Console.ReadLine());
+                end2 = int.Parse(Console.ReadLine());
+
+
+                arr2 = evenNumbers.Number.GetNumbers(start2, end2);
+
+                for (int i2 = 0; i2 < arr2.Length; i2++)
+                {
+                    Console.Write($"{arr2[i2]}, ");
+
+                }
+                Console.WriteLine("\n");
+
+            }
+            #endregion
+
         }
     }
 }
