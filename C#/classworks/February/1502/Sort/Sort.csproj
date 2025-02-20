@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B327728F-F471-476E-9DC2-698792D83F4B}</ProjectGuid>
+    <ProjectGuid>{A501AD77-06E0-4CC7-8A95-416631ACD22F}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Human</RootNamespace>
-    <AssemblyName>Human</AssemblyName>
+    <RootNamespace>Sort</RootNamespace>
+    <AssemblyName>Sort</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,12 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Array.cs" />
-    <Compile Include="Interfaces\ISort.cs" />
-    <Compile Include="Models\Builder.cs" />
-    <Compile Include="Models\Human.cs" />
-    <Compile Include="Models\Pilot.cs" />
-    <Compile Include="Models\Sailor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
