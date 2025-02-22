@@ -14,7 +14,11 @@ namespace ConsoleApp1
             return (elem % 2) == 0;
         }
 
-
+        public static int sentensusCounter(this string elem)
+        {
+            char[] chars = { '.', '?', '!' };
+            return elem.Split(chars).Length - 1;
+        }
     }
 
     internal class Program
@@ -24,6 +28,11 @@ namespace ConsoleApp1
             int number = 1;
 
             Console.WriteLine(number.isOdd());
+
+            string text = "Я люблю читати книги. А ти? Сонце світить яскраво, але вітер все ще холодний. Ми пішли в парк; там було дуже красиво. Не забудь купити хліб! Молоко теж візьми. Це неймовірно — я просто не можу повірити!";
+
+            Console.WriteLine(text.sentensusCounter());
+
             Console.ReadLine();
         }
     }
