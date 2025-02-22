@@ -20,7 +20,7 @@
         public void GiveTask(string taskName)
         {
             Console.WriteLine($"Im {Name}. Gave {taskName} task");
-            StartWork(taskName)
+            StartWork(taskName);
         }
 
     }
