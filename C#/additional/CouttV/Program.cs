@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+Console.InputEncoding = Encoding.Unicode;
+Console.OutputEncoding = Encoding.Unicode;
+
 namespace CouttV
 {
     public class Cout
@@ -19,7 +22,10 @@ namespace CouttV
         static void Main(string[] args)
         {
             Cout cout = new Cout();
-            _ = cout << "HHHH";
+
+            Console.WriteLine("фф");
+
+            _ = cout << "feregdr";
             Console.ReadLine();
         }
     }
