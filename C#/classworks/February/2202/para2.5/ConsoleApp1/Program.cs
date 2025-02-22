@@ -34,6 +34,7 @@ namespace ConsoleApp1
             Console.WriteLine(text.sentensusCounter());
 
             Console.ReadLine();
+
         }
     }
 }
