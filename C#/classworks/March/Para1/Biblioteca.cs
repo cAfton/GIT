@@ -58,6 +58,7 @@ namespace Para1
 
         public List<T> FindGanre(string findGanre)
         {
+
             List<T> list = books.FindAll(elem => findGanre == elem.Ganre);
             
             return list;
