@@ -11,7 +11,7 @@ namespace Para1
 
         public int size {  get; set; }
 
-        mafuncu()
+        public mafuncu()
         {
             name = "Mafunku!";
             size = 0;
@@ -25,7 +25,10 @@ namespace Para1
 
         public IEnumerator<mafuncu> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < cars.Count; i++)
+            {
+                yield return cars[i];
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -41,7 +44,21 @@ namespace Para1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Garage gar = new Garage()
+            {
+                cars = new List<mafuncu>() { new mafuncu(), new mafuncu(), new mafuncu()}
+            };
+            
+            
+
+
+
+
+            foreach (var car in gar.cars)
+            {
+                Console.WriteLine($"{car.name}, {car.size}");
+            }
+            Console.ReadLine();
         }
     }
 }
