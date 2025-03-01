@@ -130,7 +130,7 @@ Client Queue::pop()
 		return temp;
 	}
 	else {
-		throw runtime_error("error while poping");
+		throw runtime_error("Error while poping");
 	}
 }
 
