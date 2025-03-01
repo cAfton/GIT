@@ -1,0 +1,10 @@
+Annual Tech Conference;2025-03-15;09:00;San Francisco,CA;;
+Art Gallery Opening;2025-04-05;18:00;New York City,NY;;
+Music Festival;2025-05-12;14:00;Los Angeles,CA;;
+Charity Run;2025-06-22;08:00;Chicago,IL;;
+Film Premiere;2025-07-10;20:00;London,UK;;
+Business Networking Event;2025-08-18;17:30;Toronto,Canada;;
+Food Truck Festival;2025-09-01;12:00;Austin,TX;;
+Fashion Show;2025-10-25;19:00;Paris,France;;
+Winter Concert;2025-11-12;19:30;Berlin,Germany;;
+Marathon;2025-12-01;07:00;Boston,MA;;
