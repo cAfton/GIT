@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Newtonsoft.Json;
 
 namespace Cuisine
 {
@@ -29,11 +30,34 @@ namespace Cuisine
         public List<string> Steps { get; set; }
         public Type1 type1 { get; set; }
         public Dictionary<string, (int, int)> Ingridients { get; set; }
+
+       
+        public override string ToString()
+        {
+            string steps = "";
+            int i = 1;
+            foreach (var step in Steps) {
+                steps += $" {i}) ";
+                steps += step.ToString();
+                i++;
+            }
+
+            string ingridients = "";
+            foreach (var item in Ingridients)
+            {
+                ingridients += $"{item.Key}\nGrams:{item.Value.Item1}\tKkal:{item.Value.Item2}\n";
+            }
+
+            return $"{Name}\n{cuisine.ToString()}\n{type1.ToString()}\n{Time}\n\n{ingridients}\n\n{steps}\n";
+        }
     }
 
     public class RecipeBook : IEnumerable<Recipe>, IDisposable
     {
         public List<Recipe> recipes = new List<Recipe>();
+
+        private string filePath = "RecipeBook.json";
+
         public void AddRecipe(Recipe recipe)
         {
             recipes.Add(recipe);
@@ -42,6 +66,17 @@ namespace Cuisine
         {
             Recipe a = recipes.Find((name) => { return name.Name == Name; });
             recipes.Remove(a);
+        }
+
+        public void readFromFile()
+        {
+            string text = File.ReadAllText(filePath);
+            recipes = JsonConvert.DeserializeObject<List<Recipe>>(text);
+        }
+        public void writeToFile()
+        {
+            string text = JsonConvert.SerializeObject(recipes, Formatting.Indented);
+            File.WriteAllText(filePath, text);
         }
 
         public List<Recipe> FindRecepe()
@@ -74,43 +109,23 @@ namespace Cuisine
 
         public IEnumerator<Recipe> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return recipes.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
     }
 
     internal class Program
     {
-        /*private StreamReader Reader;
-        private StreamWriter Writer;
- 
-        public FileHandler(string filePathRead, string filePathWrite)
-        {
-            Reader = new StreamReader(filePathRead);
-            Writer = new StreamWriter(filePathWrite);
-        }
- 
-        public string ReadFromFile()
-        {
-            string currentText = Reader.ReadToEnd();
-            return currentText;
-        }
-        public void WrightToFile(string textToWritight)
-        {
-            Writer.Write(textToWritight);
-            Writer.Flush();
-            Console.WriteLine("text wrote");
-        }*/
-
+        
 
 
         static void Main(string[] args)
         {
-            RecipeBook book = new RecipeBook()
+            /*RecipeBook book = new RecipeBook()
             {
                 recipes = new List<Recipe>() {
                     new Recipe() {
@@ -133,11 +148,24 @@ namespace Cuisine
                     },
                 }
             };
+
             var elem = book.FindRecepe();
             foreach (var item in elem)
             {
                 Console.WriteLine(item.Name);
+            }*/
+            RecipeBook book = new RecipeBook();
+            book.readFromFile();
+
+            book.writeToFile();
+
+            foreach (var item in book)
+            {
+                Console.WriteLine(item);
             }
+
+            Console.ReadLine();
+
         }
     }
 }
