@@ -124,37 +124,7 @@ namespace Cuisine
 
 
         static void Main(string[] args)
-        {
-            /*RecipeBook book = new RecipeBook()
-            {
-                recipes = new List<Recipe>() {
-                    new Recipe() {
-                        Name = "borch",
-                        cuisine = Сuisine.Ukranian,
-                        Ingridients = new Dictionary <string, (int,int)>(),
-                        Steps = new List<string>(),
-                        Time = 2,
-                        type1 = Type1.Soop
-
-                    },
-                    new Recipe() {
-                        Name = "borch1",
-                        cuisine = Сuisine.Ukranian,
-                        Ingridients = new Dictionary <string, (int,int)>(),
-                        Steps = new List<string>(),
-                        Time = 2,
-                        type1 = Type1.Soop
-
-                    },
-                }
-            };
-
-            var elem = book.FindRecepe();
-            foreach (var item in elem)
-            {
-                Console.WriteLine(item.Name);
-            }*/
-            RecipeBook book = new RecipeBook();
+        {            RecipeBook book = new RecipeBook();
             book.readFromFile();
 
             book.writeToFile();
