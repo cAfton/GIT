@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq.Expressions;
 using Newtonsoft.Json;
 
 namespace Cuisine
@@ -68,6 +69,81 @@ namespace Cuisine
             recipes.Remove(a);
         }
 
+        public void Edit(string elemToEdit)
+        {
+            var b = recipes[0].GetType().GetProperties();
+            for (int i = 0; i < b.Length; i++)
+            {
+                Console.WriteLine(b[i].Name);
+            }
+
+            Console.WriteLine("Enter parametr to edit: ");
+            string param = Console.ReadLine();
+
+            var elem = recipes.Find(item => item.Name == elemToEdit);
+
+            switch (param)
+            {
+                case "Name":
+                    Console.WriteLine("Enter new name: ");
+                    elem.Name = Console.ReadLine();
+                    break;
+                case "cuisine":
+                    Console.WriteLine("Enter new cuisine: ");
+                    if(Enum.TryParse(typeof(Cuisine.Сuisine), Console.ReadLine(), true, out var result))
+                    {
+                        elem.cuisine = (Cuisine.Сuisine)result;
+                    }
+                    
+                    break;
+                case "Time":
+                    Console.WriteLine("Enter new time: ");
+                    elem.Time = double.Parse( Console.ReadLine());
+                    break;
+                case "Steps":
+                    Console.WriteLine("Enter new step: ");
+                    do
+                    {
+                        elem.Steps.Add(Console.ReadLine());
+                        Console.WriteLine("Add another step? \n1 - yes\n2 - no");
+
+                    } while (int.Parse(Console.ReadLine()) == 1);
+                    break;
+                case "type1":
+                    Console.WriteLine("Enter new type: ");
+                    if (Enum.TryParse(typeof(Cuisine.Type1), Console.ReadLine(), true, out result))
+                    {
+                        elem.type1 = (Cuisine.Type1)result;
+                    }
+                    break;
+                case "Ingridients":
+                    Console.WriteLine("Add or edit?");
+                    if (Console.ReadLine().ToLower() == "add")
+                    {
+                        Console.WriteLine("Enter new inradient: ");
+                        string newIngad = Console.ReadLine();
+
+                        Console.WriteLine("Enter grams: ");
+                        int newGrams = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Enter new Kkal: ");
+                        int newKkal = int.Parse( Console.ReadLine());
+
+                        elem.Ingridients.Add(newIngad, (newGrams, newKkal));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Enter name of ingradient to edit: ");
+                        string toFind = Console.ReadLine();
+                        Console.WriteLine("Enter grams and Kkal: ");
+                        elem.Ingridients[elem.Ingridients.First(item => item.Key == toFind).Key] = (int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void readFromFile()
         {
             string text = File.ReadAllText(filePath);
@@ -124,17 +200,23 @@ namespace Cuisine
 
 
         static void Main(string[] args)
-        {            RecipeBook book = new RecipeBook();
+        {            
+            RecipeBook book = new RecipeBook();
             book.readFromFile();
 
-            book.writeToFile();
+
+            book.Edit("BorchCool");
+
+
+            Console.WriteLine();
+
 
             foreach (var item in book)
             {
                 Console.WriteLine(item);
             }
 
-            Console.ReadLine();
+            book.writeToFile();
 
         }
     }
