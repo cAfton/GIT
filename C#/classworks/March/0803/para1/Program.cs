@@ -33,6 +33,19 @@
         {
             Performance perf = new Performance();
             Console.WriteLine(perf.Name);
+            perf.Dispose();
+            if (true)
+            {
+                Performance perf2 = new Performance();
+                Console.WriteLine(perf.Theater);
+                perf2.Dispose();
+                using (Performance spect = new Performance())
+                {
+                    spect.Actors.Add("actor1");
+                    Console.WriteLine(spect.Actors[0]);
+                }   
+                char.is
+            }
         }
     }
 }
