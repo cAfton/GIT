@@ -10,8 +10,16 @@
 
         public FileHandler(string filePathToRead, string filePathToWrite)
         {
-            Reader = new StreamReader(filePathToRead);
-            Writer = new StreamWriter(filePathToWrite);
+            try
+            {
+                Reader = new StreamReader(filePathToRead);
+                Writer = new StreamWriter(filePathToWrite);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error");
+            }
+            
         }
 
         public string ReadFromFile()
