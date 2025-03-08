@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace Cuisine
@@ -56,6 +58,18 @@ namespace Cuisine
     public class RecipeBook : IEnumerable<Recipe>, IDisposable
     {
         public List<Recipe> recipes = new List<Recipe>();
+
+        private string phonenum;
+        public string PhoneNum { get { return phonenum; } set {
+                if (Regex.IsMatch(value, @"^\+\d{12}$")) //^[A-Z, a-z, 1-2, +] {12}$
+                {
+                    phonenum = value;
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+            } }
 
         private string filePath = "RecipeBook.json";
 
@@ -204,6 +218,16 @@ namespace Cuisine
             RecipeBook book = new RecipeBook();
             book.readFromFile();
 
+            try
+            {
+                book.PhoneNum = "+123456789000";
+            }
+            catch
+            {
+                Console.WriteLine("wrong input");
+            }
+
+            Console.WriteLine(book.PhoneNum);
 
             book.Edit("BorchCool");
 
