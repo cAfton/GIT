@@ -1,4 +1,7 @@
-﻿namespace Task1_4
+﻿using System;
+using System.Runtime.CompilerServices;
+
+namespace Task1_4
 {
     public enum TypeOfFirma
     {
@@ -23,11 +26,42 @@
                 $"Number of workers: {NumberOfWorkers}\n" +
                 $"Address: {Address}\n" +
                 $"Type: {Type}\n\n";
+        }
     }
+    
     internal class Program
     {
+        #region task 4
+        public static int NumberSuma(int num)
+        {
+            int count = 0;
+            foreach (var item in num.ToString())
+            {
+                count += int.Parse(item.ToString());
+            }
+            return count;
+        }
+        #endregion
+
+        public static List<int> StrangeSort(List<int> list)
+        {
+            return list.OrderBy(elem => NumberSuma(elem)).ToList();
+
+        }
         static void Main(string[] args)
         {
+
+
+            #region task 4
+
+            List<int> listInt = new List<int> {101, 12, 54, 22, 121, 48 };
+            List<int> result = StrangeSort(listInt);
+
+            result.ForEach(item => Console.Write($"{item}  "));
+            Console.WriteLine();
+
+            #endregion
+
             List<Firma> list = new List<Firma>() { 
                 new Firma() {Name = "Food Corporation", DateOfCreating = new DateTime(2008, 10, 29), Director = "Someone", NumberOfWorkers = 123, Address = "Kyev", Type = TypeOfFirma.Eating }, 
                 new Firma() {Name = "SoftServe", DateOfCreating = new DateTime(2025, 01, 29), Director = "White Black", NumberOfWorkers = 500, Address = "Kyev", Type = TypeOfFirma.IT }, 
@@ -59,97 +93,106 @@
                           ">>> ");
                 userChoise = int.Parse(Console.ReadLine());
 
-                    switch (userChoise)
-                    {
-                        case 1:
-                            list.ForEach(elem => Console.WriteLine(elem));
-                            break;
-                        case 2:
-                            list.ForEach(elem => {
-                                if (elem.Name.Contains("Food"))
-                                {
-                                    Console.WriteLine(elem);
-                                }
-                            });
-                            break;
-                        case 3:
-                            list.ForEach(elem => {
-                                if (elem.Type == TypeOfFirma.Marketing)
-                                {
-                                    Console.WriteLine(elem);
-                                }
-                            });
-                            break;
-                        case 4:
-                            list.ForEach(elem => {
-                                if (elem.Type == TypeOfFirma.Marketing || elem.Type == TypeOfFirma.IT)
-                                {
-                                    Console.WriteLine(elem);
-                                }
-                            });
-                            break;
-                        case 5:
-                            list.ForEach(elem => {
-                                if (elem.NumberOfWorkers > 100)
-                                {
-                                    Console.WriteLine(elem);
-                                }
-                            });
-                            break;
-                        case 6:
-                            list.ForEach(elem => {
-                                if (elem.NumberOfWorkers > 100 && elem.NumberOfWorkers < 300)
-                                {
-                                    Console.WriteLine(elem);
-                                }
-                            });
-                            break;
-                        case 7:
-                            list.ForEach(elem => {
-                                if (elem.Address.Contains("London"))
-                                {
-                                    Console.WriteLine(elem);
-                                }
-                            });
-                            break;
-                        case 8:
-                            list.ForEach(elem => {
-                                if (elem.Director.Contains("White"))
-                                {
-                                    Console.WriteLine(elem);
-                                }
-                            });
-                            break;
-                        case 9:
-                            list.ForEach(elem => {
-                                if (DateTime.Now.Year - elem.DateOfCreating.Year > 2)
-                                {
-                                    Console.WriteLine(elem);
-                                }
-                            });
-                            break;
-                        case 10:
-                            list.ForEach(elem => {
-                                if (DateTime.Now.AddDays(-123).Date == elem.DateOfCreating)
-                                {
-                                    Console.WriteLine(elem);
-                                }
-                            });
-                            break;
-                        case 11:
-                            list.ForEach(elem => {
-                                if (elem.Name.Contains("White") && elem.Director.Contains("Black"))
-                                {
-                                    Console.WriteLine(elem);
-                                }
-                            });
-                            break;
-                        case 0:
-                            Console.WriteLine("You cant escape:)");
-                            break;
-                        default:
-                            break;
-                    }
+                switch (userChoise)
+                {
+                    case 1:
+                        list.ForEach(elem => Console.WriteLine(elem));
+                        break;
+                    case 2:
+                        list.ForEach(elem =>
+                        {
+                            if (elem.Name.Contains("Food"))
+                            {
+                                Console.WriteLine(elem);
+                            }
+                        });
+                        break;
+                    case 3:
+                        list.ForEach(elem =>
+                        {
+                            if (elem.Type == TypeOfFirma.Marketing)
+                            {
+                                Console.WriteLine(elem);
+                            }
+                        });
+                        break;
+                    case 4:
+                        list.ForEach(elem =>
+                        {
+                            if (elem.Type == TypeOfFirma.Marketing || elem.Type == TypeOfFirma.IT)
+                            {
+                                Console.WriteLine(elem);
+                            }
+                        });
+                        break;
+                    case 5:
+                        list.ForEach(elem =>
+                        {
+                            if (elem.NumberOfWorkers > 100)
+                            {
+                                Console.WriteLine(elem);
+                            }
+                        });
+                        break;
+                    case 6:
+                        list.ForEach(elem =>
+                        {
+                            if (elem.NumberOfWorkers > 100 && elem.NumberOfWorkers < 300)
+                            {
+                                Console.WriteLine(elem);
+                            }
+                        });
+                        break;
+                    case 7:
+                        list.ForEach(elem =>
+                        {
+                            if (elem.Address.Contains("London"))
+                            {
+                                Console.WriteLine(elem);
+                            }
+                        });
+                        break;
+                    case 8:
+                        list.ForEach(elem =>
+                        {
+                            if (elem.Director.Contains("White"))
+                            {
+                                Console.WriteLine(elem);
+                            }
+                        });
+                        break;
+                    case 9:
+                        list.ForEach(elem =>
+                        {
+                            if (DateTime.Now.Year - elem.DateOfCreating.Year > 2)
+                            {
+                                Console.WriteLine(elem);
+                            }
+                        });
+                        break;
+                    case 10:
+                        list.ForEach(elem =>
+                        {
+                            if (DateTime.Now.AddDays(-123).Date == elem.DateOfCreating)
+                            {
+                                Console.WriteLine(elem);
+                            }
+                        });
+                        break;
+                    case 11:
+                        list.ForEach(elem =>
+                        {
+                            if (elem.Name.Contains("White") && elem.Director.Contains("Black"))
+                            {
+                                Console.WriteLine(elem);
+                            }
+                        });
+                        break;
+                    case 0:
+                        Console.WriteLine("You cant escape:)");
+                        break;
+                    default:
+                        break;
                 }
             }
         }
