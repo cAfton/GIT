@@ -1,4 +1,6 @@
-﻿namespace task_rxcjyfgkv
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace task_rxcjyfgkv
 {
     internal class Program
     {
@@ -57,6 +59,27 @@
             {
                 case 1:
                     print(cities);
+                    break;
+                case 2: 
+                    int n = int.Parse(Console.ReadLine());
+                    List<string> citiesN = cities.Where(x => x.Length == n).ToList();
+                    print(citiesN);
+                    break;
+                case 3:
+                    List<string> citiesA = cities.Where(x => x.StartsWith("A")).ToList();
+                    print(citiesA);
+                    break;
+                case 4:
+                    List<string> citiesM = cities.Where(x => x.EndsWith("m")).ToList();
+                    print(citiesM);
+                    break;
+                case 5:
+                    List<string> citiesNK = cities.Where(x => x.StartsWith("N")).Where(x => x.EndsWith("k")).ToList();
+                    print(citiesNK);
+                    break;
+                case 6:
+                    List<string> citiesNa = cities.Where(x => x.StartsWith("Na")).OrderByDescending(x => x).ToList();
+                    print(citiesNa);
                     break;
                 default:
                     break;
