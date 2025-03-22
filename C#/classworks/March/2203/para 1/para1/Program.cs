@@ -148,20 +148,26 @@ namespace para1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter key");
-            
-            string choice = Console.ReadLine();
-
-            SmartHomeFacade smartHomeFacade = new SmartHomeFacade();
-
-            if (choice == "off")
+            if (false)
             {
-                smartHomeFacade.TurnOff();
+                #region SmartHomeFacade
+                Console.WriteLine("Enter key");
+
+                string choice = Console.ReadLine();
+
+                SmartHomeFacade smartHomeFacade = new SmartHomeFacade();
+
+                if (choice == "off")
+                {
+                    smartHomeFacade.TurnOff();
+                }
+                else if (choice == "on")
+                {
+                    smartHomeFacade.TurnOn();
+                }
+                #endregion
             }
-            else if (choice == "on")
-            {
-                smartHomeFacade.TurnOn();
-            }
+
 
         }
     }
