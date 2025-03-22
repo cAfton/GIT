@@ -18,6 +18,17 @@
             writer.WriteLine($"{DateTime.Now}:{message}");
         }
 
+        static public Logger getLogger
+        {
+            get
+            {
+                if (logger == null)
+                {
+                    logger = new Logger();
+                }
+                return logger;
+            }
+        }
 
         static public Logger Instance()
         {
@@ -50,8 +61,23 @@
     {
         static void Main(string[] args)
         {
-            MakeGold makeGold = new MakeGold();
-            makeGold.DoCidsWork();
+            try
+            {
+                MakeGold makeGold = new MakeGold();
+                makeGold.DoCidsWork();
+                int? a = 5;
+                if (a/0 == 5)
+                    a = 1;
+            }
+            catch (Exception ElProblemo)
+            {
+                Logger.getLogger.Log(ElProblemo.Message);
+                Console.WriteLine(ElProblemo.Message);
+                
+            }
+            
+
+            
 
             Logger.Instance().Dispose();
         }
