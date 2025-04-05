@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -7,17 +8,24 @@ using System.Threading.Tasks;
 
 namespace Dictionary.Dictionary.MyDictionaries
 {
-    internal class MyDictionary
+    public class MyDictionary
     {
         public string Name;
         public Dictionary<string, List<string>> Dictionary;
 
+        public MyDictionary() { }
         public MyDictionary(string name)
         {
             Name = name;
             Dictionary = new Dictionary<string, List<string>>();
         }
 
+        public void AddNewWord()
+        {
+            Console.WriteLine("Enter word");
+            string key = Console.ReadLine();
+            AddWord(key, AddTranslations());
+        }
         public void AddWord(string key, List<string> value)
         {
             if (Dictionary.TryGetValue(key, out List<string> Value))
@@ -40,7 +48,7 @@ namespace Dictionary.Dictionary.MyDictionaries
             int i = 1;
             while (tmpTranslation != "0")
             {
-                Console.WriteLine($"Your {i} translation)");
+                Console.WriteLine($"Your {i} translation:)");
                 tmpTranslation = Console.ReadLine();
                 i++;
             }
@@ -123,35 +131,16 @@ namespace Dictionary.Dictionary.MyDictionaries
         }
         public void FindTheWord(string key)
         {
-            if (Dictionary.TryGetValue(key, out List<string> word))
+            if (Dictionary.TryGetValue(key, out List<string> words))
             {
-                Console.WriteLine($"{key} - {printWords(word)};");
-            }
-            else
-            {
-                Console.WriteLine("There is no such word. Would you like to write a new word?(1-yes, 2-no)");
-                int choice = int.Parse(Console.ReadLine());
-                if (choice == 1)
-                {
-                    AddWord(key, AddTranslations());
-                }
-                else
-                {
-                    return;
-                }
+                Console.WriteLine($"{key} - {printWords(words)};");
             }
         }
         public void SaveToFile()
         {
-            //write to json
-            string json = JsonSerializer.Serialize(Dictionary, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText($"Dictionary({Name}).json", json);
-
             string path = $"Dictionary({Name}).txt";
 
             File.WriteAllText(path, Dictionary.ToString());
-            
-
         }
         public string ExportWord(string key)
         {
