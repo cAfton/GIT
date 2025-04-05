@@ -12,6 +12,10 @@ namespace Dictionary.Dictionary.Menu
     public class Menu
     {
         public List<MyDictionary> Dictionaries;
+        public Menu()
+        {
+            this.Dictionaries = new List<MyDictionary>();
+        }
         public void ProgramMenu()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -26,8 +30,10 @@ namespace Dictionary.Dictionary.Menu
             Console.WriteLine("[4] 🔍 Знайти слово");
             Console.WriteLine("[5] ❌ Видалити слово");
             Console.WriteLine("[6] 🗑️ Видалити словник");
-            Console.WriteLine("[7] 💾 Зберегти зміни");
-            Console.WriteLine("[8] 🚪 Вийти з програми");
+            Console.WriteLine("[7] 📖 Переглянути весь вміст");
+            Console.WriteLine("[8] ✏️ Редагувати слово");
+            Console.WriteLine("[9] 💾 Зберегти зміни");
+            Console.WriteLine("[10]🚪 Вийти з програми");
 
             Console.Write("\nВиберіть опцію (1-8): ");
             int uzerChoice = int.Parse(Console.ReadLine());
@@ -56,16 +62,57 @@ namespace Dictionary.Dictionary.Menu
                     DeleteDictionary();
                     break;
                 case 7:
-                    Save();
+                    PrintAllAllAll();
                     break;
                 case 8:
+                    EditWord();
+                    break;
+                case 9:
+                    Save();
+                    break;
+                case 10:
                     ProgramMeneger.Stop();
                     break;
                 default:
                     break;
             }
         }
-
+        public void EditWord()
+        {
+            PrintAll();
+            Console.WriteLine("Select the desired dictionary(name of dictionary):");
+            string choice = Console.ReadLine();
+            var tmpDictionary = Dictionaries.FirstOrDefault(elem => elem.Name == choice);
+            if (tmpDictionary == new MyDictionary())
+            {
+                Console.WriteLine("Such a dictionary does not exist, would you like to create one?(1-yes, 2-no)");
+                string newChoice = Console.ReadLine();
+                if (newChoice == "1")
+                {
+                    AddNewDictionary();
+                }
+                return;
+            }
+            tmpDictionary.PrintAllWords();
+            Console.WriteLine("Enter your word to edid");
+            string tmp = Console.ReadLine();
+            tmpDictionary.Edit(tmp);
+        }
+        public void PrintAllAllAll()
+        {
+            if (Dictionaries.Count == 0)
+            {
+                Console.WriteLine("There is no dictionary yet.");
+            }
+            else
+            {
+                foreach (var item in Dictionaries)
+                {
+                    Console.WriteLine(item.Name);
+                    item.PrintAllWords();
+                }
+            }
+        }
         public void PrintAll()
         {
             if (Dictionaries.Count == 0)
@@ -85,28 +132,28 @@ namespace Dictionary.Dictionary.Menu
             Console.WriteLine("Enter name:");
             string name = Console.ReadLine();
             var tmpDictionary = Dictionaries.FirstOrDefault(elem => elem.Name == name);
-            if (tmpDictionary == new MyDictionary())
+            if (tmpDictionary == null)
             {
                 Dictionaries.Add(new MyDictionary(name));
                 Console.WriteLine("Done");
                 return;
             }
-            Console.WriteLine("This dictionary already exists.");
+
         }
         public void Save()
         {
             string json = JsonSerializer.Serialize(Dictionaries, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText($"Dictionaries.json", json);
+            File.WriteAllText("Dictionaries.json", json);
             Console.WriteLine("Done");
         }
         public void AddNewWord()
         {
-            Console.WriteLine("Select the desired dictionary:");
             PrintAll();
+            Console.WriteLine("Select the desired dictionary(name of dictionary):");
             string choice = Console.ReadLine();
 
             var tmpDictionary = Dictionaries.FirstOrDefault(elem => elem.Name == choice);
-            if (tmpDictionary == new MyDictionary())
+            if (tmpDictionary == null)
             {
                 Console.WriteLine("Such a dictionary does not exist, would you like to create one?(1-yes, 2-no)");
                 string newChoice = Console.ReadLine();
@@ -116,9 +163,11 @@ namespace Dictionary.Dictionary.Menu
                 }
                 return;
             }
-            tmpDictionary.AddNewWord();
+            else
+            {
+                tmpDictionary.AddNewWorda();
+            }
         }
-
         public void SearchForAWordTranslation()
         {
             Console.WriteLine("Enter word to search");
@@ -145,6 +194,7 @@ namespace Dictionary.Dictionary.Menu
             Console.WriteLine("Keep a dictionary with the word you need");
             string choice = Console.ReadLine();
             var tmpDictionary = Dictionaries.FirstOrDefault(elem => elem.Name == choice);
+            tmpDictionary.PrintAllWords();
             Console.WriteLine("Enter word to delete:");
             choice = Console.ReadLine();
             tmpDictionary.RemoveWord(choice);

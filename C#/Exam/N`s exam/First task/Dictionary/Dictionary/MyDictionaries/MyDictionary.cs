@@ -20,7 +20,7 @@ namespace Dictionary.Dictionary.MyDictionaries
             Dictionary = new Dictionary<string, List<string>>();
         }
 
-        public void AddNewWord()
+        public void AddNewWorda()
         {
             Console.WriteLine("Enter word");
             string key = Console.ReadLine();
@@ -39,7 +39,13 @@ namespace Dictionary.Dictionary.MyDictionaries
                 Console.WriteLine("Done");
             }
         }
-
+        public void PrintAllWords()
+        {
+            foreach (var item in Dictionary)
+            {
+                Console.WriteLine($"{item.Key} - {printWords(item.Value)}");
+            }
+        }
         private List<string> AddTranslations()
         {
             Console.WriteLine("Enter translations (0-to stop)");
@@ -50,6 +56,10 @@ namespace Dictionary.Dictionary.MyDictionaries
             {
                 Console.WriteLine($"Your {i} translation:)");
                 tmpTranslation = Console.ReadLine();
+                if (tmpTranslation != "0")
+                {
+                    tmpValue.Add(tmpTranslation);
+                }
                 i++;
             }
             return tmpValue;
@@ -60,7 +70,7 @@ namespace Dictionary.Dictionary.MyDictionaries
             int i = 1;
             foreach (string item in Value)
             {
-                listOfValues += $"{i}) item ";
+                listOfValues += $"{i}) {item} ";
                 i++;
             }
             return listOfValues;
@@ -87,7 +97,7 @@ namespace Dictionary.Dictionary.MyDictionaries
                     }
                     else
                     {
-                        Value.Add(newTranslation);
+                        Value[choice - 1] = newTranslation;
                     }
                 }
                 Dictionary[key] = Value;
@@ -134,6 +144,10 @@ namespace Dictionary.Dictionary.MyDictionaries
             if (Dictionary.TryGetValue(key, out List<string> words))
             {
                 Console.WriteLine($"{key} - {printWords(words)};");
+            }
+            else
+            {
+                Console.WriteLine("Erorr");
             }
         }
         public void SaveToFile()

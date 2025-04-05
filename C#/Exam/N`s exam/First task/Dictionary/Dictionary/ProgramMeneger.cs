@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Dictionary.Dictionary.Menu;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Dictionary.Dictionary
@@ -10,18 +12,31 @@ namespace Dictionary.Dictionary
     public static class ProgramMeneger
     {
         private static bool IsProgramWorking = true;
+        private static string filePath = "Dictionaries.json";
         public static void Start()
         {
-            string jsonFromFile = File.ReadAllText("Dictionaries.json");
-            Menu.Menu menu = JsonConvert.DeserializeObject<Menu.Menu>(jsonFromFile);
+            Menu.Menu menu = null;
+
+            if (File.Exists(filePath))
+            {
+                string jsonFromFile = File.ReadAllText(filePath);
+                menu = JsonConvert.DeserializeObject<Menu.Menu>(jsonFromFile);
+            }
+            else
+            {
+                menu = new Menu.Menu();
+            }
 
             while (IsProgramWorking == true)
             {
                 menu.ProgramMenu();
+                Console.ReadLine();
+                Console.Clear();
             }
         }
-        public static void Stop()
+            public static void Stop()
         {
+            
             IsProgramWorking = false;
         }
     }
