@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CalculateHW
 {
-    public class Array: ICalc
+    public class Array: ICalc, ICalc2
     {
         public List<int> ints { get; set; }
 

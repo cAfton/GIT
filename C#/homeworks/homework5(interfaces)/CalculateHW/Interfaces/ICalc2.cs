@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CalculateHW.Interfaces
 {
-    internal interface ICalc
+    internal interface ICalc2
     {
-        int Less(int valueToCompare);
+        int CountDistinct();
 
-        int Greater(int valueToCompare);
+        int EqualToValue(int valueToCompare);
     }
 }
