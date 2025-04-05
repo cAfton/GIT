@@ -1,4 +1,5 @@
 ﻿using Dictionary.Dictionary.MyDictionaries;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -142,7 +143,7 @@ namespace Dictionary.Dictionary.Menu
         }
         public void Save()
         {
-            string json = JsonSerializer.Serialize(Dictionaries, new JsonSerializerOptions { WriteIndented = true });
+            string json = JsonConvert.SerializeObject(Dictionaries, Formatting.Indented , new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
             File.WriteAllText("Dictionaries.json", json);
             Console.WriteLine("Done");
         }
