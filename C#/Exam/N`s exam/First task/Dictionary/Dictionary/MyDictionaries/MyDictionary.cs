@@ -1,0 +1,181 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+namespace Dictionary.Dictionary.MyDictionaries
+{
+    internal class MyDictionary
+    {
+        public string Name;
+        public Dictionary<string, List<string>> Dictionary;
+
+        public MyDictionary(string name)
+        {
+            Name = name;
+            Dictionary = new Dictionary<string, List<string>>();
+        }
+
+        public void AddWord(string key, List<string> value)
+        {
+            if (Dictionary.TryGetValue(key, out List<string> Value))
+            {
+                Console.WriteLine("This word already exists");
+                printWords(Value);
+            }
+            else
+            {
+                Dictionary[key] = value;
+                Console.WriteLine("Done");
+            }
+        }
+
+        private List<string> AddTranslations()
+        {
+            Console.WriteLine("Enter translations (0-to stop)");
+            List<string> tmpValue = new List<string>();
+            string tmpTranslation = "";
+            int i = 1;
+            while (tmpTranslation != "0")
+            {
+                Console.WriteLine($"Your {i} translation)");
+                tmpTranslation = Console.ReadLine();
+                i++;
+            }
+            return tmpValue;
+        }
+        private string printWords(List<string> Value)
+        {
+            string listOfValues = "";
+            int i = 1;
+            foreach (string item in Value)
+            {
+                listOfValues += $"{i}) item ";
+                i++;
+            }
+            return listOfValues;
+        }
+        public void Edit(string key)
+        {
+            if (Dictionary.TryGetValue(key, out List<string> Value))
+            {
+                Console.WriteLine($"Here is the translation of this word:\n{key} - {printWords(Value)};");
+                Console.WriteLine("Which word do you want to edit/delete? 0-if adding a new translation");
+                int choice = int.Parse(Console.ReadLine());
+                if (choice == 0)
+                {
+                    Console.WriteLine("Enter new translation:");
+                    Value.Add(Console.ReadLine());
+                }
+                else
+                {
+                    Console.WriteLine($"{Value[choice - 1]}\nEnter the correct word. Press Enter to delete the word.");
+                    string newTranslation = Console.ReadLine();
+                    if (newTranslation == "")
+                    {
+                        Value.Remove(Value[choice - 1]);
+                    }
+                    else
+                    {
+                        Value.Add(newTranslation);
+                    }
+                }
+                Dictionary[key] = Value;
+            }
+            else
+            {
+                Console.WriteLine("There is no such word. Would you like to write a new word?(1-yes, 2-no)");
+                int choice = int.Parse(Console.ReadLine());
+                if (choice == 1)
+                {
+                    AddWord(key, AddTranslations());
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
+        public void RemoveWord(string key)
+        {
+            if (Dictionary.Remove(key))
+            {
+                Console.WriteLine("Done");
+            }
+            else
+            {
+                Console.WriteLine("Word not found");
+            }
+        }
+        public void RemoveTranslation(string key, string translation)
+        {
+            if (Dictionary[key].Remove(translation))
+            {
+                Console.WriteLine("Done");
+            }
+            else
+            {
+                Console.WriteLine("Word not found");
+            }
+        }
+        public void FindTheWord(string key)
+        {
+            if (Dictionary.TryGetValue(key, out List<string> word))
+            {
+                Console.WriteLine($"{key} - {printWords(word)};");
+            }
+            else
+            {
+                Console.WriteLine("There is no such word. Would you like to write a new word?(1-yes, 2-no)");
+                int choice = int.Parse(Console.ReadLine());
+                if (choice == 1)
+                {
+                    AddWord(key, AddTranslations());
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+        public void SaveToFile()
+        {
+            //write to json
+            string json = JsonSerializer.Serialize(Dictionary, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText($"Dictionary({Name}).json", json);
+
+            string path = $"Dictionary({Name}).txt";
+
+            File.WriteAllText(path, Dictionary.ToString());
+            
+
+        }
+        public string ExportWord(string key)
+        {
+            if (Dictionary.TryGetValue(key, out List<string> Value))
+            {
+                return $"{key} - {printWords(Value)}";
+            }
+            Console.WriteLine("There is no such word. Would you like to write a new word?(1-yes, 2-no)");
+            int choice = int.Parse(Console.ReadLine());
+            if (choice == 1)
+            {
+                AddWord(key, AddTranslations());
+            }
+            return "0";
+        }
+        public override string ToString()
+        {
+            string lineToFile = "";
+            foreach (var item in Dictionary)
+            {
+                lineToFile += $"{item.Key.ToString()} - {printWords(item.Value)}\n";
+            }
+            return lineToFile;
+        }
+
+    }
+}
