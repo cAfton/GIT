@@ -59,7 +59,7 @@ namespace Dictionary.Dictionary.Menu
                     Save();
                     break;
                 case 8:
-
+                    ProgramMeneger.Stop();
                     break;
                 default:
                     break;
