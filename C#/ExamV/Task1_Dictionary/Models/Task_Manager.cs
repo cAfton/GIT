@@ -74,7 +74,7 @@ namespace Task1_Dictionary.Models
                                     for (int i = 0; i < 15; i++)
                                     {
                                         int random1 = random.Next() % 4;
-                                        int random2 = random.Next() % 4; 
+                                        int random2 = random.Next() % 16; 
                                         Console.WriteLine(quiz_Managers[random1].Quizes_Hard[random2]);
 
                                         int chose = int.Parse(Console.ReadLine());
@@ -92,11 +92,11 @@ namespace Task1_Dictionary.Models
                                     {
                                         int random1 = random.Next() % 4;
                                         int random2 = random.Next() % 4;
-                                        Console.WriteLine(quiz_Managers[random1].Quizes_Hard[random2]);
+                                        Console.WriteLine(quiz_Managers[random1].Quizes_Medium[random2]);
 
                                         int chose = int.Parse(Console.ReadLine());
 
-                                        if (IsAnswerCorrect(chose, quiz_Managers[random1].Quizes_Hard[random2].RightAnswer, quiz_Managers[random1].Quizes_Hard[random2]))
+                                        if (IsAnswerCorrect(chose, quiz_Managers[random1].Quizes_Medium[random2].RightAnswer, quiz_Managers[random1].Quizes_Medium[random2]))
                                         {
                                             scoreMixed++;
                                         }
@@ -108,11 +108,11 @@ namespace Task1_Dictionary.Models
                                     {
                                         int random1 = random.Next() % 4;
                                         int random2 = random.Next() % 4;
-                                        Console.WriteLine(quiz_Managers[random1].Quizes_Hard[random2]);
+                                        Console.WriteLine(quiz_Managers[random1].Quizes_Easy[random2]);
 
                                         int chose = int.Parse(Console.ReadLine());
 
-                                        if (IsAnswerCorrect(chose, quiz_Managers[random1].Quizes_Hard[random2].RightAnswer, quiz_Managers[random1].Quizes_Hard[random2]))
+                                        if (IsAnswerCorrect(chose, quiz_Managers[random1].Quizes_Easy[random2].RightAnswer, quiz_Managers[random1].Quizes_Easy[random2]))
                                         {
                                             scoreMixed++;
                                         }
