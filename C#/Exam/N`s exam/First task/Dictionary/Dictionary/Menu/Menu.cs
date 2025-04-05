@@ -36,7 +36,7 @@ namespace Dictionary.Dictionary.Menu
             Console.WriteLine("[9] 💾 Зберегти зміни");
             Console.WriteLine("[10]🚪 Вийти з програми");
 
-            Console.Write("\nВиберіть опцію (1-8): ");
+            Console.Write("\nВиберіть опцію (1-10): ");
             int uzerChoice = int.Parse(Console.ReadLine());
             MenuSwicher(uzerChoice);
         }
