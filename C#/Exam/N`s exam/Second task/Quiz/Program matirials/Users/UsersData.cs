@@ -10,7 +10,7 @@ namespace Quiz.Program_matirials.Users
     public static class UsersData
     {
         private static User admin;
-        public static List<User> Users;
+        public static List<User> Users = new List<User>();
 
 
         public static bool IsAdmin(string login, string password)

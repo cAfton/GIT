@@ -1,10 +1,12 @@
-﻿namespace Quiz
+﻿using Quiz.Program_matirials;
+
+namespace Quiz
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Program_menedger.Start();
         }
     }
 }

@@ -97,13 +97,18 @@ namespace Quiz.Program_matirials
         {
             while (true)
             {
-                Console.WriteLine("1)Start a new quiz\n2)View the results of your past quizzes\n3)View the Top 20 from a specific quiz\n4)Change settings: you can change your password and date of birth\n5)Log out");
+                Console.WriteLine("1)Start a new quiz\n2)View the results of your past quizzes\n5)Log out");
                 int choice = int.Parse(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
                         QuizMenu.MeinMenu();
                         break;
+                    case 2:
+                        QuizMenu.ViewTheResultsOfYourPastQuizzes();
+                        break;
+                    case 5:
+                        return;
                     default:
                         break;
                 }

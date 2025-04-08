@@ -13,15 +13,15 @@ namespace Quiz.Program_matirials.Quiz_matirials
         private List<Quiz> quizzis;
         public int LastScore;
 
-        public static List<Quiz> LoadQuestions(string filePath)
+        public QuizType(string name)
         {
-            if (!File.Exists(filePath))
-            {
-                return new List<Quiz>();
-            }
-
+            Name = name;
+            LoadQuestions($"{name}.json");
+        }
+        public void LoadQuestions(string filePath)
+        {
             string jsonString = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<Quiz>>(jsonString);
+            quizzis = JsonSerializer.Deserialize<List<Quiz>>(jsonString);
         }
         public int StartQuiz()
         {

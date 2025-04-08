@@ -10,7 +10,7 @@ namespace Quiz.Program_matirials
     {
         public static void Start()
         {
-
+            Menu.MeinMenu();
         }
     }
 }
