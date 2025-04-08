@@ -8,11 +8,11 @@ namespace Quiz.Program_matirials.Quiz_matirials
 {
     public class Quiz
     {
-        private string QuestionType;
-        private string Text;
-        private string FirstOption;
-        private string SecondOption;
-        private string CorrectOption;
+        private string QuestionType { get; set; }
+        private string Text { get; set; }
+        private string FirstOption { get; set; }
+        private string SecondOption { get; set; }
+        private string CorrectOption { get; set; }
 
         public bool AskAQuestionAndCheckTheAnswer()
         {

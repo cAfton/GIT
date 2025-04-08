@@ -8,7 +8,7 @@ namespace Quiz.Program_matirials.Quiz_matirials
 {
     public static class QuizMenu
     {
-        private static List<Quiz> Quizzis;
+        private static List<QuizType> Quizzis;
         public static void MeinMenu()
         {
             while (true)
@@ -18,7 +18,7 @@ namespace Quiz.Program_matirials.Quiz_matirials
                 switch (choice)
                 {
                     case 1:
-
+                        
 
                     default:
                         break;
