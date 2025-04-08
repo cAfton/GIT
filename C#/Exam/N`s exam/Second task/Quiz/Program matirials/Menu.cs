@@ -30,9 +30,6 @@ namespace Quiz.Program_matirials
                     default:
                         break;
                 }
-
-                
-
             }
         }
         public static void RegIn()
@@ -98,15 +95,18 @@ namespace Quiz.Program_matirials
         }
         public static void MenuLoggedIn()
         {
-            Console.WriteLine("1)start a new quiz\n2)view the results of your past quizzes\n3)view the Top 20 from a specific quiz\n4)change settings: you can change your password and date of birth\n5)log out");
-            int choice = int.Parse(Console.ReadLine());
-            switch (choice)
+            while (true)
             {
-                case 1:
-                    QuizMenu.MeinMenu();
-                    break;
-                default:
-                    break;
+                Console.WriteLine("1)Start a new quiz\n2)View the results of your past quizzes\n3)View the Top 20 from a specific quiz\n4)Change settings: you can change your password and date of birth\n5)Log out");
+                int choice = int.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        QuizMenu.MeinMenu();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
