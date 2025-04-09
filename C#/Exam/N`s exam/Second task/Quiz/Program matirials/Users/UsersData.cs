@@ -57,6 +57,7 @@ namespace Quiz.Program_matirials.Users
                     return false;
                 }
                 Users.Add(new User(login, password, birthDate));
+                user = new User(login, password, birthDate);
                 Console.WriteLine("The user is registered");
                 return true;
             }
