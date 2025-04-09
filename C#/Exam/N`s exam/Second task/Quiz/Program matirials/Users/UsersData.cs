@@ -9,16 +9,16 @@ namespace Quiz.Program_matirials.Users
 {
     public static class UsersData
     {
-        private static User admin;
+        private static bool isAdmin;
         public static List<User> Users = new List<User>();
+        public static User user { get; private set; }
 
-
-        public static bool IsAdmin(string login, string password)
-        {
-            if(admin.IsLoggedIn(login) && admin.IsCorrectPassword(password))
-                return true;
-            return false;
-        }
+        //public static bool IsAdmin(string login, string password)
+        //{
+        //    if(admin.IsLoggedIn(login) && admin.IsCorrectPassword(password))
+        //        return true;
+        //    return false;
+        //}
         public static bool IsLoggedIn(string login, string password)
         {
             foreach (var item in Users)
@@ -27,6 +27,8 @@ namespace Quiz.Program_matirials.Users
                 {
                     if(item.IsCorrectPassword(password))
                     {
+                        user = item;
+
                         return true;
                     }
                     Console.WriteLine("Incorrect password");

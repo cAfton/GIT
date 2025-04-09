@@ -9,9 +9,13 @@ namespace Quiz.Program_matirials.Users
 {
     public class User
     {
-        private string Login;
+        public string Login;
         private string Password;
         private DateTime DateOfBirth;
+        public int BestOfHistory;
+        public int BestOfBiology;
+        public int BestOfGeography;
+
 
         public User(string login, string password, DateTime dateOfBirth)
         {
@@ -34,6 +38,14 @@ namespace Quiz.Program_matirials.Users
                 return true;
             }
             return false;
+        }
+        public void ChangePassword(string newPassword)
+        {
+            Password = newPassword;
+        }
+        public void ChangeDateOfBirth(DateTime dateOfBirth)
+        {
+            DateOfBirth = dateOfBirth;
         }
     }
 }

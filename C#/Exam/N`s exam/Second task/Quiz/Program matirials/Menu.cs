@@ -2,6 +2,7 @@
 using Quiz.Program_matirials.Users;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -95,17 +96,43 @@ namespace Quiz.Program_matirials
         }
         public static void MenuLoggedIn()
         {
+            QuizMenu.Start();
             while (true)
             {
-                Console.WriteLine("1)Start a new quiz\n2)View the results of your past quizzes\n5)Log out");
+                Console.WriteLine("1)Start a new quiz\n2)View the results of your past quizzes\n3) top-20\n4) change passwodr or birthday\n5)Log out");
                 int choice = int.Parse(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
                         QuizMenu.MeinMenu();
+
                         break;
                     case 2:
                         QuizMenu.ViewTheResultsOfYourPastQuizzes();
+                        break;
+                    case 3:
+                        Console.WriteLine("Які top 20?(History, Biology, Geography): ");
+                        string tmp = Console.ReadLine();
+                        QuizMenu.PrintSup20(tmp);
+
+                        break;
+                    case 4:
+                        Console.Write("What do you like to change?(1-password, 2-Date of birth):");
+                        choice = int.Parse (Console.ReadLine());
+                        if (choice == 1)
+                        {
+                            Console.WriteLine("Enter new password");
+                            UsersData.user.ChangePassword(Console.ReadLine());
+                        }
+                        else
+                        {
+                            Console.Write("Enter your date of birth(dd.mm.yyyy):");
+                            string dateOfBirth = Console.ReadLine();
+                            if (DateTime.TryParseExact(dateOfBirth, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime birthDate))
+                            {
+                                UsersData.user.ChangeDateOfBirth(birthDate);
+                            }
+                        }
                         break;
                     case 5:
                         return;
