@@ -43,6 +43,7 @@
             button1.TabIndex = 0;
             button1.Text = "save";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label1
             // 
@@ -68,6 +69,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(187, 27);
             textBox1.TabIndex = 3;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // textBox2
             // 
@@ -75,6 +77,7 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(187, 27);
             textBox2.TabIndex = 4;
+            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // sub_form
             // 
@@ -88,6 +91,7 @@
             Controls.Add(button1);
             Name = "sub_form";
             Text = "sub_form";
+            FormClosing += sub_form_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }
