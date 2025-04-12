@@ -9,7 +9,8 @@ namespace WinFormsApp1
         public MyDictionary myDictionary { get; set; }
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();  
+
             myDictionary = new MyDictionary();
         }
 
@@ -65,7 +66,7 @@ namespace WinFormsApp1
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {            
+        {
             if (listBox1.SelectedIndex != -1)
             {
                 var AddSubForm = new sub_form(listBox1.Items[listBox1.SelectedIndex].ToString(), listBox2.Items[listBox1.SelectedIndex].ToString());
