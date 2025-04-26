@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace taska2
 {
@@ -123,9 +125,17 @@ namespace taska2
                         break;
                     }
                 }
-
-
                 ChangeUnsavedOperation(false);
+
+
+                string read = File.ReadAllText($"{comboBox1.SelectedItem}.json");
+                LevelQuizKeeper saveNewQuizes = JsonConvert.DeserializeObject<LevelQuizKeeper>(read);
+
+                saveNewQuizes.GetType().GetProperty($"Quizes_{comboBox2.SelectedItem}").SetValue(saveNewQuizes, list);
+
+                string save = JsonConvert.SerializeObject(saveNewQuizes);
+                Console.WriteLine(save);
+                File.WriteAllText($"{comboBox1.SelectedItem}.json", save);
             }
 
 
