@@ -18,6 +18,10 @@ namespace taska2
                 return;
             }
 
+            if (CurrentUser.IsAdmin)
+            {
+                changeVictorToolStripMenuItem.Visible = true;
+            }
         }
 
         private void ShowQuestion(Quiz quiz)
@@ -117,5 +121,8 @@ namespace taska2
             Settings settings = new Settings(ref CurrentUser);
             settings.ShowDialog();
         }
+
+
+
     }
 }
