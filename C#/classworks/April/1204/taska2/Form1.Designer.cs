@@ -196,6 +196,7 @@
             changeVictorToolStripMenuItem.Size = new Size(224, 26);
             changeVictorToolStripMenuItem.Text = "Change game";
             changeVictorToolStripMenuItem.Visible = false;
+            changeVictorToolStripMenuItem.Click += changeVictorToolStripMenuItem_Click;
             // 
             // Question_label1
             // 

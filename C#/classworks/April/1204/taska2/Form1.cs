@@ -36,8 +36,7 @@ namespace taska2
         //
         private void easyBiologyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LevelQuizKeeper newQuizGame = new LevelQuizKeeper();
-            List<Quiz> questions = newQuizGame.LoadFromFile(TypesOfQuiz.Biology, HardLevel.Easy);
+            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Biology, HardLevel.Easy);
             quizes = questions.GetEnumerator();
             groupBox1.Visible = true;
             CurrentUser.HistoryOfQuizes.Add(new History());
@@ -47,34 +46,29 @@ namespace taska2
 
         private void mediumBiologyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LevelQuizKeeper newQuizGame = new LevelQuizKeeper();
-            List<Quiz> questions = newQuizGame.LoadFromFile(TypesOfQuiz.Biology, HardLevel.Medium);
+            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Biology, HardLevel.Medium);
         }
 
         private void hardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LevelQuizKeeper newQuizGame = new LevelQuizKeeper();
-            List<Quiz> questions = newQuizGame.LoadFromFile(TypesOfQuiz.Biology, HardLevel.Hard);
+            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Biology, HardLevel.Hard);
         }
         //
         //Geografy
         //
         private void easyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LevelQuizKeeper newQuizGame = new LevelQuizKeeper();
-            List<Quiz> questions = newQuizGame.LoadFromFile(TypesOfQuiz.Geografy, HardLevel.Easy);
+            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Geografy, HardLevel.Easy);
         }
 
         private void mediumToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LevelQuizKeeper newQuizGame = new LevelQuizKeeper();
-            List<Quiz> questions = newQuizGame.LoadFromFile(TypesOfQuiz.Geografy, HardLevel.Medium);
+            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Geografy, HardLevel.Medium);
         }
 
         private void hardToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            LevelQuizKeeper newQuizGame = new LevelQuizKeeper();
-            List<Quiz> questions = newQuizGame.LoadFromFile(TypesOfQuiz.Geografy, HardLevel.Hard);
+            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Geografy, HardLevel.Hard);
         }
         //
         //Button
@@ -122,7 +116,15 @@ namespace taska2
             settings.ShowDialog();
         }
 
+        private void changeVictorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeQuiz changeForm = new ChangeQuiz();
+            this.Enabled = false;
+            if (changeForm.ShowDialog() == DialogResult.OK)
+            {
+                this.Enabled = true;
+            }
 
-
+        }
     }
 }

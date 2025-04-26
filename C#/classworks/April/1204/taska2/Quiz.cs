@@ -8,9 +8,9 @@ namespace taska2
 {
     public class Quiz
     {
-        public string Question { get; set; }
-        public string[] Answers { get; set; }
-        public int RightAnswer { get; set; }
+        public string Question { get; set; } = "";
+        public string[] Answers { get; set; } = { "", "", "" };
+        public int RightAnswer { get; set; } = 0;
 
         public override string ToString()
         {
