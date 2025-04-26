@@ -1,7 +1,16 @@
+using Newtonsoft.Json;
+using System.Xml.Linq;
+
 namespace taska2
 {
     public partial class Form1 : Form
     {
+        int a = 5;
+        List<Result> scores;
+        HardLevel CurrentLevel;
+        TypesOfQuiz CurrentType;
+
+
         private IEnumerator<Quiz> quizes;
         private User CurrentUser;
         public Form1()
@@ -22,6 +31,8 @@ namespace taska2
             {
                 changeVictorToolStripMenuItem.Visible = true;
             }
+            string read = File.ReadAllText($"score.json");
+            scores = JsonConvert.DeserializeObject<List<Result>>(read);
         }
 
         private void ShowQuestion(Quiz quiz)
@@ -34,45 +45,33 @@ namespace taska2
         //
         //Biology
         //
-        private void easyBiologyToolStripMenuItem_Click(object sender, EventArgs e)
+        private void StartToGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Biology, HardLevel.Easy);
-            quizes = questions.GetEnumerator();
-            groupBox1.Visible = true;
-            CurrentUser.HistoryOfQuizes.Add(new History());
-            quizes.MoveNext();
-            ShowQuestion(quizes.Current);
+
+            if (sender is ToolStripMenuItem menuItem)
+            {
+                progressBar1.Value = 0;
+                string[] stringArr = menuItem.Name.Split('_');
+                CurrentLevel = (HardLevel)Enum.Parse(typeof(HardLevel), stringArr[0]);
+                CurrentType = (TypesOfQuiz)Enum.Parse(typeof(TypesOfQuiz), stringArr[1]);
+
+                List<Quiz> questions = LevelQuizKeeper.LoadFromFile(CurrentType, CurrentLevel);
+                progressBar1.Maximum = questions.Count;
+                quizes = questions.GetEnumerator();
+                groupBox1.Visible = true;
+                CurrentUser.HistoryOfQuizes.Add(new History());
+                quizes.MoveNext();
+                ShowQuestion(quizes.Current);
+                timer1.Start();
+                timer2.Start();
+                a = 5;
+                label1.Text = a.ToString();
+                a--;
+            }
         }
 
-        private void mediumBiologyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Biology, HardLevel.Medium);
-        }
 
-        private void hardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Biology, HardLevel.Hard);
-        }
-        //
-        //Geografy
-        //
-        private void easyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Geografy, HardLevel.Easy);
-        }
 
-        private void mediumToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Geografy, HardLevel.Medium);
-        }
-
-        private void hardToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            List<Quiz> questions = LevelQuizKeeper.LoadFromFile(TypesOfQuiz.Geografy, HardLevel.Hard);
-        }
-        //
-        //Button
-        //
         private void choose_button1_Click(object sender, EventArgs e)
         {
             if (radioButton1.Checked && quizes.Current.RightAnswer == 1)
@@ -91,14 +90,28 @@ namespace taska2
             radioButton2.Checked = false;
             radioButton3.Checked = false;
 
-
+            progressBar1.Increment(1);
             if (quizes.MoveNext())
             {
+
+                timer1.Stop();
+                timer2.Stop();
                 ShowQuestion(quizes.Current);
+                a = 5;
+                label1.Text = a.ToString();
+                a--;
+                timer1.Start();
+                timer2.Start();
             }
             else
             {
-                MessageBox.Show($"Your score: {CurrentUser.HistoryOfQuizes.Last().Score}/15", "Score", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                timer2.Stop();
+                timer1.Stop();
+                
+                MessageBox.Show($"Your score: {CurrentUser.HistoryOfQuizes.Last().Score}/{progressBar1.Maximum}", "Score", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                scores.Add(new Result { HardLevel = CurrentLevel, TypesOfQuiz = CurrentType, UserName = CurrentUser.Login, Score = CurrentUser.HistoryOfQuizes.Last().Score, Time = DateTime.Now, NumberOfQestions = progressBar1.Maximum });
+                string write = JsonConvert.SerializeObject(scores);
+                File.WriteAllText($"score.json", );
                 groupBox1.Visible = false;
             }
         }
@@ -106,7 +119,9 @@ namespace taska2
         private void myResultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string history = "";
-            CurrentUser.HistoryOfQuizes.ForEach(elem => history += elem + "\n\n");
+            string read = File.ReadAllText($"score.json");
+            List<Result> scores = JsonConvert.DeserializeObject<List<Result>>(read);
+            scores.Where(x => x.UserName == CurrentUser.Login).ToList().ForEach(result => history += $"{result.HardLevel}, {result.TypesOfQuiz}, {result.Time}, {result.Score}/{result.NumberOfQestions}\n");
             MessageBox.Show(history, "History", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -125,6 +140,19 @@ namespace taska2
                 this.Enabled = true;
             }
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
+            label1.Text = a.ToString();
+            a--;
         }
     }
 }
