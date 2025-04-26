@@ -151,6 +151,10 @@ namespace taska2
                 comboBox3.Items.Add(tmp.Question.ToString());
 
             }
+            else
+            {
+                MessageBox.Show("Not saved!", "Error");
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
