@@ -14,7 +14,7 @@ namespace taska2
         public List<Quiz> Quizes_Medium { get; set; }
         public List<Quiz> Quizes_Hard { get; set; }
 
-        public List<Quiz> LoadFromFile(TypesOfQuiz name, HardLevel level)
+        public static List<Quiz> LoadFromFile(TypesOfQuiz name, HardLevel level)
         {
             string read = File.ReadAllText($"{name.ToString()}.json");
             LevelQuizKeeper quizs = JsonConvert.DeserializeObject<LevelQuizKeeper>(read);

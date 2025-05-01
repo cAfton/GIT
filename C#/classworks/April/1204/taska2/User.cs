@@ -16,6 +16,8 @@ namespace taska2
 
         public List<History> HistoryOfQuizes { get; set; } = new List<History>();
 
+        public bool IsAdmin { get; set; } = false;
+
         public User() { }
 
         public void AddHistory(TypesOfQuiz type, HardLevel level, int score)

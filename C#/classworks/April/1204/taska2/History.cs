@@ -9,7 +9,6 @@ namespace taska2
     public enum TypesOfQuiz
     {
         History,
-        Math,
         Geografy,
         Biology,
         Mixed
