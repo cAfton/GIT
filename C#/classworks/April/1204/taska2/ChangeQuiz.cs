@@ -75,28 +75,19 @@ namespace taska2
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (UnsavedQuestion == false)
-            {
-                textBoxQuestion.Text = comboBox3.SelectedItem.ToString();
+            textBoxQuestion.Text = comboBox3.SelectedItem.ToString();
 
-                textBoxAnsvers1.Text = list[comboBox3.SelectedIndex].Answers[0].ToString();
-                textBoxAnsvers2.Text = list[comboBox3.SelectedIndex].Answers[1].ToString();
-                textBoxAnsvers3.Text = list[comboBox3.SelectedIndex].Answers[2].ToString();
-               
+            textBoxAnsvers1.Text = list[comboBox3.SelectedIndex].Answers[0].ToString();
+            textBoxAnsvers2.Text = list[comboBox3.SelectedIndex].Answers[1].ToString();
+            textBoxAnsvers3.Text = list[comboBox3.SelectedIndex].Answers[2].ToString();
 
-                int rightAnswerNumber = list[comboBox3.SelectedIndex].RightAnswer;
-                string radioButton = $"radioButton{rightAnswerNumber}";
-                RadioButton tmp = this.GetType().GetField(radioButton, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).GetValue(this) as RadioButton;
-                tmp.Checked = true;
 
-                ChangeUnsavedOperation(false);
-            }
-            else
-            {
-                //ChangeUnsavedOperation();
+            int rightAnswerNumber = list[comboBox3.SelectedIndex].RightAnswer;
+            string radioButton = $"radioButton{rightAnswerNumber}";
+            RadioButton tmp = this.GetType().GetField(radioButton, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).GetValue(this) as RadioButton;
+            tmp.Checked = true;
 
-                MessageBox.Show("Not saved!", "Error");
-            }
+            ChangeUnsavedOperation(false);
 
         }
 
@@ -125,6 +116,7 @@ namespace taska2
                         break;
                     }
                 }
+
                 ChangeUnsavedOperation(false);
 
 
@@ -136,6 +128,8 @@ namespace taska2
                 string save = JsonConvert.SerializeObject(saveNewQuizes);
                 Console.WriteLine(save);
                 File.WriteAllText($"{comboBox1.SelectedItem}.json", save);
+                comboBox3.Items[comboBox3.SelectedIndex] = textBoxQuestion.Text;
+
             }
 
 
@@ -156,9 +150,12 @@ namespace taska2
                 textBoxAnsvers3.Clear();
 
                 Quiz tmp = new Quiz();
+                tmp.Question = "New question";
                 list.Add(tmp);
 
                 comboBox3.Items.Add(tmp.Question.ToString());
+                comboBox3.SelectedItem = tmp.Question;
+                ChangeUnsavedOperation(true);
 
             }
             else

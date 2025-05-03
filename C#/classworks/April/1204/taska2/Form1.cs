@@ -111,7 +111,7 @@ namespace taska2
                 MessageBox.Show($"Your score: {CurrentUser.HistoryOfQuizes.Last().Score}/{progressBar1.Maximum}", "Score", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 scores.Add(new Result { HardLevel = CurrentLevel, TypesOfQuiz = CurrentType, UserName = CurrentUser.Login, Score = CurrentUser.HistoryOfQuizes.Last().Score, Time = DateTime.Now, NumberOfQestions = progressBar1.Maximum });
                 string write = JsonConvert.SerializeObject(scores);
-                File.WriteAllText($"score.json", );
+                File.WriteAllText($"score.json", write);
                 groupBox1.Visible = false;
             }
         }
