@@ -28,7 +28,7 @@ namespace SeparateJsonToTreeJson
         private void button_start_Click(object sender, EventArgs e)
         {
             var res = FeatureResolver.ResolveFeatures(inputJson);
-            string write = JsonConvert.SerializeObject(res);
+            string write = JsonConvert.SerializeObject(res.product);
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 File.WriteAllText(saveFileDialog1.FileName, write);
