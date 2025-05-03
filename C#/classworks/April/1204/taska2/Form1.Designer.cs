@@ -31,18 +31,6 @@
             components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
             typeToolStripMenuItem = new ToolStripMenuItem();
-            biologyToolStripMenuItem = new ToolStripMenuItem();
-            Easy_Biology_ToolStripMenuItem = new ToolStripMenuItem();
-            Medium_Biology_ToolStripMenuItem = new ToolStripMenuItem();
-            Hard_Biology_ToolStripMenuItem = new ToolStripMenuItem();
-            geografyToolStripMenuItem = new ToolStripMenuItem();
-            Easy_Geografy_ToolStripMenuItem = new ToolStripMenuItem();
-            Medium_Geografy_ToolStripMenuItem = new ToolStripMenuItem();
-            Hard_Geografy_ToolStripMenuItem1 = new ToolStripMenuItem();
-            historyToolStripMenuItem = new ToolStripMenuItem();
-            Easy_History_ToolStripMenuItem1 = new ToolStripMenuItem();
-            Medium_History_ToolStripMenuItem1 = new ToolStripMenuItem();
-            Hard_History_ToolStripMenuItem2 = new ToolStripMenuItem();
             plofileToolStripMenuItem = new ToolStripMenuItem();
             myResultsToolStripMenuItem = new ToolStripMenuItem();
             top20ToolStripMenuItem = new ToolStripMenuItem();
@@ -59,6 +47,7 @@
             progressBar1 = new ProgressBar();
             timer1 = new System.Windows.Forms.Timer(components);
             timer2 = new System.Windows.Forms.Timer(components);
+            openFileDialog1 = new OpenFileDialog();
             menuStrip1.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -75,94 +64,10 @@
             // 
             // typeToolStripMenuItem
             // 
-            typeToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { biologyToolStripMenuItem, geografyToolStripMenuItem, historyToolStripMenuItem });
             typeToolStripMenuItem.Name = "typeToolStripMenuItem";
             typeToolStripMenuItem.Size = new Size(95, 24);
             typeToolStripMenuItem.Text = "New game";
-            // 
-            // biologyToolStripMenuItem
-            // 
-            biologyToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { Easy_Biology_ToolStripMenuItem, Medium_Biology_ToolStripMenuItem, Hard_Biology_ToolStripMenuItem });
-            biologyToolStripMenuItem.Name = "biologyToolStripMenuItem";
-            biologyToolStripMenuItem.Size = new Size(153, 26);
-            biologyToolStripMenuItem.Text = "Biology";
-            // 
-            // Easy_Biology_ToolStripMenuItem
-            // 
-            Easy_Biology_ToolStripMenuItem.Name = "Easy_Biology_ToolStripMenuItem";
-            Easy_Biology_ToolStripMenuItem.Size = new Size(147, 26);
-            Easy_Biology_ToolStripMenuItem.Text = "Easy";
-            Easy_Biology_ToolStripMenuItem.Click += StartToGameToolStripMenuItem_Click;
-            // 
-            // Medium_Biology_ToolStripMenuItem
-            // 
-            Medium_Biology_ToolStripMenuItem.Name = "Medium_Biology_ToolStripMenuItem";
-            Medium_Biology_ToolStripMenuItem.Size = new Size(147, 26);
-            Medium_Biology_ToolStripMenuItem.Text = "Medium";
-            Medium_Biology_ToolStripMenuItem.Click += StartToGameToolStripMenuItem_Click;
-            // 
-            // Hard_Biology_ToolStripMenuItem
-            // 
-            Hard_Biology_ToolStripMenuItem.Name = "Hard_Biology_ToolStripMenuItem";
-            Hard_Biology_ToolStripMenuItem.Size = new Size(147, 26);
-            Hard_Biology_ToolStripMenuItem.Text = "Hard";
-            Hard_Biology_ToolStripMenuItem.Click += StartToGameToolStripMenuItem_Click;
-            // 
-            // geografyToolStripMenuItem
-            // 
-            geografyToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { Easy_Geografy_ToolStripMenuItem, Medium_Geografy_ToolStripMenuItem, Hard_Geografy_ToolStripMenuItem1 });
-            geografyToolStripMenuItem.Name = "geografyToolStripMenuItem";
-            geografyToolStripMenuItem.Size = new Size(153, 26);
-            geografyToolStripMenuItem.Text = "Geografy";
-            // 
-            // Easy_Geografy_ToolStripMenuItem
-            // 
-            Easy_Geografy_ToolStripMenuItem.Name = "Easy_Geografy_ToolStripMenuItem";
-            Easy_Geografy_ToolStripMenuItem.Size = new Size(147, 26);
-            Easy_Geografy_ToolStripMenuItem.Text = "Easy";
-            Easy_Geografy_ToolStripMenuItem.Click += StartToGameToolStripMenuItem_Click;
-            // 
-            // Medium_Geografy_ToolStripMenuItem
-            // 
-            Medium_Geografy_ToolStripMenuItem.Name = "Medium_Geografy_ToolStripMenuItem";
-            Medium_Geografy_ToolStripMenuItem.Size = new Size(147, 26);
-            Medium_Geografy_ToolStripMenuItem.Text = "Medium";
-            Medium_Geografy_ToolStripMenuItem.Click += StartToGameToolStripMenuItem_Click;
-            // 
-            // Hard_Geografy_ToolStripMenuItem1
-            // 
-            Hard_Geografy_ToolStripMenuItem1.Name = "Hard_Geografy_ToolStripMenuItem1";
-            Hard_Geografy_ToolStripMenuItem1.Size = new Size(147, 26);
-            Hard_Geografy_ToolStripMenuItem1.Text = "Hard";
-            Hard_Geografy_ToolStripMenuItem1.Click += StartToGameToolStripMenuItem_Click;
-            // 
-            // historyToolStripMenuItem
-            // 
-            historyToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { Easy_History_ToolStripMenuItem1, Medium_History_ToolStripMenuItem1, Hard_History_ToolStripMenuItem2 });
-            historyToolStripMenuItem.Name = "historyToolStripMenuItem";
-            historyToolStripMenuItem.Size = new Size(153, 26);
-            historyToolStripMenuItem.Text = "History";
-            // 
-            // Easy_History_ToolStripMenuItem1
-            // 
-            Easy_History_ToolStripMenuItem1.Name = "Easy_History_ToolStripMenuItem1";
-            Easy_History_ToolStripMenuItem1.Size = new Size(147, 26);
-            Easy_History_ToolStripMenuItem1.Text = "Easy";
-            Easy_History_ToolStripMenuItem1.Click += StartToGameToolStripMenuItem_Click;
-            // 
-            // Medium_History_ToolStripMenuItem1
-            // 
-            Medium_History_ToolStripMenuItem1.Name = "Medium_History_ToolStripMenuItem1";
-            Medium_History_ToolStripMenuItem1.Size = new Size(147, 26);
-            Medium_History_ToolStripMenuItem1.Text = "Medium";
-            Medium_History_ToolStripMenuItem1.Click += StartToGameToolStripMenuItem_Click;
-            // 
-            // Hard_History_ToolStripMenuItem2
-            // 
-            Hard_History_ToolStripMenuItem2.Name = "Hard_History_ToolStripMenuItem2";
-            Hard_History_ToolStripMenuItem2.Size = new Size(147, 26);
-            Hard_History_ToolStripMenuItem2.Text = "Hard";
-            Hard_History_ToolStripMenuItem2.Click += StartToGameToolStripMenuItem_Click;
+            typeToolStripMenuItem.Click += typeToolStripMenuItem_Click;
             // 
             // plofileToolStripMenuItem
             // 
@@ -301,6 +206,10 @@
             timer2.Interval = 1000;
             timer2.Tick += timer2_Tick;
             // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -340,21 +249,10 @@
         private RadioButton radioButton2;
         private RadioButton radioButton1;
         private Button choose_button1;
-        private ToolStripMenuItem biologyToolStripMenuItem;
-        private ToolStripMenuItem Easy_Biology_ToolStripMenuItem;
-        private ToolStripMenuItem geografyToolStripMenuItem;
-        private ToolStripMenuItem historyToolStripMenuItem;
-        private ToolStripMenuItem Medium_Biology_ToolStripMenuItem;
-        private ToolStripMenuItem Hard_Biology_ToolStripMenuItem;
-        private ToolStripMenuItem Easy_Geografy_ToolStripMenuItem;
-        private ToolStripMenuItem Medium_Geografy_ToolStripMenuItem;
-        private ToolStripMenuItem Hard_Geografy_ToolStripMenuItem1;
-        private ToolStripMenuItem Easy_History_ToolStripMenuItem1;
-        private ToolStripMenuItem Medium_History_ToolStripMenuItem1;
-        private ToolStripMenuItem Hard_History_ToolStripMenuItem2;
         private ProgressBar progressBar1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private Label label1;
+        private OpenFileDialog openFileDialog1;
     }
 }

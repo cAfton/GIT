@@ -31,5 +31,22 @@ namespace taska2
                     return new List<Quiz>();
             }
         }
+        public static List<Quiz> LoadFromFile(string Filepath, HardLevel level)
+        {
+            string read = File.ReadAllText(Filepath);
+            LevelQuizKeeper quizs = JsonConvert.DeserializeObject<LevelQuizKeeper>(read);
+
+            switch (level)
+            {
+                case HardLevel.Easy:
+                    return quizs.Quizes_Easy;
+                case HardLevel.Medium:
+                    return quizs.Quizes_Medium;
+                case HardLevel.Hard:
+                    return quizs.Quizes_Hard;
+                default:
+                    return new List<Quiz>();
+            }
+        }
     }
 }
