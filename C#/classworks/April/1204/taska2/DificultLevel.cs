@@ -26,16 +26,19 @@ namespace taska2
         private void button1_Click(object sender, EventArgs e)
         {
             SelectedLvl = HardLevel.Easy;
+            this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             SelectedLvl = HardLevel.Medium;
+            this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             SelectedLvl = HardLevel.Hard;
+            this.Close();
         }
 
         public HardLevel SelectedLvl { get; set; }
