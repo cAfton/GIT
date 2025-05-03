@@ -157,7 +157,7 @@ namespace taska2
 
         private void typeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 DificultLevel dificultLevel = new DificultLevel();
                 List<Quiz> questions = LevelQuizKeeper.LoadFromFile(openFileDialog1.FileName, dificultLevel.ShowDialogHardLvl());
@@ -173,8 +173,29 @@ namespace taska2
                 label1.Text = a.ToString();
                 a--;
             }
-            
 
+
+
+        }
+
+        private void top20ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string history = "";
+            string read = File.ReadAllText($"score.json");
+            List<Result> scores = JsonConvert.DeserializeObject<List<Result>>(read);
+            scores
+                .Select(x => new
+                {
+                    PrecenteResult = (double)x.Score/(double)x.NumberOfQestions,
+                    TypesOfQuiz = x.TypesOfQuiz,
+                    Time = x.Time,
+                    HardLevel = x.HardLevel,
+                })
+                .OrderByDescending(x => x.PrecenteResult)
+                .Take(20)
+                .ToList()
+                .ForEach(result => history += $"{result.HardLevel}, {result.TypesOfQuiz}, {result.Time}, {Math.Round(result.PrecenteResult*100, 2)}%\n");
+            MessageBox.Show(history, "History", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
     }

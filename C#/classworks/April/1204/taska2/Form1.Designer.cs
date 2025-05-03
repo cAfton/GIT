@@ -79,15 +79,16 @@
             // myResultsToolStripMenuItem
             // 
             myResultsToolStripMenuItem.Name = "myResultsToolStripMenuItem";
-            myResultsToolStripMenuItem.Size = new Size(158, 26);
+            myResultsToolStripMenuItem.Size = new Size(224, 26);
             myResultsToolStripMenuItem.Text = "My results";
             myResultsToolStripMenuItem.Click += myResultsToolStripMenuItem_Click;
             // 
             // top20ToolStripMenuItem
             // 
             top20ToolStripMenuItem.Name = "top20ToolStripMenuItem";
-            top20ToolStripMenuItem.Size = new Size(158, 26);
+            top20ToolStripMenuItem.Size = new Size(224, 26);
             top20ToolStripMenuItem.Text = "Top-20";
+            top20ToolStripMenuItem.Click += top20ToolStripMenuItem_Click;
             // 
             // settingsToolStripMenuItem
             // 
