@@ -29,28 +29,48 @@
         private void InitializeComponent()
         {
             pictureBox1 = new PictureBox();
+            LoadImg = new Button();
+            label1 = new Label();
             button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Location = new Point(12, 87);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(776, 310);
+            pictureBox1.Size = new Size(160, 236);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
+            // LoadImg
+            // 
+            LoadImg.Location = new Point(12, 383);
+            LoadImg.Name = "LoadImg";
+            LoadImg.Size = new Size(160, 55);
+            LoadImg.TabIndex = 1;
+            LoadImg.Text = "LoadImg";
+            LoadImg.UseVisualStyleBackColor = true;
+            LoadImg.Click += button1_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(24, 34);
+            label1.Name = "label1";
+            label1.Size = new Size(50, 20);
+            label1.TabIndex = 2;
+            label1.Text = "label1";
+            // 
             // button1
             // 
-            button1.Location = new Point(40, 343);
+            button1.Location = new Point(691, 17);
             button1.Name = "button1";
-            button1.Size = new Size(241, 95);
-            button1.TabIndex = 1;
+            button1.Size = new Size(97, 37);
+            button1.TabIndex = 3;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // Form1
             // 
@@ -58,16 +78,22 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(button1);
+            Controls.Add(label1);
+            Controls.Add(LoadImg);
             Controls.Add(pictureBox1);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private PictureBox pictureBox1;
+        private Button LoadImg;
+        private Label label1;
         private Button button1;
     }
 }
