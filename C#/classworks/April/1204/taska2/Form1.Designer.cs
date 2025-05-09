@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
             typeToolStripMenuItem = new ToolStripMenuItem();
+
             plofileToolStripMenuItem = new ToolStripMenuItem();
             myResultsToolStripMenuItem = new ToolStripMenuItem();
             top20ToolStripMenuItem = new ToolStripMenuItem();
@@ -47,7 +48,9 @@
             progressBar1 = new ProgressBar();
             timer1 = new System.Windows.Forms.Timer(components);
             timer2 = new System.Windows.Forms.Timer(components);
+
             openFileDialog1 = new OpenFileDialog();
+
             menuStrip1.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -67,7 +70,9 @@
             typeToolStripMenuItem.Name = "typeToolStripMenuItem";
             typeToolStripMenuItem.Size = new Size(95, 24);
             typeToolStripMenuItem.Text = "New game";
+
             typeToolStripMenuItem.Click += typeToolStripMenuItem_Click;
+
             // 
             // plofileToolStripMenuItem
             // 
@@ -207,10 +212,12 @@
             timer2.Interval = 1000;
             timer2.Tick += timer2_Tick;
             // 
+
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
+
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -250,10 +257,13 @@
         private RadioButton radioButton2;
         private RadioButton radioButton1;
         private Button choose_button1;
+
         private ProgressBar progressBar1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private Label label1;
+
         private OpenFileDialog openFileDialog1;
+
     }
 }

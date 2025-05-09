@@ -10,7 +10,9 @@ namespace taska2
     {
         public string Question { get; set; } = "";
         public string[] Answers { get; set; } = { "", "", "" };
+
         public int RightAnswer { get; set; } = 1;
+
 
         public override string ToString()
         {

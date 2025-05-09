@@ -108,10 +108,12 @@ namespace taska2
                 timer2.Stop();
                 timer1.Stop();
 
+
                 MessageBox.Show($"Your score: {CurrentUser.HistoryOfQuizes.Last().Score}/{progressBar1.Maximum}", "Score", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 scores.Add(new Result { HardLevel = CurrentLevel, TypesOfQuiz = CurrentType, UserName = CurrentUser.Login, Score = CurrentUser.HistoryOfQuizes.Last().Score, Time = DateTime.Now, NumberOfQestions = progressBar1.Maximum });
                 string write = JsonConvert.SerializeObject(scores);
                 File.WriteAllText($"score.json", write);
+
                 groupBox1.Visible = false;
             }
         }
@@ -154,6 +156,7 @@ namespace taska2
             label1.Text = a.ToString();
             a--;
         }
+
 
         private void typeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -198,5 +201,6 @@ namespace taska2
             MessageBox.Show(history, "History", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
+
     }
 }

@@ -75,6 +75,7 @@ namespace taska2
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             textBoxQuestion.Text = comboBox3.SelectedItem.ToString();
 
             textBoxAnsvers1.Text = list[comboBox3.SelectedIndex].Answers[0].ToString();
@@ -88,6 +89,7 @@ namespace taska2
             tmp.Checked = true;
 
             ChangeUnsavedOperation(false);
+
 
         }
 
@@ -128,6 +130,7 @@ namespace taska2
                 string save = JsonConvert.SerializeObject(saveNewQuizes);
                 Console.WriteLine(save);
                 File.WriteAllText($"{comboBox1.SelectedItem}.json", save);
+
                 comboBox3.Items[comboBox3.SelectedIndex] = textBoxQuestion.Text;
 
             }
@@ -150,12 +153,14 @@ namespace taska2
                 textBoxAnsvers3.Clear();
 
                 Quiz tmp = new Quiz();
+
                 tmp.Question = "New question";
                 list.Add(tmp);
 
                 comboBox3.Items.Add(tmp.Question.ToString());
                 comboBox3.SelectedItem = tmp.Question;
                 ChangeUnsavedOperation(true);
+
 
             }
             else
