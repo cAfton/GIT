@@ -107,11 +107,13 @@ namespace taska2
             {
                 timer2.Stop();
                 timer1.Stop();
-                
+
+
                 MessageBox.Show($"Your score: {CurrentUser.HistoryOfQuizes.Last().Score}/{progressBar1.Maximum}", "Score", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 scores.Add(new Result { HardLevel = CurrentLevel, TypesOfQuiz = CurrentType, UserName = CurrentUser.Login, Score = CurrentUser.HistoryOfQuizes.Last().Score, Time = DateTime.Now, NumberOfQestions = progressBar1.Maximum });
                 string write = JsonConvert.SerializeObject(scores);
-                File.WriteAllText($"score.json", );
+                File.WriteAllText($"score.json", write);
+
                 groupBox1.Visible = false;
             }
         }
@@ -147,12 +149,58 @@ namespace taska2
 
         }
 
-        
+
         private void timer2_Tick(object sender, EventArgs e)
         {
 
             label1.Text = a.ToString();
             a--;
         }
+
+
+        private void typeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                DificultLevel dificultLevel = new DificultLevel();
+                List<Quiz> questions = LevelQuizKeeper.LoadFromFile(openFileDialog1.FileName, dificultLevel.ShowDialogHardLvl());
+                progressBar1.Maximum = questions.Count;
+                quizes = questions.GetEnumerator();
+                groupBox1.Visible = true;
+                CurrentUser.HistoryOfQuizes.Add(new History());
+                quizes.MoveNext();
+                ShowQuestion(quizes.Current);
+                timer1.Start();
+                timer2.Start();
+                a = 5;
+                label1.Text = a.ToString();
+                a--;
+            }
+
+
+
+        }
+
+        private void top20ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string history = "";
+            string read = File.ReadAllText($"score.json");
+            List<Result> scores = JsonConvert.DeserializeObject<List<Result>>(read);
+            scores
+                .Select(x => new
+                {
+                    PrecenteResult = (double)x.Score/(double)x.NumberOfQestions,
+                    TypesOfQuiz = x.TypesOfQuiz,
+                    Time = x.Time,
+                    HardLevel = x.HardLevel,
+                })
+                .OrderByDescending(x => x.PrecenteResult)
+                .Take(20)
+                .ToList()
+                .ForEach(result => history += $"{result.HardLevel}, {result.TypesOfQuiz}, {result.Time}, {Math.Round(result.PrecenteResult*100, 2)}%\n");
+            MessageBox.Show(history, "History", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+
     }
 }
