@@ -13,9 +13,13 @@ namespace taska2
     public partial class SignUp : Form
     {
         public User newUser {  get; set; }
-        private List<string> userLogins {  get; set; }
-        public SignUp(List<string> user_logins)
+        private List<string>? userLogins {  get; set; }
+        public SignUp(List<string>? user_logins)
         {
+            if(user_logins == null)
+            {
+                user_logins = new List<string>();
+            }
             userLogins = user_logins;
             InitializeComponent();
         }
@@ -26,7 +30,7 @@ namespace taska2
                 login_textBox.BackColor = Color.White;
                 if (pass1_textBox.Text == pass2_textBox.Text)
                 {
-                    newUser = new User() { Login = login_textBox.Text, Password = pass1_textBox.Text, Birthday = Birthday_dateTimePicker1.Value };
+                    newUser = new User() { Login = login_textBox.Text, Password = pass1_textBox.Text};
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
