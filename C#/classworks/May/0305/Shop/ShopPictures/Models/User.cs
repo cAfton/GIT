@@ -12,12 +12,8 @@ namespace taska2
 
         public string Password { get; set; }
 
-        public DateTime Birthday { get; set; }
-
-
         public bool IsAdmin { get; set; } = false;
 
-        public User() { }
 
     }
 }

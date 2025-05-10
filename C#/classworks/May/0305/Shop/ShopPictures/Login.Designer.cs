@@ -123,6 +123,7 @@
             ShowIcon = false;
             SizeGripStyle = SizeGripStyle.Hide;
             Text = "Login";
+            Load += Login_Load;
             ResumeLayout(false);
             PerformLayout();
         }

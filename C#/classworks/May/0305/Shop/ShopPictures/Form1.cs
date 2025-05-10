@@ -1,12 +1,15 @@
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
+using taska2;
 
 namespace ShopPictures
 {
     public partial class Form1 : Form
     {
         private DriveService driveService;
+
+        private bool isLogin = false;
         public Form1()
         {
             InitializeComponent();
@@ -57,8 +60,20 @@ namespace ShopPictures
             var stream = new MemoryStream();
             request.Download(stream);
             stream.Position = 0;
+            if (stream != null)
+            {
+                pictureBox1.Image = Image.FromStream(stream);
+            }
+        }
 
-            pictureBox1.Image = Image.FromStream(stream);
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.ShowDialog();
+            if (login.DialogResult == DialogResult.OK)
+            {
+                isLogin = true;
+            }
         }
     }
 }

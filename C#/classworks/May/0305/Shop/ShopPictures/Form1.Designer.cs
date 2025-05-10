@@ -31,13 +31,15 @@
             pictureBox1 = new PictureBox();
             LoadImg = new Button();
             label1 = new Label();
-            button1 = new Button();
+            buttonLogin = new Button();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(12, 87);
+            pictureBox1.Location = new Point(12, 48);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(160, 236);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -50,34 +52,45 @@
             LoadImg.Name = "LoadImg";
             LoadImg.Size = new Size(160, 55);
             LoadImg.TabIndex = 1;
-            LoadImg.Text = "LoadImg";
+            LoadImg.Text = "Load Img";
             LoadImg.UseVisualStyleBackColor = true;
             LoadImg.Click += button1_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(24, 34);
+            label1.Location = new Point(12, 25);
             label1.Name = "label1";
             label1.Size = new Size(50, 20);
             label1.TabIndex = 2;
             label1.Text = "label1";
             // 
-            // button1
+            // buttonLogin
             // 
-            button1.Location = new Point(691, 17);
-            button1.Name = "button1";
-            button1.Size = new Size(97, 37);
-            button1.TabIndex = 3;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            buttonLogin.Location = new Point(691, 17);
+            buttonLogin.Name = "buttonLogin";
+            buttonLogin.Size = new Size(97, 37);
+            buttonLogin.TabIndex = 3;
+            buttonLogin.Text = "Login";
+            buttonLogin.UseVisualStyleBackColor = true;
+            buttonLogin.Click += buttonLogin_Click;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Location = new Point(178, 48);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(160, 236);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 4;
+            pictureBox2.TabStop = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button1);
+            Controls.Add(pictureBox2);
+            Controls.Add(buttonLogin);
             Controls.Add(label1);
             Controls.Add(LoadImg);
             Controls.Add(pictureBox1);
@@ -85,6 +98,7 @@
             Text = "Form1";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -94,6 +108,7 @@
         private PictureBox pictureBox1;
         private Button LoadImg;
         private Label label1;
-        private Button button1;
+        private Button buttonLogin;
+        private PictureBox pictureBox2;
     }
 }
