@@ -21,7 +21,7 @@ namespace taska2
     {
         private string fileip = "1Is277UWDPbOP6swGobwttNTggKAFMNqi";
 
-        public User CurrentUser { get; set; }
+        public User CurrentUserLogin { get; set; }
         private List<User>? users { get; set; }
         public Login()
         {
@@ -44,27 +44,29 @@ namespace taska2
             signUp.ShowDialog();
             if (signUp.DialogResult == DialogResult.OK)
             {
-                if(users == null) { users = new List<User>(); }
+                signUp.newUser.FolderId = DriveServiceClass.CreateFolder(DriveServiceClass.driveService, signUp.newUser.Login);
+                if (users == null) { users = new List<User>(); }
                 users.Add(signUp.newUser);
             }
-
-
-
             string save = JsonConvert.SerializeObject(users, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
-            //File.WriteAllText("Users.json", save);
-            DriveServiceClass.CreateJsonFile(DriveServiceClass.driveService, "Test.json", save, "1-zPDv8T-sNjb1IArDRjFFVh_kbLd7mP4");
             DriveServiceClass.LoadFileJson(DriveServiceClass.driveService, fileip, save);
-
             label4.Visible = false;
+            
+
+
+
+            //File.WriteAllText("Users.json", save);
+            //DriveServiceClass.CreateJsonFile(DriveServiceClass.driveService, "Test.json", save, "1ZoP4ZdVMY6ueLW_iJpD0CKwDOprUWMj3");
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CurrentUser = users.FirstOrDefault(elem => elem.Login == login_textBox.Text);
-            if (CurrentUser != null)
+            CurrentUserLogin = users.FirstOrDefault(elem => elem.Login == login_textBox.Text);
+            if (CurrentUserLogin != null)
             {
                 login_textBox.BackColor = Color.White;
-                if (pass_textBox2.Text == CurrentUser.Password)
+                if (pass_textBox2.Text == CurrentUserLogin.Password)
                 {
                     this.DialogResult = DialogResult.OK;
                     this.Close();
@@ -80,10 +82,10 @@ namespace taska2
             }
         }
 
-        private void Login_Load(object sender, EventArgs e)
+        async private void Login_Load(object sender, EventArgs e)
         {
             
-            MemoryStream file = DriveServiceClass.DownloadFile(DriveServiceClass.driveService, fileip);
+            MemoryStream file = await DriveServiceClass.DownloadFile(DriveServiceClass.driveService, fileip);
 
             file.Position = 0; // Повертаємо позицію стріму на початок
             using (var reader = new StreamReader(file))
@@ -91,8 +93,6 @@ namespace taska2
                 string jsonContent = reader.ReadToEnd();
                 users = JsonConvert.DeserializeObject<List<User>>(jsonContent);
             }
-
-
 
         }
     }

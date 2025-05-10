@@ -12,6 +12,8 @@ namespace taska2
 
         public string Password { get; set; }
 
+        public string FolderId { get; set; }
+
         public bool IsAdmin { get; set; } = false;
 
 

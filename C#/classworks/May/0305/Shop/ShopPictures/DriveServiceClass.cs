@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Management;
 using Google.Apis.Upload;
 using Google.Apis.Drive.v3.Data;
+using System.Net.Http.Json;
 
 namespace ShopPictures
 {
@@ -34,11 +35,11 @@ namespace ShopPictures
             }
         }
 
-        public static MemoryStream DownloadFile(DriveService service, string fileId)
+        async public static Task<MemoryStream> DownloadFile(DriveService service, string fileId)
         {
             var request = service.Files.Get(fileId);
             var stream = new MemoryStream();
-            request.Download(stream);
+            await request.DownloadAsync(stream);
             stream.Position = 0;
             return stream;
         }
@@ -71,6 +72,64 @@ namespace ShopPictures
                 }
             }
         }
+
+        public static string CreateFolder(DriveService service, string userName)
+        {
+            var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+            {
+                Name = userName,
+                MimeType = "application/vnd.google-apps.folder"
+            };
+
+            fileMetadata.Parents = new List<string> { "1ZoP4ZdVMY6ueLW_iJpD0CKwDOprUWMj3" };
+            var request = service.Files.Create(fileMetadata);
+            request.Fields = "id";
+
+            var folder = request.Execute();
+
+            return folder.Id;
+        }
+
+        public static string CreateImageFile(DriveService service, string fileName, string imagePath, string parentFolderId)
+        {
+            try
+            {
+                // Вміст JSON у потік
+                using var stream = new FileStream(imagePath, FileMode.Open);
+
+                // Метадані файлу
+                var fileMetadata = new Google.Apis.Drive.v3.Data.File
+                {
+                    Name = fileName,
+                    MimeType = "image/png"
+                };
+
+                fileMetadata.Parents = new List<string> { parentFolderId };
+
+                // Створення файлу
+                var request = service.Files.Create(fileMetadata, stream, "image/png");
+                request.Fields = "id"; // отримай тільки ID файлу
+                var file = request.Upload();
+
+                if (file.Status == UploadStatus.Completed)
+                {
+                    var createdFile = request.ResponseBody;
+                    Console.WriteLine($"✅ Файл створено. ID: {createdFile.Id}");
+                    return createdFile.Id;
+                }
+                else
+                {
+                    Console.WriteLine("❌ Помилка під час створення файлу: " + file.Exception?.Message);
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("❌ Виняток: " + ex.Message);
+                return null;
+            }
+        }
+
 
         public static string CreateJsonFile(DriveService service, string fileName, string jsonContent, string parentFolderId = null)
         {
