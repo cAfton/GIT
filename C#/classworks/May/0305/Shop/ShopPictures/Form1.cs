@@ -8,23 +8,14 @@ namespace ShopPictures
     public partial class Form1 : Form
     {
         private DriveService driveService;
+        List<Image> images;
 
         private bool isLogin = false;
         public Form1()
         {
             InitializeComponent();
-            InitDriveService();
         }
-        private void InitDriveService()
-        {
-            var credential = GoogleCredential.FromFile("shoponwinformscs-de54ab3b9543.json").CreateScoped(DriveService.Scope.DriveReadonly);
-
-            driveService = new DriveService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = "Drive Image Loader Service",
-            });
-        }
+        
         private void button1_Click(object sender, EventArgs e)
         {
             string fileId = "1eC3uyEmquCRufx-Md1XeY0i_7OjCj9Ar";
@@ -55,7 +46,7 @@ namespace ShopPictures
         {
             ChangeLabelStyle(label1);
 
-            string fileId = "1eC3uyEmquCRufx-Md1XeY0i_7OjCj9Ar";
+            /*string fileId = "1eC3uyEmquCRufx-Md1XeY0i_7OjCj9Ar";
             var request = driveService.Files.Get(fileId);
             var stream = new MemoryStream();
             request.Download(stream);
@@ -63,7 +54,7 @@ namespace ShopPictures
             if (stream != null)
             {
                 pictureBox1.Image = Image.FromStream(stream);
-            }
+            }*/
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -73,7 +64,30 @@ namespace ShopPictures
             if (login.DialogResult == DialogResult.OK)
             {
                 isLogin = true;
+
+                var request = DriveServiceClass.driveService.Files.List();
+                request.Q = $"'{"1HnJOxlFzAW3BhEOVEuSRCmBRQKXur9ct"}' in parents and trashed = false";
+                request.Fields = "files(id, name)";
+
+                var result = request.Execute();
+
+                for (int i = 0; i < 4; i++)
+                {
+                    var tmp = this.GetType().GetField("pictureBox" + (i + 1).ToString(), System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).GetValue(this) as PictureBox;
+                    if (tmp != null)
+                    {
+                        var stream = DriveServiceClass.DownloadFile(DriveServiceClass.driveService, result.Files[i].Id);
+                        stream.Position = 0;
+                        if (stream != null)
+                        {
+                            tmp.Image = Image.FromStream(stream);
+                        }
+                    }
+                }
             }
+
+
+
         }
     }
 }
