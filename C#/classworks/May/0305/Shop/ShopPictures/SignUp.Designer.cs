@@ -37,8 +37,6 @@
             label1 = new Label();
             pass2_textBox = new TextBox();
             label5 = new Label();
-            Birthday_dateTimePicker1 = new DateTimePicker();
-            label6 = new Label();
             SuspendLayout();
             // 
             // label4
@@ -127,34 +125,11 @@
             label5.TabIndex = 14;
             label5.Text = "Password again";
             // 
-            // Birthday_dateTimePicker1
-            // 
-            Birthday_dateTimePicker1.Format = DateTimePickerFormat.Short;
-            Birthday_dateTimePicker1.Location = new Point(36, 378);
-            Birthday_dateTimePicker1.MaxDate = new DateTime(2025, 4, 12, 12, 28, 43, 401);
-            Birthday_dateTimePicker1.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
-            Birthday_dateTimePicker1.Name = "Birthday_dateTimePicker1";
-            Birthday_dateTimePicker1.Size = new Size(250, 27);
-            Birthday_dateTimePicker1.TabIndex = 16;
-            Birthday_dateTimePicker1.Value = new DateTime(2025, 4, 12, 12, 28, 43, 401);
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(87, 334);
-            label6.Name = "label6";
-            label6.Size = new Size(140, 41);
-            label6.TabIndex = 17;
-            label6.Text = "Birthday";
-            // 
             // SignUp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(313, 554);
-            Controls.Add(label6);
-            Controls.Add(Birthday_dateTimePicker1);
             Controls.Add(pass2_textBox);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -184,7 +159,5 @@
         private Label label1;
         private TextBox pass2_textBox;
         private Label label5;
-        private DateTimePicker Birthday_dateTimePicker1;
-        private Label label6;
     }
 }
