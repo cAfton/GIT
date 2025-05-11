@@ -9,7 +9,7 @@ namespace Task1
             InitializeComponent();
             this.Text = CurrentFileToSave;
         }
-        private void NewTextBox() 
+        private void NewTextBox()
         {
             richTextBox1.Clear();
             CurrentFileToSave = "";
@@ -113,7 +113,7 @@ namespace Task1
 
         private void font_color_click(object sender, EventArgs e)
         {
-            if(colorDialog1.ShowDialog() == DialogResult.OK)
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.ForeColor = colorDialog1.Color;
             }
@@ -139,6 +139,47 @@ namespace Task1
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
             isSaved = false;
+        }
+
+        private void copyToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            copy_click(sender, e);
+        }
+
+        private void cutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            cut_click(sender, e);
+        }
+
+        private void pasteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            paste_Click(sender, e);
+        }
+
+        private void cancelToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            cancel_click(sender, e);
+        }
+
+        private void selectAllToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Select_all_click(sender, e);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!isSaved)
+            {
+                DialogResult userChoise = MessageBox.Show("Save your current progres?", "Is not saved", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (userChoise == DialogResult.Yes)
+                {
+                    save_click(sender, e);
+                }
+                else if (userChoise == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
         }
     }
 }

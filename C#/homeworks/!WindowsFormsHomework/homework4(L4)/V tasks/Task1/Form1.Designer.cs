@@ -60,12 +60,18 @@
             fontToolStripMenuItem1 = new ToolStripMenuItem();
             richTextBox1 = new RichTextBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
+            copyToolStripMenuItem1 = new ToolStripMenuItem();
+            cutToolStripMenuItem1 = new ToolStripMenuItem();
+            pasteToolStripMenuItem1 = new ToolStripMenuItem();
+            cancelToolStripMenuItem1 = new ToolStripMenuItem();
+            selectAllToolStripMenuItem1 = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
             folderBrowserDialog1 = new FolderBrowserDialog();
             colorDialog1 = new ColorDialog();
             menuStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -297,9 +303,10 @@
             // richTextBox1
             // 
             richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            richTextBox1.ContextMenuStrip = contextMenuStrip1;
             richTextBox1.Location = new Point(0, 58);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(800, 432);
+            richTextBox1.Size = new Size(800, 433);
             richTextBox1.TabIndex = 2;
             richTextBox1.Text = "";
             richTextBox1.TextChanged += richTextBox1_TextChanged;
@@ -307,8 +314,44 @@
             // contextMenuStrip1
             // 
             contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { copyToolStripMenuItem1, cutToolStripMenuItem1, pasteToolStripMenuItem1, cancelToolStripMenuItem1, selectAllToolStripMenuItem1 });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
+            contextMenuStrip1.Size = new Size(139, 124);
+            // 
+            // copyToolStripMenuItem1
+            // 
+            copyToolStripMenuItem1.Name = "copyToolStripMenuItem1";
+            copyToolStripMenuItem1.Size = new Size(138, 24);
+            copyToolStripMenuItem1.Text = "Copy";
+            copyToolStripMenuItem1.Click += copyToolStripMenuItem1_Click;
+            // 
+            // cutToolStripMenuItem1
+            // 
+            cutToolStripMenuItem1.Name = "cutToolStripMenuItem1";
+            cutToolStripMenuItem1.Size = new Size(138, 24);
+            cutToolStripMenuItem1.Text = "Cut";
+            cutToolStripMenuItem1.Click += cutToolStripMenuItem1_Click;
+            // 
+            // pasteToolStripMenuItem1
+            // 
+            pasteToolStripMenuItem1.Name = "pasteToolStripMenuItem1";
+            pasteToolStripMenuItem1.Size = new Size(138, 24);
+            pasteToolStripMenuItem1.Text = "Paste";
+            pasteToolStripMenuItem1.Click += pasteToolStripMenuItem1_Click;
+            // 
+            // cancelToolStripMenuItem1
+            // 
+            cancelToolStripMenuItem1.Name = "cancelToolStripMenuItem1";
+            cancelToolStripMenuItem1.Size = new Size(138, 24);
+            cancelToolStripMenuItem1.Text = "Cancel";
+            cancelToolStripMenuItem1.Click += cancelToolStripMenuItem1_Click;
+            // 
+            // selectAllToolStripMenuItem1
+            // 
+            selectAllToolStripMenuItem1.Name = "selectAllToolStripMenuItem1";
+            selectAllToolStripMenuItem1.Size = new Size(138, 24);
+            selectAllToolStripMenuItem1.Text = "Select all";
+            selectAllToolStripMenuItem1.Click += selectAllToolStripMenuItem1_Click;
             // 
             // openFileDialog1
             // 
@@ -330,10 +373,12 @@
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Form1";
+            FormClosing += Form1_FormClosing;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -374,5 +419,10 @@
         private SaveFileDialog saveFileDialog1;
         private FolderBrowserDialog folderBrowserDialog1;
         private ColorDialog colorDialog1;
+        private ToolStripMenuItem copyToolStripMenuItem1;
+        private ToolStripMenuItem cutToolStripMenuItem1;
+        private ToolStripMenuItem pasteToolStripMenuItem1;
+        private ToolStripMenuItem cancelToolStripMenuItem1;
+        private ToolStripMenuItem selectAllToolStripMenuItem1;
     }
 }
