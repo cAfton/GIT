@@ -53,6 +53,10 @@ namespace Task2
                 {
                     listView1.Items.Add(new ListViewItem(Path.GetFileName(file)));
                 }
+                foreach (string folder in Directory.GetDirectories(e.Node.Tag.ToString()))
+                {
+                    listView1.Items.Add(new ListViewItem(Path.GetFileName(folder)));
+                }
             }
             catch (UnauthorizedAccessException)
             {
