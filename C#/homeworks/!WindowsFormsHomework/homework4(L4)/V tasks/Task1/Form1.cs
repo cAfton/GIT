@@ -13,8 +13,7 @@ namespace Task1
         {
             richTextBox1.Clear();
             CurrentFileToSave = "";
-            CurrentFileToSave = "";
-
+            this.Text = CurrentFileToSave;
         }
 
         private void new_Click(object sender, EventArgs e)
@@ -46,6 +45,7 @@ namespace Task1
                 richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.RichText);
                 CurrentFileToSave = openFileDialog1.FileName;
                 isSaved = true;
+                this.Text = CurrentFileToSave;
             }
         }
 
@@ -70,6 +70,7 @@ namespace Task1
                 CurrentFileToSave = saveFileDialog1.FileName;
                 richTextBox1.SaveFile(CurrentFileToSave, RichTextBoxStreamType.RichText);
                 isSaved = true;
+                this.Text = CurrentFileToSave;
             }
         }
 

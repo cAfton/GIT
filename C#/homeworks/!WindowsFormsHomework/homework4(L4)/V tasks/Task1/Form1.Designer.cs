@@ -296,6 +296,7 @@
             // 
             // richTextBox1
             // 
+            richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             richTextBox1.Location = new Point(0, 58);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.Size = new Size(800, 432);
@@ -326,10 +327,7 @@
             Controls.Add(richTextBox1);
             Controls.Add(toolStrip1);
             Controls.Add(menuStrip1);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
-            MaximizeBox = false;
-            MinimizeBox = false;
             Name = "Form1";
             Text = "Form1";
             menuStrip1.ResumeLayout(false);
