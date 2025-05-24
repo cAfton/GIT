@@ -10,24 +10,29 @@ namespace ProgressBarLoad
             InitializeComponent();
         }
 
-        private void button_choose_Click(object sender, EventArgs e)
+        async private void button_choose_Click(object sender, EventArgs e)
         {
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                List<string> lines = File.ReadAllLines(openFileDialog.FileName).ToList();
-                progressBar1.Value = 0;
-                progressBar1.Maximum = lines.Count;
-                using (StreamReader read = new StreamReader(openFileDialog.FileName))
+                await Task.Run(() => ReadFile(openFileDialog.FileName));
+            }
+        }
+
+        async private void ReadFile(string fileName)
+        {
+            List<string> lines = File.ReadAllLines(fileName).ToList();
+            progressBar1.Value = 0;
+            progressBar1.Maximum = lines.Count;
+            using (StreamReader read = new StreamReader(fileName))
+            {
+                for (int i = 0; i < lines.Count; i++)
                 {
-                    for (int i = 0; i < lines.Count; i++)
-                    {
-                        read.ReadLine();
-                        Thread.Sleep(300);
-                        progressBar1.PerformStep();
-                        progressBar1.Show();
-                    }
+                    read.ReadLine();
+                    Thread.Sleep(300);
+                    progressBar1.PerformStep();
+                    progressBar1.Show();
                 }
             }
         }
