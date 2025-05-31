@@ -11,9 +11,15 @@ namespace saper
         public Status ButtonStatus {  get; set; }
         public int Number {  get; set; }
 
-        public ButtonTag(Status bs)
+        public int IndexX {  get; set; }
+        public int IndexY { get; set; }
+
+
+        public ButtonTag(Status bs, int x, int y)
         {
             ButtonStatus = bs;
+            IndexX = x;
+            IndexY = y;
         }
     }
 }

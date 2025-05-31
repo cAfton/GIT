@@ -35,7 +35,7 @@ namespace saper
                 for (int j = 0; j < Size; j++)
                 {
                     buttons[i, j] = new Button() {Location = new Point(i * SizeOfButton, j * SizeOfButton + 50), Size = new Size(SizeOfButton, SizeOfButton) };
-                    buttons[i, j].Tag = new ButtonTag(Status.Empty);
+                    buttons[i, j].Tag = new ButtonTag(Status.Empty, i, j);
                     buttons[i, j].MouseDown += ButtonClick;
                     control.Controls.Add(buttons[i, j]);
                 }
@@ -58,7 +58,9 @@ namespace saper
 
             foreach (Button button in buttons)
             {
-                button.Tag = new ButtonTag(Status.Empty);
+                (button.Tag as ButtonTag).ButtonStatus = Status.Empty;
+                (button.Tag as ButtonTag).Number = 0;
+                button.Text = "";
                 button.Enabled = true;
                 button.Image = null;
                 CurrentMines = NumberOfMin;
@@ -96,10 +98,8 @@ namespace saper
                             }
                         }
                     }
-
                 }
             }
-
         }
 
         private void GameOver()
@@ -123,15 +123,19 @@ namespace saper
             {
                 if ((sender as Button).Image?.Flags != Properties.Resources.Flag.Flags)
                 {
-                    (sender as Button).Enabled = false;
-                    if(((sender as Button).Tag as ButtonTag).ButtonStatus == Status.Mina)
+                    //(sender as Button).Enabled = false;
+                    if (((sender as Button).Tag as ButtonTag).ButtonStatus == Status.Mina)
                     {
                         GameOver();
+                    }
+                    else
+                    {
+                        CheckClick(((sender as Button).Tag as ButtonTag).IndexX, ((sender as Button).Tag as ButtonTag).IndexY);
                     }
                 }           
                 if (WinCheck() == true)
                 {
-                    if (MessageBox.Show("Ті маладєца", "пірімоґа", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
+                    if (MessageBox.Show("You cool", "You win!", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
                     {
                         StartGame();
                     }
@@ -146,9 +150,17 @@ namespace saper
                     CurrentMines++; 
                     PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentMines)));
                 }
+                else if((sender as Button).Text != "")
+                {
+
+                    FlagCheck(((sender as Button).Tag as ButtonTag).IndexX, ((sender as Button).Tag as ButtonTag).IndexY);
+
+                }
                 else
                 {
                     (sender as Button).Image = Properties.Resources.Flag;
+                    ((sender as Button).Tag as ButtonTag).ButtonStatus = Status.Flag;
+
                     CurrentMines--; 
                     PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentMines)));
 
@@ -156,6 +168,95 @@ namespace saper
             }
         }
 
+        private void FlagCheck(int X, int Y)
+        {
+            int count = 0;
+            
+            /*
+
+               (-1, -1) (0, -1) (1, -1)
+               (-1, 0)  (0, 0)  (1, 0)
+               (-1, 1)  (0, 1)  (1, 1)
+
+            */
+            for (int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                {
+                    if (X + i >= 0 || Y + j >= 0 || X + i < Size || Y + j < Size)
+                    {
+                        if ((buttons[X + i, Y + j].Tag as ButtonTag).ButtonStatus == Status.Flag)
+                        {
+                            count++;
+                        }
+                    }
+                }
+            }
+
+
+            if (int.Parse(buttons[X, Y].Text) == count)
+            {
+                for (int i = -1; i <= 1; i++)
+                {
+                    for (int j = -1; j <= 1; j++)
+                    {
+                        if (X + i >= 0 || Y + j >= 0 || X + i < Size || Y + j < Size)
+                        {
+                            if ((buttons[X + i, Y + j].Tag as ButtonTag).ButtonStatus == Status.Mina)
+                            {
+                                GameOver();
+                                return;
+                            }
+                            if((buttons[X + i, Y + j].Tag as ButtonTag).ButtonStatus == Status.Empty)
+                            {
+                                buttons[X, Y].Text = (buttons[X, Y].Tag as ButtonTag).Number.ToString();
+                                buttons[X, Y].Enabled = false;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        /*
+           1  1,2,3,4,5,6
+           2  1,2,3,4,5,6
+           3  1,2,3,4,5,6
+           4  1,2,3,4,5,6
+           5  1,2,3,4,5,6
+
+        */
+
+        private void CheckClick(int X, int Y)
+        {
+            if (X < 0 || Y < 0 || X >= Size || Y >= Size)
+            {
+                return;
+            }
+
+            if ((buttons[X, Y].Tag as ButtonTag).ButtonStatus == Status.Number)
+            {
+                buttons[X, Y].Text = (buttons[X, Y].Tag as ButtonTag).Number.ToString();
+                buttons[X, Y].Enabled = false;
+                return;
+            }
+            
+            if(buttons[X, Y].Enabled == false)
+            {
+                return;
+            }
+
+            buttons[X, Y].Enabled = false;
+
+
+            CheckClick(X, Y - 1);
+            CheckClick(X + 1, Y);
+            CheckClick(X, Y + 1);
+            CheckClick(X - 1, Y);
+
+
+        }
         private bool WinCheck()
         {
             foreach (var item in buttons)
