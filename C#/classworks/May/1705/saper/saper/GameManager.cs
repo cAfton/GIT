@@ -75,7 +75,7 @@ namespace saper
                 else{
                     (buttons[n, m].Tag as ButtonTag).ButtonStatus = Status.Mina;
                     buttons[n, m].Text = "";
-                    //buttons[n, m].Image = Properties.Resources.Bomba;
+                    buttons[n, m].Image = Properties.Resources.Bomba;
 
                     for (int j = -1; j <= 1; j++)
                     {
@@ -128,8 +128,16 @@ namespace saper
                     {
                         GameOver();
                     }
+                }           
+                if (WinCheck() == true)
+                {
+                    if (MessageBox.Show("Ті маладєца", "пірімоґа", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
+                    {
+                        StartGame();
+                    }
                 }
             }
+
             if((e as MouseEventArgs).Button == MouseButtons.Right) 
             {
                 if((sender as Button).Image?.Flags == Properties.Resources.Flag.Flags)
@@ -147,6 +155,18 @@ namespace saper
                 }
             }
         }
+
+        private bool WinCheck()
+        {
+            foreach (var item in buttons)
+            {
+                if (item.Enabled == true && (item.Tag as ButtonTag).ButtonStatus != Status.Mina)
+                {
+                    return false;
+                }
+            }
+            return true;
+        } 
 
     }
 }
