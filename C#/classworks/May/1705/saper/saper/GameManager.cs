@@ -75,7 +75,7 @@ namespace saper
                 else{
                     (buttons[n, m].Tag as ButtonTag).ButtonStatus = Status.Mina;
                     buttons[n, m].Text = "";
-                    buttons[n, m].Image = Properties.Resources.Bomba;
+                    //buttons[n, m].Image = Properties.Resources.Bomba;
 
                     for (int j = -1; j <= 1; j++)
                     {
