@@ -77,7 +77,7 @@ namespace saper
                 else{
                     (buttons[n, m].Tag as ButtonTag).ButtonStatus = Status.Mina;
                     buttons[n, m].Text = "";
-                    //buttons[n, m].Image = Properties.Resources.Bomba;
+                    buttons[n, m].Image = Properties.Resources.Bomba;
 
                     for (int j = -1; j <= 1; j++)
                     {
@@ -133,7 +133,7 @@ namespace saper
                         CheckClick(((sender as Button).Tag as ButtonTag).IndexX, ((sender as Button).Tag as ButtonTag).IndexY);
                     }
                 }           
-                if (WinCheck() == true)
+                if (WinCheck())
                 {
                     if (MessageBox.Show("You cool", "You win!", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
                     {
@@ -261,7 +261,7 @@ namespace saper
         {
             foreach (var item in buttons)
             {
-                if (item.Enabled == true && (item.Tag as ButtonTag).ButtonStatus != Status.Mina)
+                if (item.Enabled == true && ((item.Tag as ButtonTag).ButtonStatus != Status.Flag && (item.Tag as ButtonTag).ButtonStatus != Status.Mina))
                 {
                     return false;
                 }
