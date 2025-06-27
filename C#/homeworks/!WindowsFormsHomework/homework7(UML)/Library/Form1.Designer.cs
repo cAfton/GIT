@@ -120,6 +120,7 @@
             button_ReturnBook.TabIndex = 10;
             button_ReturnBook.Text = "Return book";
             button_ReturnBook.UseVisualStyleBackColor = true;
+            button_ReturnBook.Click += button_ReturnBook_Click;
             // 
             // label1
             // 
@@ -171,12 +172,14 @@
             deleteToolStripMenuItemUser.Name = "deleteToolStripMenuItemUser";
             deleteToolStripMenuItemUser.Size = new Size(122, 24);
             deleteToolStripMenuItemUser.Text = "Delete";
+            deleteToolStripMenuItemUser.Click += deleteToolStripMenuItemUser_Click;
             // 
             // editToolStripMenuItemUser
             // 
             editToolStripMenuItemUser.Name = "editToolStripMenuItemUser";
             editToolStripMenuItemUser.Size = new Size(122, 24);
             editToolStripMenuItemUser.Text = "Edit";
+            editToolStripMenuItemUser.Click += editToolStripMenuItemUser_Click;
             // 
             // lendToolStripMenuItemUser
             // 
@@ -194,14 +197,15 @@
             // deleteToolStripMenuItemBook
             // 
             deleteToolStripMenuItemBook.Name = "deleteToolStripMenuItemBook";
-            deleteToolStripMenuItemBook.Size = new Size(210, 24);
+            deleteToolStripMenuItemBook.Size = new Size(122, 24);
             deleteToolStripMenuItemBook.Text = "Delete";
             // 
             // editToolStripMenuItemBook
             // 
             editToolStripMenuItemBook.Name = "editToolStripMenuItemBook";
-            editToolStripMenuItemBook.Size = new Size(210, 24);
+            editToolStripMenuItemBook.Size = new Size(122, 24);
             editToolStripMenuItemBook.Text = "Edit";
+            editToolStripMenuItemBook.Click += editToolStripMenuItemBook_Click;
             // 
             // Form1
             // 

@@ -9,7 +9,7 @@ namespace Library
 {
     public class BibliothecaManager
     {
-        private Bibliotheca MainBibliotheca {  get; set; }
+        public Bibliotheca MainBibliotheca {  get; set; }
 
         public BibliothecaManager(Bibliotheca bibliotheca) {
             MainBibliotheca = bibliotheca;

@@ -17,5 +17,10 @@ namespace Library.Models
         public string? Email { get; set; }
 
         public List<Book> BorrowedBooks {  get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

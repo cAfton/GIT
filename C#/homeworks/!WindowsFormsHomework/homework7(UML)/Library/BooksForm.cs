@@ -30,6 +30,8 @@ namespace Library
             this.Text = "Update books";
             button1.Text = "Update";
 
+
+            this.book.Id = book.Id;
             textBox_Title.Text = book.Title;
             textBox_Author.Text = book.Author;
             numericUpDown_year.Value = book.Year;

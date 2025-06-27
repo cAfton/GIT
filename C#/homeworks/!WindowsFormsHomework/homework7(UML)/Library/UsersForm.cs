@@ -29,6 +29,7 @@ namespace Library
             this.Text = "Update reader";
             button1.Text = "Update";
 
+            this.user.Id = user.Id;
             textBox_Name.Text = user.Name;
             textBox_PhoneNumber.Text = user.PhoneNumber;
             textBox_Email.Text = user.Email;
