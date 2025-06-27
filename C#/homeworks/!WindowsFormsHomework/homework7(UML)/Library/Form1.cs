@@ -117,7 +117,6 @@ namespace Library
             }
         }
 
-
         private void editToolStripMenuItemBook_Click(object sender, EventArgs e)
         {
             if (listBox_books.SelectedItem is Book BookToEdit)
@@ -187,6 +186,7 @@ namespace Library
             UpdateBookListBox();
             textBox_findBook.Text = "Find book";
         }
+
         private void button_UpdateUsers_Click(object sender, EventArgs e)
         {
             UpdateUserListBox();

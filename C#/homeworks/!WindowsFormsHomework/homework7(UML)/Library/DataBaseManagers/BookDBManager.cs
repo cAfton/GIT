@@ -13,21 +13,6 @@ namespace Library.DataBaseManagers
     {
         const string ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Victoria\\Documents\\LibrarySQL.mdf;Integrated Security=True;Connect Timeout=30";
 
-        public static void ClearDatabase()
-        {
-            using (var conn = new SqlConnection(ConnectionString))
-            {
-                conn.Open();
-
-                // Спершу видаляємо всі записи з дочірньої таблиці (Book),
-                // потім з батьківської (User), щоб уникнути порушень FK.
-                var deleteBooksCmd = new SqlCommand("DELETE FROM [Book];", conn);
-                deleteBooksCmd.ExecuteNonQuery();
-
-                var deleteUsersCmd = new SqlCommand("DELETE FROM [User];", conn);
-                deleteUsersCmd.ExecuteNonQuery();
-            }
-        }
         public static List<Book> GetBooks(List<User> Users)
         {
             List<Book> books = new List<Book>();
