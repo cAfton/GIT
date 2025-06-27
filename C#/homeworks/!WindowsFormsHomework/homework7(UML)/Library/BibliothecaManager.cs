@@ -45,16 +45,5 @@ namespace Library
             MainBibliotheca.AvailableBooks.Remove(MainBibliotheca.AvailableBooks.FirstOrDefault(elem => elem.Id == IdToDelete));
         }
 
-        public void LendBook(int IdToLend, User user) {
-            Book book = MainBibliotheca.AvailableBooks.FirstOrDefault(elem => elem.Id == IdToLend);
-            user.BorrowedBooks.Add(book);
-            MainBibliotheca.AvailableBooks.Remove(book);
-        }
-
-        public void ReturnBook(int IdToLend, User user) {
-            Book book = user.BorrowedBooks.FirstOrDefault(elem => elem.Id == IdToLend);
-            MainBibliotheca.AvailableBooks.Add(book);
-            user.BorrowedBooks.Remove(book);
-        }
     }
 }

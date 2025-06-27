@@ -12,6 +12,22 @@ namespace Library.DataBaseManagers
     public class BookDBManager
     {
         const string ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Victoria\\Documents\\LibrarySQL.mdf;Integrated Security=True;Connect Timeout=30";
+
+        public static void ClearDatabase()
+        {
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                // Спершу видаляємо всі записи з дочірньої таблиці (Book),
+                // потім з батьківської (User), щоб уникнути порушень FK.
+                var deleteBooksCmd = new SqlCommand("DELETE FROM [Book];", conn);
+                deleteBooksCmd.ExecuteNonQuery();
+
+                var deleteUsersCmd = new SqlCommand("DELETE FROM [User];", conn);
+                deleteUsersCmd.ExecuteNonQuery();
+            }
+        }
         public static List<Book> GetBooks(List<User> Users)
         {
             List<Book> books = new List<Book>();
@@ -23,11 +39,15 @@ namespace Library.DataBaseManagers
                 var enters = cmd.ExecuteReader();
                 while (enters.Read())
                 {
-                    books.Add(new Book() { Id = enters.GetInt32(0), Title = enters.GetString(1), Author = enters.GetString(2), Year = enters.GetInt32(3), IsAvailable = enters.GetBoolean(4) });
-                    if (enters.GetValue(5) != DBNull.Value)
+                    Book newBook = new Book() { Id = enters.GetInt32(0), Title = enters.GetString(1), Author = enters.GetString(2), Year = enters.GetInt32(3), IsAvailable = enters.GetBoolean(4) };
+                    if (newBook.IsAvailable)
+                    {
+                        books.Add(newBook);
+                    }
+                    else if (enters.GetValue(5) != DBNull.Value)
                     {
                         int borrowerId = (int)enters.GetValue(5);
-                        Users.FirstOrDefault(elem => elem.Id == borrowerId)?.BorrowedBooks.Add(books.Last());
+                        Users.FirstOrDefault(elem => elem.Id == borrowerId)?.BorrowedBooks.Add(newBook);
                     }
 
                 }

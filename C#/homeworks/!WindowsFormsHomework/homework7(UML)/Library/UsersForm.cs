@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -39,12 +40,20 @@ namespace Library
         {
             if (!textBox_Name.Text.IsNullOrEmpty())
             {
-                user.Name = textBox_Name.Text;
-                user.Email = textBox_Email.Text;
-                user.PhoneNumber = textBox_PhoneNumber.Text;
+                if ((Regex.IsMatch(textBox_PhoneNumber.Text, @"^\+\d{12}$") || textBox_PhoneNumber.Text.IsNullOrEmpty()) && (Regex.IsMatch(textBox_Email.Text, @"^[\w\.-]+@[\w\.-]+\.\w+$") || textBox_Email.Text.IsNullOrEmpty()))
+                {
+                    user.Name = textBox_Name.Text;
+                    user.Email = textBox_Email.Text;
+                    user.PhoneNumber = textBox_PhoneNumber.Text;
 
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Enter int the right format!", "Wrong format", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
             else
             {

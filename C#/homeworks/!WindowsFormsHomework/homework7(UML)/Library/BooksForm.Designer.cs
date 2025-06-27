@@ -46,6 +46,7 @@
             numericUpDown_year.Name = "numericUpDown_year";
             numericUpDown_year.Size = new Size(304, 27);
             numericUpDown_year.TabIndex = 27;
+            numericUpDown_year.Maximum = DateTime.Now.Year;
             // 
             // buttonCancel
             // 

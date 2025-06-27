@@ -16,7 +16,7 @@ namespace Library.Models
 
         public string? Email { get; set; }
 
-        public List<Book> BorrowedBooks {  get; set; }
+        public List<Book> BorrowedBooks {  get; set; } = new List<Book>();
 
         public override string ToString()
         {

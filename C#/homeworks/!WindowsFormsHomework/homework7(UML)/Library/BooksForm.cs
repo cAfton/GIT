@@ -39,7 +39,7 @@ namespace Library
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!textBox_Title.Text.IsNullOrEmpty() || !textBox_Author.Text.IsNullOrEmpty())
+            if (!textBox_Title.Text.IsNullOrEmpty() && !textBox_Author.Text.IsNullOrEmpty())
             {
                 book.Title = textBox_Title.Text;
                 book.Author = textBox_Author.Text;

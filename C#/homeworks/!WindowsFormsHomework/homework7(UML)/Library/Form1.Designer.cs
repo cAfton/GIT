@@ -32,10 +32,6 @@
             listBox_books = new ListBox();
             listBox_readers = new ListBox();
             button_AddBook = new Button();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
-            button3 = new Button();
-            button4 = new Button();
             button_ReturnBook = new Button();
             label1 = new Label();
             label2 = new Label();
@@ -48,6 +44,12 @@
             contextMenuStrip_books = new ContextMenuStrip(components);
             deleteToolStripMenuItemBook = new ToolStripMenuItem();
             editToolStripMenuItemBook = new ToolStripMenuItem();
+            button_UpdateUsers = new Button();
+            textBox_findReader = new TextBox();
+            button_UpdateBooks = new Button();
+            textBox_findBook = new TextBox();
+            button_findBooks = new Button();
+            button_findUsers = new Button();
             contextMenuStrip_users.SuspendLayout();
             contextMenuStrip_books.SuspendLayout();
             SuspendLayout();
@@ -77,40 +79,6 @@
             button_AddBook.Text = "Add new book";
             button_AddBook.UseVisualStyleBackColor = true;
             button_AddBook.Click += button_AddBook_Click;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(8, 101);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(331, 27);
-            textBox2.TabIndex = 5;
-            textBox2.Text = "Find book";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(394, 101);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(331, 27);
-            textBox1.TabIndex = 6;
-            textBox1.Text = "Find reader";
-            // 
-            // button3
-            // 
-            button3.Image = Properties.Resources.magnifiying_glass_93642__1_;
-            button3.Location = new Point(345, 101);
-            button3.Name = "button3";
-            button3.Size = new Size(43, 29);
-            button3.TabIndex = 7;
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Image = Properties.Resources.magnifiying_glass_93642__1_;
-            button4.Location = new Point(731, 99);
-            button4.Name = "button4";
-            button4.Size = new Size(43, 29);
-            button4.TabIndex = 8;
-            button4.UseVisualStyleBackColor = true;
             // 
             // button_ReturnBook
             // 
@@ -186,6 +154,7 @@
             lendToolStripMenuItemUser.Name = "lendToolStripMenuItemUser";
             lendToolStripMenuItemUser.Size = new Size(122, 24);
             lendToolStripMenuItemUser.Text = "Lend";
+            lendToolStripMenuItemUser.Click += lendToolStripMenuItemUser_Click;
             // 
             // contextMenuStrip_books
             // 
@@ -199,6 +168,7 @@
             deleteToolStripMenuItemBook.Name = "deleteToolStripMenuItemBook";
             deleteToolStripMenuItemBook.Size = new Size(122, 24);
             deleteToolStripMenuItemBook.Text = "Delete";
+            deleteToolStripMenuItemBook.Click += deleteToolStripMenuItemBook_Click;
             // 
             // editToolStripMenuItemBook
             // 
@@ -207,20 +177,78 @@
             editToolStripMenuItemBook.Text = "Edit";
             editToolStripMenuItemBook.Click += editToolStripMenuItemBook_Click;
             // 
+            // button_UpdateUsers
+            // 
+            button_UpdateUsers.Image = Properties.Resources.delete_3759322__1_;
+            button_UpdateUsers.Location = new Point(731, 99);
+            button_UpdateUsers.Name = "button_UpdateUsers";
+            button_UpdateUsers.Size = new Size(43, 29);
+            button_UpdateUsers.TabIndex = 8;
+            button_UpdateUsers.UseVisualStyleBackColor = true;
+            button_UpdateUsers.Click += button_UpdateUsers_Click;
+            // 
+            // textBox_findReader
+            // 
+            textBox_findReader.Location = new Point(394, 101);
+            textBox_findReader.Name = "textBox_findReader";
+            textBox_findReader.Size = new Size(287, 27);
+            textBox_findReader.TabIndex = 6;
+            textBox_findReader.Text = "Find reader";
+            // 
+            // button_UpdateBooks
+            // 
+            button_UpdateBooks.Image = Properties.Resources.delete_3759322__1_;
+            button_UpdateBooks.Location = new Point(345, 101);
+            button_UpdateBooks.Name = "button_UpdateBooks";
+            button_UpdateBooks.Size = new Size(43, 29);
+            button_UpdateBooks.TabIndex = 7;
+            button_UpdateBooks.UseVisualStyleBackColor = true;
+            button_UpdateBooks.Click += button_UpdateBooks_Click;
+            // 
+            // textBox_findBook
+            // 
+            textBox_findBook.Location = new Point(8, 101);
+            textBox_findBook.Name = "textBox_findBook";
+            textBox_findBook.Size = new Size(289, 27);
+            textBox_findBook.TabIndex = 5;
+            textBox_findBook.Text = "Find book";
+            // 
+            // button_findBooks
+            // 
+            button_findBooks.Image = Properties.Resources.magnifiying_glass_93642__1_;
+            button_findBooks.Location = new Point(299, 101);
+            button_findBooks.Name = "button_findBooks";
+            button_findBooks.Size = new Size(43, 29);
+            button_findBooks.TabIndex = 15;
+            button_findBooks.UseVisualStyleBackColor = true;
+            button_findBooks.Click += button_FindBooks_Click;
+            // 
+            // button_findUsers
+            // 
+            button_findUsers.Image = Properties.Resources.magnifiying_glass_93642__1_;
+            button_findUsers.Location = new Point(686, 99);
+            button_findUsers.Name = "button_findUsers";
+            button_findUsers.Size = new Size(43, 29);
+            button_findUsers.TabIndex = 16;
+            button_findUsers.UseVisualStyleBackColor = true;
+            button_findUsers.Click += button_FindUsers_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(786, 556);
+            Controls.Add(button_findUsers);
+            Controls.Add(button_findBooks);
             Controls.Add(button_NewUser);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(button_ReturnBook);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(textBox1);
-            Controls.Add(textBox2);
+            Controls.Add(button_UpdateUsers);
+            Controls.Add(button_UpdateBooks);
+            Controls.Add(textBox_findReader);
+            Controls.Add(textBox_findBook);
             Controls.Add(button_AddBook);
             Controls.Add(listBox_readers);
             Controls.Add(listBox_books);
@@ -237,11 +265,7 @@
         private ListBox listBox_books;
         private ListBox listBox_readers;
         private Button button_AddBook;
-        private Button button2;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private Button button3;
-        private Button button4;
+        private Button button_findUsers;
         private Button button_LendBook;
         private Button button_ReturnBook;
         private Label label1;
@@ -255,5 +279,10 @@
         private ContextMenuStrip contextMenuStrip_books;
         private ToolStripMenuItem deleteToolStripMenuItemBook;
         private ToolStripMenuItem editToolStripMenuItemBook;
+        private Button button_UpdateUsers;
+        private TextBox textBox_findReader;
+        private Button button_UpdateBooks;
+        private TextBox textBox_findBook;
+        private Button button_findBooks;
     }
 }

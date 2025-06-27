@@ -63,6 +63,16 @@ namespace Library.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap delete_3759322__1_ {
+            get {
+                object obj = ResourceManager.GetObject("delete_3759322 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap magnifiying_glass_93642 {
             get {
                 object obj = ResourceManager.GetObject("magnifiying-glass_93642", resourceCulture);
