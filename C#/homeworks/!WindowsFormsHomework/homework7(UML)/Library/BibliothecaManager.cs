@@ -9,9 +9,11 @@ namespace Library
 {
     public class BibliothecaManager
     {
-        public Bibliotheca MainBibliotheca {  get; set; }
+        private Bibliotheca MainBibliotheca {  get; set; }
 
-        public BibliothecaManager(Bibliotheca bibliotheca) { }
+        public BibliothecaManager(Bibliotheca bibliotheca) {
+            MainBibliotheca = bibliotheca;
+        }
 
         public void AddNewUser(User NewUser) {
             if (!MainBibliotheca.Users.Any(elem => elem.Id == NewUser.Id))

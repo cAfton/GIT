@@ -11,5 +11,12 @@ namespace Library.Models
         public List<User> Users { get; set; }
 
         public List<Book> AvailableBooks { get; set;}
+
+        public Bibliotheca(List<User> users, List<Book> availableBooks)
+        {
+            Users = users;
+            AvailableBooks = availableBooks;
+        }
+
     }
 }

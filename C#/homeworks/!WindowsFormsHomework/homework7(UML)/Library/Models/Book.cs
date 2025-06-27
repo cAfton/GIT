@@ -17,5 +17,7 @@ namespace Library.Models
         public int Year { get; set; }
 
         public bool IsAvailable { get; set; }
+
+        public int? BorrowerId { get; set; }
     }
 }
