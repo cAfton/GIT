@@ -11,7 +11,11 @@ namespace Library.DataBaseManagers
 
     public static class UserDBManager
     {
-        public const string ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Victoria\\Documents\\LibrarySQL.mdf;Integrated Security=True;Connect Timeout=30;MultipleActiveResultSets=True";
+        private static string relativePath = @"..\..\..\LibrarySQL.mdf";
+        private static string fullPath = Path.GetFullPath(relativePath);
+
+        private static string ConnectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={fullPath};";
+
 
         public static List<User> GetUsers()
         {
