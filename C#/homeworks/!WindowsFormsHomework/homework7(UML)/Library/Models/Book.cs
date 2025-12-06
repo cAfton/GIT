@@ -16,6 +16,13 @@ namespace Library.Models
 
         public int Year { get; set; }
 
-        public bool IsAvailable { get; set; }
+        public bool IsAvailable { get; set; } = true;
+
+        public int? BorrowerId { get; set; }
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }
