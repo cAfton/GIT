@@ -27,7 +27,7 @@ namespace Questions
             var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
 
             #region History
-            /*string jsonFromFile = File.ReadAllText("History.json");
+            string jsonFromFile = File.ReadAllText("History.json");
 
             QuizManager manager_History = JsonConvert.DeserializeObject<QuizManager>(jsonFromFile, settings);
 
@@ -38,12 +38,12 @@ namespace Questions
             manager_History.Quizes_Hard.ForEach(elem => Console.WriteLine($"{elem.Question}\n\n1) {elem.Answers[0]}\n2) {elem.Answers[1]}\n3) {elem.Answers[2]}\n({elem.RightAnswer})\n\n"));
 
             string json = JsonConvert.SerializeObject(manager_History, Formatting.Indented, settings);
-            File.WriteAllText("History.json", json);*/
+            File.WriteAllText("History.json", json);
             #endregion
-
+            /*
             #region Math
 
-            /*string jsonFromFile = File.ReadAllText("Math.json");
+            string jsonFromFile = File.ReadAllText("Math.json");
             QuizManager manager_Mathematics = JsonConvert.DeserializeObject<QuizManager>(jsonFromFile, settings);
 
             /*
@@ -413,6 +413,7 @@ namespace Questions
 
             string json = JsonConvert.SerializeObject(manager_Mathematics, Formatting.Indented, settings);
             File.WriteAllText("Math.json", json);*/
+            /*
             #endregion
 
             #region Geografy
@@ -1176,6 +1177,7 @@ namespace Questions
                 Console.WriteLine($"The correct answer is {quiz.RightAnswer}) {quiz.Answers[quiz.RightAnswer - 1]}");
             }
             #endregion
+            */
         }
     }
 }
